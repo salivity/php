@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Handle File Uploads in PHP - php</title>
+    <meta name="description" content="This article provides a straightforward guide on how PHP processes file uploads submitted through HTML forms. You will learn how to configure the HTML form correctly, understand the role of the PHP $FILES superglobal, configure crucial configuration sett">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-handle-file-uploads-in-php">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Handle File Uploads in PHP - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-handle-file-uploads-in-php" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a straightforward guide on how PHP processes file uploads submitted through HTML forms. You will learn how to configure the HTML form correctly, understand the role of the PHP $FILES superglobal, configure crucial configuration sett" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-handle-file-uploads-in-php">How to Handle File Uploads in
+PHP</h1>
+<p>This article provides a straightforward guide on how PHP processes
+file uploads submitted through HTML forms. You will learn how to
+configure the HTML form correctly, understand the role of the PHP
+<code>$_FILES</code> superglobal, configure crucial configuration
+settings, and write a secure backend script to validate and save
+uploaded files to a server.</p>
+<h2 id="1-setting-up-the-html-form">1. Setting Up the HTML Form</h2>
+<p>For PHP to receive a file, the HTML form must meet two strict
+requirements. First, the form must use the <code>POST</code> method.
+Second, it must include the <code>enctype="multipart/form-data"</code>
+attribute. This attribute ensures that the browser splits the file into
+chunks and sends it correctly.</p>
+<p>Here is a basic HTML form structure:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode html"><code class="sourceCode html"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">form</span><span class="ot"> action</span><span class="op">=</span><span class="st">&quot;upload.php&quot;</span><span class="ot"> method</span><span class="op">=</span><span class="st">&quot;POST&quot;</span><span class="ot"> enctype</span><span class="op">=</span><span class="st">&quot;multipart/form-data&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">label</span><span class="ot"> for</span><span class="op">=</span><span class="st">&quot;fileUpload&quot;</span><span class="dt">&gt;</span>Choose a file:<span class="dt">&lt;/</span><span class="kw">label</span><span class="dt">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">input</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;file&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;uploaded_file&quot;</span><span class="ot"> id</span><span class="op">=</span><span class="st">&quot;fileUpload&quot;</span><span class="dt">&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&lt;</span><span class="kw">button</span><span class="ot"> type</span><span class="op">=</span><span class="st">&quot;submit&quot;</span><span class="ot"> name</span><span class="op">=</span><span class="st">&quot;submit&quot;</span><span class="dt">&gt;</span>Upload<span class="dt">&lt;/</span><span class="kw">button</span><span class="dt">&gt;</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">form</span><span class="dt">&gt;</span></span></code></pre></div>
+<h2 id="2-understanding-the-php-_files-superglobal">2. Understanding the
+PHP <code>$_FILES</code> Superglobal</h2>
+<p>When a file is submitted, PHP automatically stores information about
+it in a multi-dimensional associative array called
+<code>$_FILES</code>.</p>
+<p>If your input name is <code>uploaded_file</code>, PHP populates
+<code>$_FILES['uploaded_file']</code> with five key-value pairs:</p>
+<ul>
+<li><strong><code>name</code></strong>: The original name of the file on
+the user's computer (e.g., <code>document.pdf</code>).</li>
+<li><strong><code>type</code></strong>: The MIME type of the file as
+reported by the browser (e.g., <code>application/pdf</code>).</li>
+<li><strong><code>tmp_name</code></strong>: The temporary path where the
+file is stored on the server immediately after upload.</li>
+<li><strong><code>error</code></strong>: An error code representing the
+status of the upload. A value of <code>0</code>
+(<code>UPLOAD_ERR_OK</code>) means the upload was successful.</li>
+<li><strong><code>size</code></strong>: The size of the file in
+bytes.</li>
+</ul>
+<h2 id="3-processing-and-saving-the-uploaded-file">3. Processing and
+Saving the Uploaded File</h2>
+<p>By default, uploaded files are saved to a temporary directory on the
+server. If your script does not move the file, it is automatically
+deleted at the end of the request.</p>
+<p>To save the file permanently, you must use the
+<code>move_uploaded_file()</code> function. This function verifies that
+the file is a valid upload and moves it to a directory of your
+choice.</p>
+<p>Here is a practical PHP script to handle this process:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$_SERVER</span>[<span class="st">&#39;REQUEST_METHOD&#39;</span>] <span class="op">===</span> <span class="st">&#39;POST&#39;</span>) {</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Check if file was uploaded without errors</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">isset</span>(<span class="va">$_FILES</span>[<span class="st">&#39;uploaded_file&#39;</span>]) <span class="op">&amp;&amp;</span> <span class="va">$_FILES</span>[<span class="st">&#39;uploaded_file&#39;</span>][<span class="st">&#39;error&#39;</span>] <span class="op">===</span> <span class="cn">UPLOAD_ERR_OK</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="va">$fileTmpPath</span> <span class="op">=</span> <span class="va">$_FILES</span>[<span class="st">&#39;uploaded_file&#39;</span>][<span class="st">&#39;tmp_name&#39;</span>]<span class="ot">;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="va">$fileName</span> <span class="op">=</span> <span class="va">$_FILES</span>[<span class="st">&#39;uploaded_file&#39;</span>][<span class="st">&#39;name&#39;</span>]<span class="ot">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Define the destination path</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="va">$uploadFileDir</span> <span class="op">=</span> <span class="st">&#39;./uploads/&#39;</span><span class="ot">;</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">$dest_path</span> <span class="op">=</span> <span class="va">$uploadFileDir</span> <span class="op">.</span> <span class="fu">basename</span>(<span class="va">$fileName</span>)<span class="ot">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Create the directory if it does not exist</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="op">!</span><span class="fu">is_dir</span>(<span class="va">$uploadFileDir</span>)) {</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>            <span class="fu">mkdir</span>(<span class="va">$uploadFileDir</span><span class="ot">,</span> <span class="bn">0755</span><span class="ot">,</span> <span class="kw">true</span>)<span class="ot">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Move the file to the target directory</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> (<span class="fu">move_uploaded_file</span>(<span class="va">$fileTmpPath</span><span class="ot">,</span> <span class="va">$dest_path</span>)) {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="kw">echo</span> <span class="st">&quot;File successfully uploaded and saved.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>        } <span class="cf">else</span> {</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="kw">echo</span> <span class="st">&quot;There was an error moving the uploaded file.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>        <span class="kw">echo</span> <span class="st">&quot;Upload failed. Error code: &quot;</span> <span class="op">.</span> <span class="va">$_FILES</span>[<span class="st">&#39;uploaded_file&#39;</span>][<span class="st">&#39;error&#39;</span>]<span class="ot">;</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<h2 id="4-crucial-security-and-validation">4. Crucial Security and
+Validation</h2>
+<p>Allowing users to upload files is a major security risk. To protect
+your server, you should implement these basic validation checks before
+calling <code>move_uploaded_file()</code>:</p>
+<ul>
+<li><strong>Validate File Size:</strong> Limit the maximum file size in
+your script by checking
+<code>$_FILES['uploaded_file']['size']</code>.</li>
+<li><strong>Restrict File Extensions:</strong> Only allow specific
+extensions (like <code>.jpg</code>, <code>.png</code>, or
+<code>.pdf</code>). Use <code>pathinfo()</code> to extract and check the
+extension.</li>
+<li><strong>Verify MIME Type:</strong> Do not trust the file extension
+alone. Use PHP’s <code>finfo_file()</code> function to inspect the
+actual binary content of the file.</li>
+<li><strong>Sanitize Filenames:</strong> Use <code>basename()</code> to
+prevent directory traversal attacks, and consider renaming the file to a
+random string or UUID to avoid overwriting existing files.</li>
+</ul>
+<h2 id="5-required-php-configuration-settings">5. Required PHP
+Configuration Settings</h2>
+<p>Your PHP configuration file (<code>php.ini</code>) must be configured
+to allow file uploads. Ensure the following directives are properly
+set:</p>
+<ul>
+<li><code>file_uploads = On</code>: Enables HTTP file uploads.</li>
+<li><code>upload_max_filesize = 2M</code>: The maximum size allowed for
+a single uploaded file.</li>
+<li><code>post_max_size = 8M</code>: The maximum size of POST data that
+PHP will accept. This must be larger than
+<code>upload_max_filesize</code>.</li>
+<li><code>upload_tmp_dir</code>: Specifies the temporary directory where
+files are stored during the upload process (if not set, system defaults
+are used).</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

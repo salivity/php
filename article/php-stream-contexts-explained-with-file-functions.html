@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Stream Contexts Explained with File Functions - php</title>
+    <meta name="description" content="This article provides a practical overview of stream contexts in PHP and how they can be used to customize file and network stream operations. You will learn what stream contexts are, how to create them, and how to apply them to common PHP file functions">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-stream-contexts-explained-with-file-functions">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP Stream Contexts Explained with File Functions - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-stream-contexts-explained-with-file-functions" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a practical overview of stream contexts in PHP and how they can be used to customize file and network stream operations. You will learn what stream contexts are, how to create them, and how to apply them to common PHP file functions" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php-stream-contexts-explained-with-file-functions">PHP Stream
+Contexts Explained with File Functions</h1>
+<p>This article provides a practical overview of stream contexts in PHP
+and how they can be used to customize file and network stream
+operations. You will learn what stream contexts are, how to create them,
+and how to apply them to common PHP file functions to handle tasks like
+custom HTTP headers, POST requests, and timeout settings.</p>
+<h2 id="what-is-a-stream-context-in-php">What is a Stream Context in
+PHP?</h2>
+<p>In PHP, a stream represents a resource that can be read from or
+written to, such as a local file, a network socket, or an HTTP/FTP
+connection. A <strong>stream context</strong> is a collection of options
+and parameters that modifies the behavior of these streams.</p>
+<p>By using stream contexts, you can instruct PHP's built-in file
+functions to perform advanced operations—such as sending custom headers,
+utilizing specific HTTP methods (like POST or PUT), or configuring
+SSL/TLS settings—without needing to rely on heavier libraries like
+cURL.</p>
+<h2 id="how-to-create-a-stream-context">How to Create a Stream
+Context</h2>
+<p>Stream contexts are created using the
+<code>stream_context_create()</code> function. This function accepts an
+associative array of options structured by "wrapper" (such as
+<code>http</code>, <code>ftp</code>, <code>ssl</code>, or
+<code>file</code>).</p>
+<p>Here is the basic structure:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">$options</span> <span class="op">=</span> [</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;wrapper_name&#39;</span> =&gt; [</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;option_name&#39;</span> =&gt; <span class="st">&#39;value&#39;</span><span class="ot">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    ]<span class="ot">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="va">$context</span> <span class="op">=</span> <span class="fu">stream_context_create</span>(<span class="va">$options</span>)<span class="ot">;</span></span></code></pre></div>
+<h2 id="using-stream-contexts-with-file-functions">Using Stream Contexts
+with File Functions</h2>
+<p>Many of PHP's filesystem functions accept a context resource as one
+of their arguments. Below are common use cases demonstrating how to
+implement them.</p>
+<h3 id="1-making-an-http-post-request-with-file_get_contents">1. Making
+an HTTP POST Request with <code>file_get_contents</code></h3>
+<p>By default, <code>file_get_contents()</code> performs an HTTP GET
+request. You can use a stream context to change the method to POST and
+attach payload data.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$url</span> <span class="op">=</span> <span class="st">&#39;https://api.example.com/data&#39;</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$data</span> <span class="op">=</span> <span class="fu">json_encode</span>([<span class="st">&#39;username&#39;</span> =&gt; <span class="st">&#39;john_doe&#39;</span>])<span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">$options</span> <span class="op">=</span> [</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http&#39;</span> =&gt; [</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;method&#39;</span>  =&gt; <span class="st">&#39;POST&#39;</span><span class="ot">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;header&#39;</span>  =&gt; <span class="st">&quot;Content-Type: application/json</span><span class="sc">\r\n</span><span class="st">&quot;</span> <span class="op">.</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>                     <span class="st">&quot;Accept: application/json</span><span class="sc">\r\n</span><span class="st">&quot;</span><span class="ot">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;content&#39;</span> =&gt; <span class="va">$data</span><span class="ot">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;timeout&#39;</span> =&gt; <span class="fl">5.0</span><span class="ot">,</span> <span class="co">// Timeout in seconds</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    ]<span class="ot">,</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="va">$context</span> <span class="op">=</span> <span class="fu">stream_context_create</span>(<span class="va">$options</span>)<span class="ot">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="va">$result</span> <span class="op">=</span> <span class="fu">file_get_contents</span>(<span class="va">$url</span><span class="ot">,</span> <span class="kw">false</span><span class="ot">,</span> <span class="va">$context</span>)<span class="ot">;</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$result</span> <span class="op">===</span> <span class="kw">false</span>) {</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Handle error</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="2-passing-custom-headers">2. Passing Custom Headers</h3>
+<p>Some APIs require a specific <code>User-Agent</code> or an
+<code>Authorization</code> token. You can pass these via the
+<code>header</code> option inside the <code>http</code> wrapper.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$url</span> <span class="op">=</span> <span class="st">&#39;https://api.example.com/user&#39;</span><span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$options</span> <span class="op">=</span> [</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http&#39;</span> =&gt; [</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;method&#39;</span> =&gt; <span class="st">&#39;GET&#39;</span><span class="ot">,</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;header&#39;</span> =&gt; <span class="st">&quot;Authorization: Bearer YOUR_API_TOKEN</span><span class="sc">\r\n</span><span class="st">&quot;</span> <span class="op">.</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>                    <span class="st">&quot;User-Agent: MyPHPApp/1.0</span><span class="sc">\r\n</span><span class="st">&quot;</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="va">$context</span> <span class="op">=</span> <span class="fu">stream_context_create</span>(<span class="va">$options</span>)<span class="ot">;</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="va">$response</span> <span class="op">=</span> <span class="fu">file_get_contents</span>(<span class="va">$url</span><span class="ot">,</span> <span class="kw">false</span><span class="ot">,</span> <span class="va">$context</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="3-using-contexts-with-fopen">3. Using Contexts with
+<code>fopen</code></h3>
+<p>You can also pass a stream context to <code>fopen()</code>. This is
+useful for reading large streams line-by-line while applying custom
+network or file settings.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$options</span> <span class="op">=</span> [</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http&#39;</span> =&gt; [</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;protocol_version&#39;</span> =&gt; <span class="fl">1.1</span><span class="ot">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">&#39;ignore_errors&#39;</span> =&gt; <span class="kw">true</span><span class="ot">,</span> <span class="co">// Continue reading even on 4xx/5xx status codes</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    ]<span class="ot">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="va">$context</span> <span class="op">=</span> <span class="fu">stream_context_create</span>(<span class="va">$options</span>)<span class="ot">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="va">$handle</span> <span class="op">=</span> <span class="fu">fopen</span>(<span class="st">&#39;https://example.com&#39;</span><span class="ot">,</span> <span class="st">&#39;r&#39;</span><span class="ot">,</span> <span class="kw">false</span><span class="ot">,</span> <span class="va">$context</span>)<span class="ot">;</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$handle</span>) {</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> ((<span class="va">$line</span> <span class="op">=</span> <span class="fu">fgets</span>(<span class="va">$handle</span>)) <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>        <span class="kw">echo</span> <span class="va">$line</span><span class="ot">;</span></span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fclose</span>(<span class="va">$handle</span>)<span class="ot">;</span></span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="supported-file-functions">Supported File Functions</h2>
+<p>Stream contexts can be used with a variety of built-in PHP functions
+that interact with files and URLs, including:</p>
+<ul>
+<li><code>file_get_contents()</code></li>
+<li><code>file_put_contents()</code></li>
+<li><code>fopen()</code></li>
+<li><code>readfile()</code></li>
+<li><code>copy()</code></li>
+<li><code>file()</code></li>
+</ul>
+<p>By mastering stream contexts, you can write lightweight, efficient
+PHP code that interacts seamlessly with web APIs and local resources
+using native file-handling functions.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

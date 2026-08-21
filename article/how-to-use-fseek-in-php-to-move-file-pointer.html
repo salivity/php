@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use fseek in PHP to Move File Pointer - php</title>
+    <meta name="description" content="In PHP, navigating through a file efficiently is crucial when you need to read or write data at specific locations. This article provides a quick, straight-to-the-point guide on how to use the fseek() function to move the file pointer to a specific byte">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-use-fseek-in-php-to-move-file-pointer">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use fseek in PHP to Move File Pointer - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-use-fseek-in-php-to-move-file-pointer" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="In PHP, navigating through a file efficiently is crucial when you need to read or write data at specific locations. This article provides a quick, straight-to-the-point guide on how to use the fseek() function to move the file pointer to a specific byte" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-fseek-in-php-to-move-file-pointer">How to Use fseek
+in PHP to Move File Pointer</h1>
+<p>In PHP, navigating through a file efficiently is crucial when you
+need to read or write data at specific locations. This article provides
+a quick, straight-to-the-point guide on how to use the
+<code>fseek()</code> function to move the file pointer to a specific
+byte position, explaining its syntax, parameter options, and providing a
+practical code example.</p>
+<p>The <code>fseek()</code> function is used to position the file
+pointer of an open file. To use it, you must first open the file using
+<code>fopen()</code>, which returns a file pointer resource.</p>
+<h3 id="syntax-of-fseek">Syntax of fseek()</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fseek</span>(<span class="kw">resource</span> <span class="va">$handle</span><span class="ot">,</span> <span class="dt">int</span> <span class="va">$offset</span><span class="ot">,</span> <span class="dt">int</span> <span class="va">$whence</span> <span class="op">=</span> <span class="cn">SEEK_SET</span>)<span class="ot">:</span> <span class="dt">int</span></span></code></pre></div>
+<ul>
+<li><strong><code>$handle</code></strong>: The file system pointer
+resource returned by <code>fopen()</code>.</li>
+<li><strong><code>$offset</code></strong>: The byte offset. This value
+can be positive to move forward or negative to move backward.</li>
+<li><strong><code>$whence</code></strong>: Optional. This parameter
+defines how the offset is interpreted. It accepts three constants:
+<ul>
+<li><strong><code>SEEK_SET</code></strong> (Default): Sets the position
+equal to <code>$offset</code> bytes from the beginning of the file.</li>
+<li><strong><code>SEEK_CUR</code></strong>: Sets the position to the
+current location plus <code>$offset</code>.</li>
+<li><strong><code>SEEK_END</code></strong>: Sets the position to the
+end-of-file plus <code>$offset</code> (use a negative offset to move
+backward from the end).</li>
+</ul></li>
+</ul>
+<p>The function returns <code>0</code> on success, and <code>-1</code>
+on failure.</p>
+<h3 id="practical-example">Practical Example</h3>
+<p>The following example demonstrates how to open a file, move the
+pointer to the 10th byte, and read data from that position.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Open the file in read-only mode</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$file</span> <span class="op">=</span> <span class="fu">fopen</span>(<span class="st">&quot;example.txt&quot;</span><span class="ot">,</span> <span class="st">&quot;r&quot;</span>)<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$file</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Move the file pointer to the 10th byte from the beginning</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">$status</span> <span class="op">=</span> <span class="fu">fseek</span>(<span class="va">$file</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">,</span> <span class="cn">SEEK_SET</span>)<span class="ot">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$status</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Read 20 bytes starting from the new pointer position</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="va">$data</span> <span class="op">=</span> <span class="fu">fread</span>(<span class="va">$file</span><span class="ot">,</span> <span class="dv">20</span>)<span class="ot">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="kw">echo</span> <span class="st">&quot;Data read from byte 10: &quot;</span> <span class="op">.</span> <span class="va">$data</span><span class="ot">;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        <span class="kw">echo</span> <span class="st">&quot;Failed to move the file pointer.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Always close the file handle</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fclose</span>(<span class="va">$file</span>)<span class="ot">;</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Could not open the file.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<h3 id="key-considerations">Key Considerations</h3>
+<ul>
+<li><strong>Write Mode Behavior</strong>: If you open a file in append
+mode (<code>"a"</code> or <code>"a+"</code>), any data you write will
+always be appended to the end of the file, regardless of any pointer
+movement using <code>fseek()</code>.</li>
+<li><strong>Pointer Exceeding File Size</strong>: You can seek past the
+end-of-file. If you do this and then write data, the gap between the
+original end of the file and the new data will be filled with null bytes
+(<code>\0</code>).</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

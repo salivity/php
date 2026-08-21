@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP eval Security Risks and Dangers - php</title>
+    <meta name="description" content="The eval() function in PHP is a powerful tool that executes a string as PHP code, but it represents one of the most severe security vulnerabilities a web application can face. This article explores the critical dangers of using eval(), focusing on how it">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-eval-security-risks-and-dangers">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP eval Security Risks and Dangers - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-eval-security-risks-and-dangers" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The eval() function in PHP is a powerful tool that executes a string as PHP code, but it represents one of the most severe security vulnerabilities a web application can face. This article explores the critical dangers of using eval(), focusing on how it" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php-eval-security-risks-and-dangers">PHP eval Security Risks and
+Dangers</h1>
+<p>The <code>eval()</code> function in PHP is a powerful tool that
+executes a string as PHP code, but it represents one of the most severe
+security vulnerabilities a web application can face. This article
+explores the critical dangers of using <code>eval()</code>, focusing on
+how it leads to Remote Code Execution (RCE) vulnerabilities. We will
+examine how attackers exploit this function to compromise servers, why
+it bypasses standard security defenses, and how developers can replace
+it with safer alternatives.</p>
+<h2 id="the-ultimate-danger-remote-code-execution-rce">The Ultimate
+Danger: Remote Code Execution (RCE)</h2>
+<p>The primary hazard of <code>eval()</code> is Remote Code Execution
+(RCE). If an application passes any user-controlled input—such as query
+parameters, form submissions, or HTTP headers—into an
+<code>eval()</code> statement without absolute sanitization, an attacker
+can inject malicious PHP code.</p>
+<p>Because <code>eval()</code> executes code with the same privileges as
+the running PHP process, a successful injection allows an attacker
+to:</p>
+<ul>
+<li>Read, modify, or delete sensitive files on the server (including
+configuration files containing database credentials).</li>
+<li>Install backdoors, web shells, or malware to maintain persistent
+access to the system.</li>
+<li>Use the compromised server to launch attacks against other networks
+or send spam emails.</li>
+<li>Access and exfiltrate the entire application database.</li>
+</ul>
+<h2 id="why-sanitization-is-not-enough">Why Sanitization is Not
+Enough</h2>
+<p>Developers often attempt to secure <code>eval()</code> by sanitizing
+input using regular expressions or blacklists. However, securing
+<code>eval()</code> input is notoriously difficult and highly prone to
+bypasses. Attackers are highly skilled at obfuscating PHP code using
+encoding, string concatenation, or alternative PHP syntax to slip
+through sanitization filters. Once the obfuscated string reaches
+<code>eval()</code>, PHP decodes and executes it, completely
+neutralizing the developer's filtering attempts.</p>
+<h2 id="operational-and-performance-drawbacks">Operational and
+Performance Drawbacks</h2>
+<p>Beyond catastrophic security risks, <code>eval()</code> introduces
+significant operational downsides:</p>
+<ul>
+<li><strong>Performance Hit:</strong> PHP cannot cache code executed via
+<code>eval()</code> using OPcache. Every time the function is called,
+the PHP engine must compile the string from scratch, slowing down
+response times.</li>
+<li><strong>Difficult Debugging:</strong> Code executed inside
+<code>eval()</code> does not have a real file name or line number. When
+an error occurs, the PHP error log points to the line where
+<code>eval()</code> was called, rather than the line containing the
+actual syntax or runtime error, making troubleshooting extremely
+difficult.</li>
+</ul>
+<h2 id="safer-alternatives-to-eval">Safer Alternatives to eval()</h2>
+<p>In almost every scenario, the use of <code>eval()</code> can and
+should be avoided. PHP offers safer, built-in features to handle dynamic
+logic:</p>
+<ol type="1">
+<li><strong>JSON Parsing:</strong> If you are using <code>eval()</code>
+to decode data, use <code>json_decode()</code> instead. It is secure,
+faster, and does not execute code.</li>
+<li><strong>Dynamic Variable and Function Calls:</strong> Instead of
+evaluating strings to call functions or access variables dynamically,
+use PHP's native dynamic syntax (e.g.,
+<code>$controller-&gt;$method()</code>).</li>
+<li><strong>Strict Whitelisting:</strong> If you must map user input to
+specific operations, use an associative array to map allowed input
+strings to specific safe functions or classes, rejecting any input that
+does not match the whitelist.</li>
+</ol></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

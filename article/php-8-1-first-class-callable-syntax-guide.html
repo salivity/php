@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP 8.1 First-Class Callable Syntax Guide - php</title>
+    <meta name="description" content="PHP 8.1 introduced the first-class callable syntax, providing a cleaner, safer, and more efficient way to reference functions and methods as callbacks. This article explores how this new feature replaces older, error-prone string and array representation">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-8-1-first-class-callable-syntax-guide">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP 8.1 First-Class Callable Syntax Guide - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-8-1-first-class-callable-syntax-guide" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="PHP 8.1 introduced the first-class callable syntax, providing a cleaner, safer, and more efficient way to reference functions and methods as callbacks. This article explores how this new feature replaces older, error-prone string and array representation" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php-81-first-class-callable-syntax-guide">PHP 8.1 First-Class
+Callable Syntax Guide</h1>
+<p>PHP 8.1 introduced the first-class callable syntax, providing a
+cleaner, safer, and more efficient way to reference functions and
+methods as callbacks. This article explores how this new feature
+replaces older, error-prone string and array representations, improves
+static analysis and IDE support, and simplifies your PHP code with
+practical examples.</p>
+<p>Historically, PHP developers had to reference callbacks using strings
+or arrays. For instance, to reference a global function, you used a
+string like <code>'strlen'</code>. For an instance method, you used an
+array like <code>[$this, 'myMethod']</code>. These approaches suffered
+from several drawbacks: they were prone to typos, lacked autocomplete
+support in IDEs, and could not be easily validated by static analysis
+tools like PHPStan or Psalm.</p>
+<p>The first-class callable syntax solves these issues by introducing
+the <code>...</code> (ellipsis) operator. Instead of passing strings or
+arrays, you can now reference any callable directly using its standard
+call syntax followed by three dots.</p>
+<h3 id="how-the-new-syntax-works">How the New Syntax Works</h3>
+<p>Here is a quick comparison of the old and new ways to define
+callbacks across different contexts:</p>
+<p><strong>1. Global Functions</strong></p>
+<ul>
+<li><strong>Old Way:</strong>
+<code>array_map('strtoupper', $array);</code></li>
+<li><strong>New Way:</strong>
+<code>array_map(strtoupper(...), $array);</code></li>
+</ul>
+<p><strong>2. Instance Methods</strong></p>
+<ul>
+<li><strong>Old Way:</strong>
+<code>array_map([$transformer, 'toUppercase'], $array);</code></li>
+<li><strong>New Way:</strong>
+<code>array_map($transformer-&gt;toUppercase(...), $array);</code></li>
+</ul>
+<p><strong>3. Static Methods</strong></p>
+<ul>
+<li><strong>Old Way:</strong>
+<code>array_map(['Helper', 'format'], $array);</code></li>
+<li><strong>New Way:</strong>
+<code>array_map(Helper::format(...), $array);</code></li>
+</ul>
+<h3 id="why-this-simplifies-callback-creation">Why This Simplifies
+Callback Creation</h3>
+<p><strong>Immediate Validation and Type Safety</strong><br />
+With the old string and array syntax, typos in method names were only
+caught at runtime when the callback was executed. With first-class
+callables, PHP validates the existence of the function or method at the
+point of creation. If the method does not exist, a compile-time or
+immediate runtime error is thrown, making debugging much simpler.</p>
+<p><strong>Improved Tooling and Refactoring</strong><br />
+Modern IDEs and static analysis tools can easily understand first-class
+callables. This means features like "Go to Definition" work instantly on
+your callbacks. Additionally, if you rename a method, your IDE can
+automatically update the callback reference, preventing silent
+failures.</p>
+<p><strong>Respect for Scope</strong><br />
+The first-class callable syntax respects the scope in which it is
+created. If you create a callable targeting a private or protected
+method from within the defining class, you can safely pass that callable
+to external functions, and it will execute without scope violations.</p>
+<p>By replacing fragile string and array definitions with native syntax,
+PHP 8.1 makes callbacks safer to write, easier to read, and fully
+compatible with modern development tools.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

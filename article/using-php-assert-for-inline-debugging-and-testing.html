@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Using PHP assert for Inline Debugging and Testing - php</title>
+    <meta name="description" content="This article explains how to use the PHP assert() function to perform inline debugging and test logic assumptions during development. You will learn how to configure assertions, write effective checks to verify code behavior, and understand the differenc">
+    <link rel="canonical" href="https://salivity.github.io/php/article/using-php-assert-for-inline-debugging-and-testing">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Using PHP assert for Inline Debugging and Testing - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/using-php-assert-for-inline-debugging-and-testing" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explains how to use the PHP assert() function to perform inline debugging and test logic assumptions during development. You will learn how to configure assertions, write effective checks to verify code behavior, and understand the differenc" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="using-php-assert-for-inline-debugging-and-testing">Using PHP
+assert for Inline Debugging and Testing</h1>
+<p>This article explains how to use the PHP <code>assert()</code>
+function to perform inline debugging and test logic assumptions during
+development. You will learn how to configure assertions, write effective
+checks to verify code behavior, and understand the difference between
+using assertions in development versus production environments.</p>
+<h2 id="understanding-the-php-assert-function">Understanding the PHP
+assert() Function</h2>
+<p>The <code>assert()</code> function in PHP is a language construct
+used to define expectations in your code. It checks whether a given
+condition evaluates to <code>true</code>. If the condition is met, your
+program continues executing normally. If the condition is
+<code>false</code>, PHP triggers an assertion failure, which can either
+raise a warning or throw an <code>AssertionError</code>.</p>
+<p>Using <code>assert()</code> is highly effective for inline debugging
+because it allows you to document and verify internal program states
+(invariants) as the code runs, without needing to write heavy unit
+testing boilerplate for small, specific logic checks.</p>
+<h2 id="basic-syntax-and-usage">Basic Syntax and Usage</h2>
+<p>The basic syntax for <code>assert()</code> in PHP 7 and PHP 8 is:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">assert</span>(<span class="dt">mixed</span> <span class="va">$assertion</span><span class="ot">,</span> <span class="bu">Throwable</span><span class="op">|</span><span class="dt">string</span><span class="op">|</span><span class="kw">null</span> <span class="va">$description</span> <span class="op">=</span> <span class="kw">null</span>)<span class="ot">:</span> <span class="dt">bool</span></span></code></pre></div>
+<ul>
+<li><strong><code>$assertion</code></strong>: The expression or
+condition you want to test.</li>
+<li><strong><code>$description</code></strong>: An optional error
+message or a custom <code>Throwable</code> exception to throw if the
+assertion fails.</li>
+</ul>
+<p>Here is a simple example checking if a variable meets a specific
+condition:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> divide(<span class="va">$dividend</span><span class="ot">,</span> <span class="va">$divisor</span>) {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Assert that the divisor is never zero</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assert</span>(<span class="va">$divisor</span> <span class="op">!==</span> <span class="dv">0</span><span class="ot">,</span> <span class="st">&quot;Divisor cannot be zero&quot;</span>)<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="va">$dividend</span> <span class="op">/</span> <span class="va">$divisor</span><span class="ot">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> divide(<span class="dv">10</span><span class="ot">,</span> <span class="dv">2</span>)<span class="ot">;</span> <span class="co">// Works fine</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> divide(<span class="dv">10</span><span class="ot">,</span> <span class="dv">0</span>)<span class="ot">;</span> <span class="co">// Fails the assertion</span></span></code></pre></div>
+<h2 id="configuring-assert-in-phpini">Configuring assert() in
+php.ini</h2>
+<p>The behavior of <code>assert()</code> depends on your PHP
+configuration, specifically the <code>zend.assertions</code> and
+<code>assert.exception</code> directives in your <code>php.ini</code>
+file.</p>
+<h3 id="1-zendassertions">1. zend.assertions</h3>
+<p>This directive controls whether assertions are compiled into the
+execution code.</p>
+<ul>
+<li><code>1</code>: (Development mode) Assertions are generated and
+executed.</li>
+<li><code>0</code>: Assertions are generated but bypassed at
+runtime.</li>
+<li><code>-1</code>: (Production mode) Assertions are not generated at
+all, resulting in zero performance overhead.</li>
+</ul>
+<h3 id="2-assertexception">2. assert.exception</h3>
+<p>This directive defines what happens when an assertion fails.</p>
+<ul>
+<li><code>1</code>: PHP throws an <code>AssertionError</code> exception
+when an assertion fails. This is highly recommended for modern PHP
+development.</li>
+<li><code>0</code>: PHP issues a traditional PHP warning instead of
+throwing an exception.</li>
+</ul>
+<p>To enable strict assertions with exceptions during development,
+configure your <code>php.ini</code> like this:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="dt">zend.assertions </span><span class="ot">=</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="dt">assert.exception </span><span class="ot">=</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<h2 id="custom-exceptions-with-assert">Custom Exceptions with
+assert()</h2>
+<p>Instead of a simple string description, you can pass a custom
+exception object as the second argument to <code>assert()</code>. This
+is useful for integrating assertion failures into your application's
+error-handling architecture.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> InvalidUserStatusException <span class="kw">extends</span> <span class="bu">Exception</span> {}</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="kw">function</span> activateUser(<span class="va">$status</span>) {</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">assert</span>(<span class="va">$status</span> <span class="op">===</span> <span class="st">&#39;pending&#39;</span><span class="ot">,</span> <span class="kw">new</span> InvalidUserStatusException(<span class="st">&quot;User must be in pending status to activate.&quot;</span>))<span class="ot">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Activation logic here</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="best-practices-for-using-assert">Best Practices for Using
+assert()</h2>
+<p>To get the most out of inline debugging and testing with
+<code>assert()</code>, follow these guidelines:</p>
+<ul>
+<li><strong>Do not use assertions for input validation:</strong> Use
+standard conditional statements (<code>if</code>,
+<code>try/catch</code>) for user-input validation, API responses, and
+run-time errors. Assertions should only be used to detect programming
+errors and logical inconsistencies.</li>
+<li><strong>Avoid side effects inside assertions:</strong> Since
+assertions are disabled in production
+(<code>zend.assertions = -1</code>), any code inside the
+<code>assert()</code> statement will not run. Avoid modifying variables
+or executing database queries inside an assertion.</li>
+<li><strong>Disable assertions in production:</strong> Always set
+<code>zend.assertions = -1</code> in production environments to ensure
+maximum application performance and to prevent sensitive internal debug
+messages from exposing details to end-users.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

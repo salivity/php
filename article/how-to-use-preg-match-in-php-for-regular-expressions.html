@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use preg_match in PHP for Regular Expressions - php</title>
+    <meta name="description" content="Regular expressions are powerful tools for pattern matching and data validation in web development. This article provides a practical guide on how to use PHP's pregmatch() function to search strings for specific patterns. You will learn the basic syntax,">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-use-preg-match-in-php-for-regular-expressions">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use preg_match in PHP for Regular Expressions - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-use-preg-match-in-php-for-regular-expressions" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Regular expressions are powerful tools for pattern matching and data validation in web development. This article provides a practical guide on how to use PHP's pregmatch() function to search strings for specific patterns. You will learn the basic syntax," />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-preg_match-in-php-for-regular-expressions">How to Use
+preg_match in PHP for Regular Expressions</h1>
+<p>Regular expressions are powerful tools for pattern matching and data
+validation in web development. This article provides a practical guide
+on how to use PHP's <code>preg_match()</code> function to search strings
+for specific patterns. You will learn the basic syntax, how to perform
+simple boolean matches, and how to extract specific parts of a string
+using capturing groups.</p>
+<h2 id="understanding-the-syntax-of-preg_match">Understanding the Syntax
+of preg_match()</h2>
+<p>The <code>preg_match()</code> function searches a subject string for
+a match to a regular expression pattern. The basic syntax is as
+follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">preg_match</span>(<span class="dt">string</span> <span class="va">$pattern</span><span class="ot">,</span> <span class="dt">string</span> <span class="va">$subject</span><span class="ot">,</span> <span class="dt">array</span> <span class="op">&amp;</span><span class="va">$matches</span> <span class="op">=</span> <span class="kw">null</span>)<span class="ot">:</span> <span class="dt">int</span><span class="op">|</span><span class="kw">false</span></span></code></pre></div>
+<ul>
+<li><strong><code>$pattern</code></strong>: The regular expression
+search pattern, enclosed in delimiters (typically slashes, like
+<code>/pattern/</code>).</li>
+<li><strong><code>$subject</code></strong>: The input string you want to
+search.</li>
+<li><strong><code>$matches</code></strong>: An optional array that gets
+populated with the search results if a match is found.</li>
+</ul>
+<p>The function returns <code>1</code> if a match is found,
+<code>0</code> if no match is found, and <code>false</code> if an error
+occurs.</p>
+<h2 id="performing-a-simple-match">Performing a Simple Match</h2>
+<p>To check if a specific pattern exists within a string, you can use
+<code>preg_match()</code> inside an conditional statement.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$pattern</span> <span class="op">=</span> <span class="st">&#39;/cat/i&#39;</span><span class="ot">;</span> <span class="co">// The &#39;i&#39; modifier makes the search case-insensitive</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$string</span> <span class="op">=</span> <span class="st">&#39;The quick brown cat jumps over the lazy dog.&#39;</span><span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">preg_match</span>(<span class="va">$pattern</span><span class="ot">,</span> <span class="va">$string</span>)) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Match found!&quot;</span><span class="ot">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;No match found.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this example, the pattern <code>/cat/i</code> searches for the
+word "cat" regardless of capitalization. Since "cat" is in the string,
+the function returns <code>1</code>, and the success message is
+printed.</p>
+<h2 id="capturing-specific-data-using-groups">Capturing Specific Data
+Using Groups</h2>
+<p>If you need to extract specific parts of the matched text, you can
+pass a third argument—an array variable—to <code>preg_match()</code>.
+Inside your pattern, use parentheses <code>()</code> to define capturing
+groups.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$pattern</span> <span class="op">=</span> <span class="st">&#39;/(\d{4})-(\d{2})-(\d{2})/&#39;</span><span class="ot">;</span> <span class="co">// Matches YYYY-MM-DD date format</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$string</span> <span class="op">=</span> <span class="st">&#39;The release date is 2023-10-25.&#39;</span><span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="fu">preg_match</span>(<span class="va">$pattern</span><span class="ot">,</span> <span class="va">$string</span><span class="ot">,</span> <span class="va">$matches</span>)) {</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Full match: &quot;</span> <span class="op">.</span> <span class="va">$matches</span>[<span class="dv">0</span>] <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span> <span class="co">// Output: 2023-10-25</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Year: &quot;</span> <span class="op">.</span> <span class="va">$matches</span>[<span class="dv">1</span>] <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span>       <span class="co">// Output: 2023</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Month: &quot;</span> <span class="op">.</span> <span class="va">$matches</span>[<span class="dv">2</span>] <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span>      <span class="co">// Output: 10</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Day: &quot;</span> <span class="op">.</span> <span class="va">$matches</span>[<span class="dv">3</span>] <span class="op">.</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="ot">;</span>        <span class="co">// Output: 25</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>When a match is found:</p>
+<ul>
+<li><code>$matches[0]</code> contains the entire text that matched the
+pattern.</li>
+<li><code>$matches[1]</code> contains the text matched by the first
+parenthesized subpattern.</li>
+<li><code>$matches[2]</code> and subsequent keys contain data from
+subsequent capturing groups.</li>
+</ul>
+<h2 id="common-regex-modifiers">Common Regex Modifiers</h2>
+<p>Modifiers are appended after the closing pattern delimiter to alter
+the search behavior:</p>
+<ul>
+<li><strong><code>i</code></strong>: Case-insensitive search.</li>
+<li><strong><code>m</code></strong>: Multi-line search, changing how
+caret (<code>^</code>) and dollar (<code>$</code>) anchors behave.</li>
+<li><strong><code>s</code></strong>: Allows the dot (<code>.</code>)
+metacharacter to match all characters, including newlines.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

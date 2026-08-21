@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Function to Convert Array to JSON - php</title>
+    <meta name="description" content="This article explains how to convert a PHP array into a JSON string using the built-in PHP function. You will learn the exact function to use, its syntax, practical code examples, and how to format the resulting JSON output. In PHP, the jsonencode() func">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-function-to-convert-array-to-json">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP Function to Convert Array to JSON - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-function-to-convert-array-to-json" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explains how to convert a PHP array into a JSON string using the built-in PHP function. You will learn the exact function to use, its syntax, practical code examples, and how to format the resulting JSON output. In PHP, the jsonencode() func" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php-function-to-convert-array-to-json">PHP Function to Convert
+Array to JSON</h1>
+<p>This article explains how to convert a PHP array into a JSON string
+using the built-in PHP function. You will learn the exact function to
+use, its syntax, practical code examples, and how to format the
+resulting JSON output.</p>
+<h2 id="the-json_encode-function">The <code>json_encode()</code>
+Function</h2>
+<p>In PHP, the <strong><code>json_encode()</code></strong> function is
+used to convert an array (or an object) into a JSON string
+representation. This function is essential for sending data from a PHP
+backend to a JavaScript frontend, API endpoints, or mobile
+applications.</p>
+<h3 id="basic-syntax">Basic Syntax</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">json_encode</span>(<span class="dt">mixed</span> <span class="va">$value</span><span class="ot">,</span> <span class="dt">int</span> <span class="va">$flags</span> <span class="op">=</span> <span class="dv">0</span><span class="ot">,</span> <span class="dt">int</span> <span class="va">$depth</span> <span class="op">=</span> <span class="dv">512</span>)<span class="ot">:</span> <span class="dt">string</span><span class="op">|</span><span class="kw">false</span></span></code></pre></div>
+<ul>
+<li><strong><code>$value</code></strong>: The value being encoded. This
+is typically an associative or indexed array.</li>
+<li><strong><code>$flags</code></strong>: Optional bitmask constants
+that modify the encoding behavior (e.g., formatting).</li>
+<li><strong><code>$depth</code></strong>: Optional maximum depth. Must
+be greater than zero.</li>
+<li><strong>Return Value</strong>: Returns a JSON-encoded string on
+success, or <code>false</code> on failure.</li>
+</ul>
+<hr />
+<h3 id="code-examples">Code Examples</h3>
+<h4 id="1-converting-an-associative-array">1. Converting an Associative
+Array</h4>
+<p>An associative array in PHP converts into a JSON object.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Define an associative array</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$user</span> <span class="op">=</span> [</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;name&quot;</span> =&gt; <span class="st">&quot;John Doe&quot;</span><span class="ot">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;email&quot;</span> =&gt; <span class="st">&quot;john@example.com&quot;</span><span class="ot">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;age&quot;</span> =&gt; <span class="dv">30</span><span class="ot">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;isAdmin&quot;</span> =&gt; <span class="kw">true</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Convert array to JSON string</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="va">$jsonString</span> <span class="op">=</span> <span class="fu">json_encode</span>(<span class="va">$user</span>)<span class="ot">;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="co">// Output the JSON string</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$jsonString</span><span class="ot">;</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span><span class="dt">&quot;name&quot;</span><span class="fu">:</span><span class="st">&quot;John Doe&quot;</span><span class="fu">,</span><span class="dt">&quot;email&quot;</span><span class="fu">:</span><span class="st">&quot;john@example.com&quot;</span><span class="fu">,</span><span class="dt">&quot;age&quot;</span><span class="fu">:</span><span class="dv">30</span><span class="fu">,</span><span class="dt">&quot;isAdmin&quot;</span><span class="fu">:</span><span class="kw">true</span><span class="fu">}</span></span></code></pre></div>
+<h4 id="2-converting-an-indexed-array">2. Converting an Indexed
+Array</h4>
+<p>A simple indexed array in PHP converts into a JSON array.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Define an indexed array</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">$colors</span> <span class="op">=</span> [<span class="st">&quot;red&quot;</span><span class="ot">,</span> <span class="st">&quot;green&quot;</span><span class="ot">,</span> <span class="st">&quot;blue&quot;</span>]<span class="ot">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Convert array to JSON string</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="va">$jsonString</span> <span class="op">=</span> <span class="fu">json_encode</span>(<span class="va">$colors</span>)<span class="ot">;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$jsonString</span><span class="ot">;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ot">[</span><span class="st">&quot;red&quot;</span><span class="ot">,</span><span class="st">&quot;green&quot;</span><span class="ot">,</span><span class="st">&quot;blue&quot;</span><span class="ot">]</span></span></code></pre></div>
+<hr />
+<h3 id="useful-flags-for-json_encode">Useful Flags for
+<code>json_encode()</code></h3>
+<p>You can pass specific constants as the second argument to customize
+the JSON string output:</p>
+<ul>
+<li><strong><code>JSON_PRETTY_PRINT</code></strong>: Uses whitespace to
+format the returned data for human readability.</li>
+<li><strong><code>JSON_UNESCAPED_SLASHES</code></strong>: Prevents PHP
+from escaping forward slashes (<code>/</code>).</li>
+<li><strong><code>JSON_NUMERIC_CHECK</code></strong>: Encodes numeric
+strings as numbers instead of strings.</li>
+</ul>
+<h4 id="example-with-flags">Example with Flags:</h4>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$data</span> <span class="op">=</span> [</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;url&quot;</span> =&gt; <span class="st">&quot;https://example.com/api&quot;</span><span class="ot">,</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot;status&quot;</span> =&gt; <span class="st">&quot;200&quot;</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Use flags to pretty print and prevent escaped slashes</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="va">$jsonString</span> <span class="op">=</span> <span class="fu">json_encode</span>(<span class="va">$data</span><span class="ot">,</span> <span class="cn">JSON_PRETTY_PRINT</span> <span class="op">|</span> <span class="cn">JSON_UNESCAPED_SLASHES</span> <span class="op">|</span> <span class="cn">JSON_NUMERIC_CHECK</span>)<span class="ot">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$jsonString</span><span class="ot">;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;https://example.com/api&quot;</span><span class="fu">,</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;status&quot;</span><span class="fu">:</span> <span class="dv">200</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

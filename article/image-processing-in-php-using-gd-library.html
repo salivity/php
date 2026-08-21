@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Processing in PHP Using GD Library - php</title>
+    <meta name="description" content="This article provides a practical guide on how to process and manipulate images in PHP using the built-in GD library. You will learn how to verify the GD installation, load images from various formats, perform essential manipulations like resizing and cr">
+    <link rel="canonical" href="https://salivity.github.io/php/article/image-processing-in-php-using-gd-library">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Image Processing in PHP Using GD Library - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/image-processing-in-php-using-gd-library" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a practical guide on how to process and manipulate images in PHP using the built-in GD library. You will learn how to verify the GD installation, load images from various formats, perform essential manipulations like resizing and cr" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="image-processing-in-php-using-gd-library">Image Processing in
+PHP Using GD Library</h1>
+<p>This article provides a practical guide on how to process and
+manipulate images in PHP using the built-in GD library. You will learn
+how to verify the GD installation, load images from various formats,
+perform essential manipulations like resizing and cropping, apply basic
+filters, and save or output the final image files.</p>
+<h2 id="enabling-the-gd-library">Enabling the GD Library</h2>
+<p>Before manipulating images, you must ensure the GD extension is
+enabled in your PHP environment. Open your <code>php.ini</code> file and
+locate the following line:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">;extension=gd</span></span></code></pre></div>
+<p>Remove the semicolon (<code>;</code>) to uncomment and enable it:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode ini"><code class="sourceCode ini"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="dt">extension</span><span class="ot">=</span><span class="st">gd</span></span></code></pre></div>
+<p>Restart your web server (such as Apache or Nginx) to apply the
+changes. You can verify if GD is enabled by running
+<code>phpinfo()</code> or checking <code>extension_loaded('gd')</code>
+in a PHP script.</p>
+<h2 id="the-basic-image-manipulation-workflow">The Basic Image
+Manipulation Workflow</h2>
+<p>The workflow for processing images with GD always follows four basic
+steps:</p>
+<ol type="1">
+<li><strong>Load</strong> an existing image file or
+<strong>create</strong> a blank canvas.</li>
+<li><strong>Manipulate</strong> the image (resize, crop, rotate, or add
+text).</li>
+<li><strong>Output</strong> the image to the browser or
+<strong>save</strong> it to a directory.</li>
+<li><strong>Destroy</strong> the image resource to free up server
+memory.</li>
+</ol>
+<hr />
+<h2 id="loading-and-creating-images">Loading and Creating Images</h2>
+<p>To work on an existing image, load it using the function
+corresponding to its file format:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$jpegImage</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;source.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$pngImage</span>  <span class="op">=</span> <span class="fu">imagecreatefrompng</span>(<span class="st">&#39;source.png&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$gifImage</span>  <span class="op">=</span> <span class="fu">imagecreatefromgif</span>(<span class="st">&#39;source.gif&#39;</span>)<span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="va">$webpImage</span> <span class="op">=</span> <span class="fu">imagecreatefromwebp</span>(<span class="st">&#39;source.webp&#39;</span>)<span class="ot">;</span></span></code></pre></div>
+<p>To create a new, blank canvas from scratch, use
+<code>imagecreatetruecolor()</code>:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Create a blank 400x300 pixel canvas</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$canvas</span> <span class="op">=</span> <span class="fu">imagecreatetruecolor</span>(<span class="dv">400</span><span class="ot">,</span> <span class="dv">300</span>)<span class="ot">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Allocate a color (RGB: Red, Green, Blue)</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">$white</span> <span class="op">=</span> <span class="fu">imagecolorallocate</span>(<span class="va">$canvas</span><span class="ot">,</span> <span class="dv">255</span><span class="ot">,</span> <span class="dv">255</span><span class="ot">,</span> <span class="dv">255</span>)<span class="ot">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">// Fill the canvas with the color</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="fu">imagefill</span>(<span class="va">$canvas</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="va">$white</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="resizing-and-scaling-images">Resizing and Scaling Images</h2>
+<p>To resize an image, the easiest method in PHP 5.5+ is using the
+<code>imagescale()</code> function, which automatically handles aspect
+ratios.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">$source</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;photo.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Scale the image to a width of 300px (height is calculated automatically)</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="va">$resized</span> <span class="op">=</span> <span class="fu">imagescale</span>(<span class="va">$source</span><span class="ot">,</span> <span class="dv">300</span>)<span class="ot">;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Save the scaled image</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>(<span class="va">$resized</span><span class="ot">,</span> <span class="st">&#39;resized_photo.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Free memory</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$source</span>)<span class="ot">;</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$resized</span>)<span class="ot">;</span></span></code></pre></div>
+<p>For more precise control, such as resizing a specific portion of an
+image into another, use <code>imagecopyresampled()</code>:</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">$source</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;photo.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="va">$srcWidth</span> <span class="op">=</span> <span class="fu">imagesx</span>(<span class="va">$source</span>)<span class="ot">;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="va">$srcHeight</span> <span class="op">=</span> <span class="fu">imagesy</span>(<span class="va">$source</span>)<span class="ot">;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="va">$dstWidth</span> <span class="op">=</span> <span class="dv">150</span><span class="ot">;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="va">$dstHeight</span> <span class="op">=</span> <span class="dv">150</span><span class="ot">;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="va">$destination</span> <span class="op">=</span> <span class="fu">imagecreatetruecolor</span>(<span class="va">$dstWidth</span><span class="ot">,</span> <span class="va">$dstHeight</span>)<span class="ot">;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="co">// Copy and resize the entire source image into the destination canvas</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="fu">imagecopyresampled</span>(</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>    <span class="va">$destination</span><span class="ot">,</span> <span class="va">$source</span><span class="ot">,</span> </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> </span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    <span class="va">$dstWidth</span><span class="ot">,</span> <span class="va">$dstHeight</span><span class="ot">,</span> <span class="va">$srcWidth</span><span class="ot">,</span> <span class="va">$srcHeight</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>)<span class="ot">;</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>(<span class="va">$destination</span><span class="ot">,</span> <span class="st">&#39;thumbnail.jpg&#39;</span><span class="ot">,</span> <span class="dv">90</span>)<span class="ot">;</span> <span class="co">// 90 is the JPEG quality percentage</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$source</span>)<span class="ot">;</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$destination</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="cropping-images">Cropping Images</h2>
+<p>You can crop images using the <code>imagecrop()</code> function by
+defining a bounding box array containing the <code>x</code>,
+<code>y</code>, <code>width</code>, and <code>height</code> of the crop
+area.</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="va">$source</span> <span class="op">=</span> <span class="fu">imagecreatefrompng</span>(<span class="st">&#39;avatar.png&#39;</span>)<span class="ot">;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Define the cropping area</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="va">$cropArea</span> <span class="op">=</span> [</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;x&#39;</span> =&gt; <span class="dv">50</span><span class="ot">,</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;y&#39;</span> =&gt; <span class="dv">50</span><span class="ot">,</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;width&#39;</span> =&gt; <span class="dv">200</span><span class="ot">,</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;height&#39;</span> =&gt; <span class="dv">200</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="va">$cropped</span> <span class="op">=</span> <span class="fu">imagecrop</span>(<span class="va">$source</span><span class="ot">,</span> <span class="va">$cropArea</span>)<span class="ot">;</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$cropped</span> <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="fu">imagepng</span>(<span class="va">$cropped</span><span class="ot">,</span> <span class="st">&#39;cropped_avatar.png&#39;</span>)<span class="ot">;</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">imagedestroy</span>(<span class="va">$cropped</span>)<span class="ot">;</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$source</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="adding-text-to-images">Adding Text to Images</h2>
+<p>To add text or watermarks to an image, use
+<code>imagettftext()</code> to render TrueType fonts.</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="va">$image</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;banner.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Allocate text color (White)</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="va">$textColor</span> <span class="op">=</span> <span class="fu">imagecolorallocate</span>(<span class="va">$image</span><span class="ot">,</span> <span class="dv">255</span><span class="ot">,</span> <span class="dv">255</span><span class="ot">,</span> <span class="dv">255</span>)<span class="ot">;</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Path to a valid TrueType font (.ttf) file on your server</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="va">$fontPath</span> <span class="op">=</span> <span class="cn">__DIR__</span> <span class="op">.</span> <span class="st">&#39;/fonts/Roboto-Bold.ttf&#39;</span><span class="ot">;</span> </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co">// Add text: (image, size, angle, x, y, color, font, text)</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="fu">imagettftext</span>(<span class="va">$image</span><span class="ot">,</span> <span class="dv">20</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">10</span><span class="ot">,</span> <span class="dv">50</span><span class="ot">,</span> <span class="va">$textColor</span><span class="ot">,</span> <span class="va">$fontPath</span><span class="ot">,</span> <span class="st">&quot;Watermark Text&quot;</span>)<span class="ot">;</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>(<span class="va">$image</span><span class="ot">,</span> <span class="st">&#39;watermarked_banner.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$image</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="rotating-and-applying-filters">Rotating and Applying
+Filters</h2>
+<p>GD provides functions to rotate images and apply basic filters like
+grayscale, brightness adjustments, or blurs.</p>
+<h3 id="rotating-an-image">Rotating an Image</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="va">$image</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;original.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Rotate by 90 degrees counter-clockwise with a black background fill</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="va">$rotated</span> <span class="op">=</span> <span class="fu">imagerotate</span>(<span class="va">$image</span><span class="ot">,</span> <span class="dv">90</span><span class="ot">,</span> <span class="dv">0</span>)<span class="ot">;</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>(<span class="va">$rotated</span><span class="ot">,</span> <span class="st">&#39;rotated.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$image</span>)<span class="ot">;</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$rotated</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="applying-grayscale-filter">Applying Grayscale Filter</h3>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="va">$image</span> <span class="op">=</span> <span class="fu">imagecreatefromjpeg</span>(<span class="st">&#39;color.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Apply grayscale effect</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">imagefilter</span>(<span class="va">$image</span><span class="ot">,</span> <span class="cn">IMG_FILTER_GRAYSCALE</span>)<span class="ot">;</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="fu">imagejpeg</span>(<span class="va">$image</span><span class="ot">,</span> <span class="st">&#39;grayscale.jpg&#39;</span>)<span class="ot">;</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$image</span>)<span class="ot">;</span></span></code></pre></div>
+<hr />
+<h2 id="outputting-directly-to-the-browser">Outputting Directly to the
+Browser</h2>
+<p>If you want to display the generated image dynamically in a web
+browser instead of saving it as a file, send the correct HTTP header and
+omit the file path parameter from the output function.</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="va">$image</span> <span class="op">=</span> <span class="fu">imagecreatetruecolor</span>(<span class="dv">200</span><span class="ot">,</span> <span class="dv">200</span>)<span class="ot">;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="va">$red</span> <span class="op">=</span> <span class="fu">imagecolorallocate</span>(<span class="va">$image</span><span class="ot">,</span> <span class="dv">255</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span>)<span class="ot">;</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="fu">imagefill</span>(<span class="va">$image</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="dv">0</span><span class="ot">,</span> <span class="va">$red</span>)<span class="ot">;</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Send content-type header</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="fu">header</span>(<span class="st">&#39;Content-Type: image/png&#39;</span>)<span class="ot">;</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Output the image directly to the browser output buffer</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="fu">imagepng</span>(<span class="va">$image</span>)<span class="ot">;</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">// Free memory</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="fu">imagedestroy</span>(<span class="va">$image</span>)<span class="ot">;</span></span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use the PHP parse_url Function - php</title>
+    <meta name="description" content="This article provides a clear overview of the parseurl() function in PHP, explaining its core purpose, syntax, and returned components. You will learn how this built-in function parses a URL string and breaks it down into its constituent parts, along wit">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-use-the-php-parse-url-function">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use the PHP parse_url Function - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-use-the-php-parse-url-function" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a clear overview of the parseurl() function in PHP, explaining its core purpose, syntax, and returned components. You will learn how this built-in function parses a URL string and breaks it down into its constituent parts, along wit" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-the-php-parse_url-function">How to Use the PHP
+parse_url Function</h1>
+<p>This article provides a clear overview of the
+<code>parse_url()</code> function in PHP, explaining its core purpose,
+syntax, and returned components. You will learn how this built-in
+function parses a URL string and breaks it down into its constituent
+parts, along with practical code examples to help you implement it in
+your projects.</p>
+<h2 id="understanding-parse_url">Understanding parse_url()</h2>
+<p>The primary purpose of the <code>parse_url()</code> function in PHP
+is to parse a URL and return an associative array containing its various
+components. This function is highly useful when you need to extract
+specific information from a web address, such as the domain name, the
+path, or the query parameters, without writing complex regular
+expressions.</p>
+<p>It is important to note that <code>parse_url()</code> does not
+validate the given URL; it simply splits the string into components
+based on standard URL structures.</p>
+<h2 id="supported-url-components">Supported URL Components</h2>
+<p>When you pass a URL to <code>parse_url()</code>, it can identify and
+extract the following parts:</p>
+<ul>
+<li><strong>scheme</strong>: The protocol used (e.g., <code>http</code>,
+<code>https</code>, <code>ftp</code>).</li>
+<li><strong>host</strong>: The domain name or IP address (e.g.,
+<code>www.example.com</code>).</li>
+<li><strong>port</strong>: The port number (e.g.,
+<code>8080</code>).</li>
+<li><strong>user</strong>: The username, if basic authentication is
+used.</li>
+<li><strong>pass</strong>: The password, if basic authentication is
+used.</li>
+<li><strong>path</strong>: The path to the resource (e.g.,
+<code>/blog/article.php</code>).</li>
+<li><strong>query</strong>: The query string containing variables (e.g.,
+<code>id=123&amp;category=tech</code>).</li>
+<li><strong>fragment</strong>: The sub-anchor within the page (e.g.,
+<code>#section-2</code>).</li>
+</ul>
+<h2 id="basic-syntax-and-examples">Basic Syntax and Examples</h2>
+<p>The syntax for the function is:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">parse_url</span>(<span class="dt">string</span> <span class="va">$url</span><span class="ot">,</span> <span class="dt">int</span> <span class="va">$component</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span>)<span class="ot">:</span> <span class="dt">mixed</span></span></code></pre></div>
+<h3 id="example-1-parsing-a-full-url">Example 1: Parsing a Full URL</h3>
+<p>By default, calling <code>parse_url()</code> with only the URL
+parameter returns an associative array containing all identified
+components.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$url</span> <span class="op">=</span> <span class="st">&quot;https://user:password@www.example.com:8080/path/to/page.php?query=value#anchor&quot;</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$parts</span> <span class="op">=</span> <span class="fu">parse_url</span>(<span class="va">$url</span>)<span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print_r</span>(<span class="va">$parts</span>)<span class="ot">;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<pre class="text"><code>Array
+(
+    [scheme] =&gt; https
+    [host] =&gt; www.example.com
+    [port] =&gt; 8080
+    [user] =&gt; user
+    [pass] =&gt; password
+    [path] =&gt; /path/to/page.php
+    [query] =&gt; query=value
+    [fragment] =&gt; anchor
+)</code></pre>
+<h3 id="example-2-extracting-a-single-component">Example 2: Extracting a
+Single Component</h3>
+<p>If you only need a specific part of the URL, you can pass a second
+argument using PHP's predefined constants:</p>
+<ul>
+<li><code>PHP_URL_SCHEME</code></li>
+<li><code>PHP_URL_HOST</code></li>
+<li><code>PHP_URL_PORT</code></li>
+<li><code>PHP_URL_USER</code></li>
+<li><code>PHP_URL_PASS</code></li>
+<li><code>PHP_URL_PATH</code></li>
+<li><code>PHP_URL_QUERY</code></li>
+<li><code>PHP_URL_FRAGMENT</code></li>
+</ul>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$url</span> <span class="op">=</span> <span class="st">&quot;https://www.example.com/about&quot;</span><span class="ot">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$host</span> <span class="op">=</span> <span class="fu">parse_url</span>(<span class="va">$url</span><span class="ot">,</span> <span class="cn">PHP_URL_HOST</span>)<span class="ot">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$host</span><span class="ot">;</span> <span class="co">// Outputs: www.example.com</span></span></code></pre></div>
+<h2 id="key-considerations">Key Considerations</h2>
+<ul>
+<li><strong>Malformed URLs:</strong> If a URL is severely malformed,
+<code>parse_url()</code> may return <code>false</code>.</li>
+<li><strong>Relative URLs:</strong> The function can parse relative URLs
+(e.g., <code>/images/logo.png</code>). In this case, the returned array
+will only contain the <code>path</code> key.</li>
+<li><strong>No Validation:</strong> Since <code>parse_url()</code> does
+not validate the URL's legitimacy, you should use
+<code>filter_var($url, FILTER_VALIDATE_URL)</code> if you need to ensure
+the URL is valid before parsing it.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

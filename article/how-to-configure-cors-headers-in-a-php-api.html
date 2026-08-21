@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Configure CORS Headers in a PHP API - php</title>
+    <meta name="description" content="This article provides a straightforward guide on how to configure Cross-Origin Resource Sharing (CORS) headers in a PHP API. You will learn how to enable cross-domain requests, handle preflight OPTIONS requests, and secure your API by restricting allowed">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-configure-cors-headers-in-a-php-api">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Configure CORS Headers in a PHP API - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-configure-cors-headers-in-a-php-api" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a straightforward guide on how to configure Cross-Origin Resource Sharing (CORS) headers in a PHP API. You will learn how to enable cross-domain requests, handle preflight OPTIONS requests, and secure your API by restricting allowed" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-configure-cors-headers-in-a-php-api">How to Configure
+CORS Headers in a PHP API</h1>
+<p>This article provides a straightforward guide on how to configure
+Cross-Origin Resource Sharing (CORS) headers in a PHP API. You will
+learn how to enable cross-domain requests, handle preflight OPTIONS
+requests, and secure your API by restricting allowed origins, HTTP
+methods, and custom headers.</p>
+<h2 id="understanding-cors-in-php">Understanding CORS in PHP</h2>
+<p>By default, web browsers block frontend applications (like React,
+Vue, or Angular) from making API requests to a domain different from the
+one they were served from. This security measure is known as the
+Same-Origin Policy. To allow your PHP API to accept requests from other
+domains, you must send specific CORS headers from your server.</p>
+<p>In PHP, you configure these headers using the native
+<code>header()</code> function before any output is sent to the
+browser.</p>
+<h2 id="step-1-set-the-allowed-origins">Step 1: Set the Allowed
+Origins</h2>
+<p>To allow web applications to access your API, you need to define the
+<code>Access-Control-Allow-Origin</code> header.</p>
+<p>To allow access from <strong>any</strong> domain (not recommended for
+private or sensitive APIs):</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Origin: *&quot;</span>)<span class="ot">;</span></span></code></pre></div>
+<p>To restrict access to a <strong>specific</strong> domain (highly
+recommended for production):</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Origin: https://www.yourfrontenddomain.com&quot;</span>)<span class="ot">;</span></span></code></pre></div>
+<h2 id="step-2-allow-http-methods-and-headers">Step 2: Allow HTTP
+Methods and Headers</h2>
+<p>Next, specify which HTTP methods and headers are allowed when
+accessing your API resources.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co">// Define allowed HTTP methods</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS&quot;</span>)<span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co">// Define allowed request headers (useful if you use JWT tokens or JSON payloads)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With&quot;</span>)<span class="ot">;</span></span></code></pre></div>
+<h2 id="step-3-handle-http-options-preflight-requests">Step 3: Handle
+HTTP OPTIONS Preflight Requests</h2>
+<p>Browsers automatically send a "preflight" request using the
+<code>OPTIONS</code> method before sending complex requests (like
+<code>POST</code> or <code>PUT</code> with custom headers). Your PHP
+script must catch this request, send the appropriate CORS headers, and
+exit immediately with a <code>200 OK</code> status without executing the
+rest of your API logic.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$_SERVER</span>[<span class="st">&#39;REQUEST_METHOD&#39;</span>] <span class="op">===</span> <span class="st">&#39;OPTIONS&#39;</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Return standard 200 OK status for preflight</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">http_response_code</span>(<span class="dv">200</span>)<span class="ot">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">exit</span>()<span class="ot">;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h2 id="complete-php-cors-implementation-example">Complete PHP CORS
+Implementation Example</h2>
+<p>Below is a complete, production-ready PHP snippet that handles CORS
+headers dynamically. Place this code at the very top of your main entry
+point file (e.g., <code>index.php</code> or <code>api.php</code>),
+before any output is rendered.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Define allowed origins</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="va">$allowed_origins</span> <span class="op">=</span> [</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;https://www.yourfrontenddomain.com&#39;</span><span class="ot">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">&#39;http://localhost:3000&#39;</span> <span class="co">// Local development</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>]<span class="ot">;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="kw">isset</span>(<span class="va">$_SERVER</span>[<span class="st">&#39;HTTP_ORIGIN&#39;</span>])) {</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="va">$origin</span> <span class="op">=</span> <span class="va">$_SERVER</span>[<span class="st">&#39;HTTP_ORIGIN&#39;</span>]<span class="ot">;</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="fu">in_array</span>(<span class="va">$origin</span><span class="ot">,</span> <span class="va">$allowed_origins</span>)) {</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>        <span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Origin: &quot;</span> <span class="op">.</span> <span class="va">$origin</span>)<span class="ot">;</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        <span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Credentials: true&quot;</span>)<span class="ot">;</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a><span class="co">// Access-Control headers are received during OPTIONS requests</span></span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$_SERVER</span>[<span class="st">&#39;REQUEST_METHOD&#39;</span>] <span class="op">===</span> <span class="st">&#39;OPTIONS&#39;</span>) {</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">isset</span>(<span class="va">$_SERVER</span>[<span class="st">&#39;HTTP_ACCESS_CONTROL_REQUEST_METHOD&#39;</span>])) {</span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a>        <span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS&quot;</span>)<span class="ot">;</span></span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="kw">isset</span>(<span class="va">$_SERVER</span>[<span class="st">&#39;HTTP_ACCESS_CONTROL_REQUEST_HEADERS&#39;</span>])) {</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>        <span class="fu">header</span>(<span class="st">&quot;Access-Control-Allow-Headers: </span>{<span class="va">$_SERVER</span>[<span class="st">&#39;HTTP_ACCESS_CONTROL_REQUEST_HEADERS&#39;</span>]}<span class="st">&quot;</span>)<span class="ot">;</span></span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="fu">http_response_code</span>(<span class="dv">200</span>)<span class="ot">;</span></span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">exit</span>()<span class="ot">;</span></span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a><span class="co">// Your actual API logic starts here</span></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="fu">json_encode</span>([<span class="st">&quot;status&quot;</span> =&gt; <span class="st">&quot;success&quot;</span><span class="ot">,</span> <span class="st">&quot;message&quot;</span> =&gt; <span class="st">&quot;CORS configured successfully.&quot;</span>])<span class="ot">;</span></span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

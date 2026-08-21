@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Compare Arrays Using array_diff in PHP - php</title>
+    <meta name="description" content="This article explains how to use the PHP arraydiff() function to compare multiple arrays. You will learn the fundamental syntax of the function, how it evaluates and identifies differences based on values, and see practical code examples demonstrating it">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-compare-arrays-using-array-diff-in-php">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Compare Arrays Using array_diff in PHP - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-compare-arrays-using-array-diff-in-php" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explains how to use the PHP arraydiff() function to compare multiple arrays. You will learn the fundamental syntax of the function, how it evaluates and identifies differences based on values, and see practical code examples demonstrating it" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-compare-arrays-using-array_diff-in-php">How to Compare
+Arrays Using array_diff in PHP</h1>
+<p>This article explains how to use the PHP <code>array_diff()</code>
+function to compare multiple arrays. You will learn the fundamental
+syntax of the function, how it evaluates and identifies differences
+based on values, and see practical code examples demonstrating its
+behavior.</p>
+<h2 id="understanding-the-array_diff-function">Understanding the
+array_diff() Function</h2>
+<p>The <code>array_diff()</code> function in PHP compares the values of
+two or more arrays and returns the differences. Specifically, it
+compares the first array against one or more other arrays and returns an
+array containing all the entries from the first array that are not
+present in any of the subsequent arrays.</p>
+<h3 id="syntax">Syntax</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">array_diff</span>(<span class="dt">array</span> <span class="va">$array1</span><span class="ot">,</span> <span class="dt">array</span> <span class="va">$array2</span><span class="ot">,</span> <span class="dt">array</span> ...<span class="va">$arrays</span>)<span class="ot">:</span> <span class="dt">array</span></span></code></pre></div>
+<ul>
+<li><strong>$array1</strong>: The array to compare from (the source
+array).</li>
+<li><strong>$array2</strong>: An array to compare against.</li>
+<li><strong>$...arrays</strong>: Additional arrays to compare against
+(optional).</li>
+</ul>
+<p>The function returns an array containing all the values of
+<code>$array1</code> that do not exist in any of the other input arrays.
+Note that the original keys from <code>$array1</code> are preserved in
+the returned array.</p>
+<hr />
+<h2 id="basic-example-comparing-two-arrays">Basic Example: Comparing Two
+Arrays</h2>
+<p>In this example, we compare two arrays of colors. The function will
+identify which colors exist in the first array but are missing from the
+second array.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$array1</span> <span class="op">=</span> [<span class="st">&quot;red&quot;</span><span class="ot">,</span> <span class="st">&quot;green&quot;</span><span class="ot">,</span> <span class="st">&quot;blue&quot;</span><span class="ot">,</span> <span class="st">&quot;yellow&quot;</span>]<span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$array2</span> <span class="op">=</span> [<span class="st">&quot;red&quot;</span><span class="ot">,</span> <span class="st">&quot;green&quot;</span><span class="ot">,</span> <span class="st">&quot;purple&quot;</span>]<span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="va">$result</span> <span class="op">=</span> <span class="fu">array_diff</span>(<span class="va">$array1</span><span class="ot">,</span> <span class="va">$array2</span>)<span class="ot">;</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print_r</span>(<span class="va">$result</span>)<span class="ot">;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<pre class="text"><code>Array
+(
+    [2] =&gt; blue
+    [3] =&gt; yellow
+)</code></pre>
+<p>In this output, "blue" and "yellow" are returned because they exist
+in <code>$array1</code> but not in <code>$array2</code>. The keys
+<code>2</code> and <code>3</code> from the original array are
+preserved.</p>
+<hr />
+<h2 id="example-comparing-multiple-arrays">Example: Comparing Multiple
+Arrays</h2>
+<p>You can pass multiple arrays to <code>array_diff()</code>. The
+function will exclude any values from the first array that appear in
+<em>any</em> of the other passed arrays.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$array1</span> <span class="op">=</span> [<span class="st">&quot;apple&quot;</span><span class="ot">,</span> <span class="st">&quot;banana&quot;</span><span class="ot">,</span> <span class="st">&quot;cherry&quot;</span><span class="ot">,</span> <span class="st">&quot;orange&quot;</span>]<span class="ot">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$array2</span> <span class="op">=</span> [<span class="st">&quot;banana&quot;</span>]<span class="ot">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">$array3</span> <span class="op">=</span> [<span class="st">&quot;orange&quot;</span><span class="ot">,</span> <span class="st">&quot;melon&quot;</span>]<span class="ot">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="va">$result</span> <span class="op">=</span> <span class="fu">array_diff</span>(<span class="va">$array1</span><span class="ot">,</span> <span class="va">$array2</span><span class="ot">,</span> <span class="va">$array3</span>)<span class="ot">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">print_r</span>(<span class="va">$result</span>)<span class="ot">;</span></span></code></pre></div>
+<p><strong>Output:</strong></p>
+<pre class="text"><code>Array
+(
+    [0] =&gt; apple
+    [2] =&gt; cherry
+)</code></pre>
+<hr />
+<h2 id="crucial-behaviors-of-array_diff">Crucial Behaviors of
+array_diff()</h2>
+<p>To use <code>array_diff()</code> effectively, keep these three rules
+in mind:</p>
+<ol type="1">
+<li><strong>Value-Only Comparison</strong>: The function only compares
+the values of the arrays. The keys are completely ignored during the
+comparison process, though the keys of the first array are preserved in
+the final output.</li>
+<li><strong>Case Sensitivity</strong>: The comparison is case-sensitive.
+For example, "Red" and "red" are treated as different values.</li>
+<li><strong>String Conversion</strong>: Elements are compared as
+strings. This means that an integer <code>1</code> and a string
+<code>'1'</code> are considered equal during the comparison.</li>
+</ol></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP == vs ===: Loose vs Strict Comparison - php</title>
+    <meta name="description" content="In PHP, understanding the difference between the loose comparison operator (==) and the strict comparison operator (===) is crucial for writing secure and bug-free applications. This article explains how these two operators evaluate variables, how PHP's">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-vs-loose-vs-strict-comparison">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP == vs ===: Loose vs Strict Comparison - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-vs-loose-vs-strict-comparison" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="In PHP, understanding the difference between the loose comparison operator (==) and the strict comparison operator (===) is crucial for writing secure and bug-free applications. This article explains how these two operators evaluate variables, how PHP's" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php--vs--loose-vs-strict-comparison">PHP == vs ===: Loose vs
+Strict Comparison</h1>
+<p>In PHP, understanding the difference between the loose comparison
+operator (<code>==</code>) and the strict comparison operator
+(<code>===</code>) is crucial for writing secure and bug-free
+applications. This article explains how these two operators evaluate
+variables, how PHP's automatic type conversion (type juggling) affects
+comparison outcomes, and provides clear examples of when to use each
+operator.</p>
+<h2 id="the-loose-comparison-operator-">The Loose Comparison Operator
+(==)</h2>
+<p>The loose comparison operator (<code>==</code>) compares two values
+for equality <em>after</em> converting them to a common data type. This
+process is known as <strong>type juggling</strong> or <strong>type
+coercion</strong>.</p>
+<p>If the two values being compared are of different data types (for
+example, a string and an integer), PHP will automatically convert one or
+both of the variables behind the scenes so they match before performing
+the comparison.</p>
+<h3 id="example-of-loose-comparison">Example of Loose Comparison:</h3>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">$integerVar</span> <span class="op">=</span> <span class="dv">5</span><span class="ot">;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="va">$stringVar</span> <span class="op">=</span> <span class="st">&quot;5&quot;</span><span class="ot">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$integerVar</span> <span class="op">==</span> <span class="va">$stringVar</span>) {</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;They are equal&quot;</span><span class="ot">;</span> <span class="co">// This will execute</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In the example above, PHP converts the string <code>"5"</code> to the
+integer <code>5</code> before comparing them, resulting in
+<code>true</code>.</p>
+<p>Other common loose comparison results that can lead to unexpected
+bugs include:</p>
+<ul>
+<li><code>0 == false</code> (returns <code>true</code>)</li>
+<li><code>"" == false</code> (returns <code>true</code>)</li>
+<li><code>null == false</code> (returns <code>true</code>)</li>
+<li><code>[] == false</code> (returns <code>true</code>)</li>
+</ul>
+<hr />
+<h2 id="the-strict-comparison-operator-">The Strict Comparison Operator
+(===)</h2>
+<p>The strict comparison operator (<code>===</code>) compares both the
+<strong>value</strong> and the <strong>data type</strong> of the two
+variables. It does not perform type juggling.</p>
+<p>For a strict comparison to return <code>true</code>, both operands
+must have the exact same value and belong to the exact same data type
+(e.g., both must be integers, both must be strings, etc.).</p>
+<h3 id="example-of-strict-comparison">Example of Strict Comparison:</h3>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$integerVar</span> <span class="op">=</span> <span class="dv">5</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$stringVar</span> <span class="op">=</span> <span class="st">&quot;5&quot;</span><span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$integerVar</span> <span class="op">===</span> <span class="va">$stringVar</span>) {</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;They are equal&quot;</span><span class="ot">;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;They are not equal&quot;</span><span class="ot">;</span> <span class="co">// This will execute</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>In this example, because <code>$integerVar</code> is an integer and
+<code>$stringVar</code> is a string, the strict comparison returns
+<code>false</code> because their types do not match.</p>
+<p>Common strict comparison results:</p>
+<ul>
+<li><code>0 === false</code> (returns <code>false</code>)</li>
+<li><code>"" === false</code> (returns <code>false</code>)</li>
+<li><code>null === false</code> (returns <code>false</code>)</li>
+</ul>
+<hr />
+<h2 id="summary-of-differences">Summary of Differences</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Comparison</th>
+<th style="text-align: left;">Loose (<code>==</code>)</th>
+<th style="text-align: left;">Strict (<code>===</code>)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;"><strong>Checks Value?</strong></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Checks Data Type?</strong></td>
+<td style="text-align: left;">No</td>
+<td style="text-align: left;">Yes</td>
+</tr>
+<tr>
+<td style="text-align: left;"><strong>Performs Type
+Juggling?</strong></td>
+<td style="text-align: left;">Yes</td>
+<td style="text-align: left;">No</td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>1 == '1'</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;"><code>false</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>0 == false</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;"><code>false</code></td>
+</tr>
+<tr>
+<td style="text-align: left;"><code>null == false</code></td>
+<td style="text-align: left;"><code>true</code></td>
+<td style="text-align: left;"><code>false</code></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="best-practice-which-one-should-you-use">Best Practice: Which One
+Should You Use?</h2>
+<p>In almost all scenarios, it is best practice to use the
+<strong>strict comparison operator (<code>===</code>)</strong>.</p>
+<p>Using <code>===</code> makes your code more predictable, easier to
+debug, and secure. It prevents subtle logic errors caused by PHP's
+automatic type conversion. For example, when using built-in PHP
+functions like <code>strpos()</code>, which can return <code>0</code>
+(indicating a match at the start of a string) or <code>false</code>
+(indicating no match), a loose comparison (<code>==</code>) cannot
+distinguish between the two, whereas a strict comparison
+(<code>===</code>) can.</p>
+<p>Only use the loose comparison operator (<code>==</code>) if you
+intentionally want to allow type coercion and are certain it will not
+introduce security vulnerabilities or logical errors into your code.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

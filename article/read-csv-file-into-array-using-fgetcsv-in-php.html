@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read CSV File into Array Using fgetcsv in PHP - php</title>
+    <meta name="description" content="This article explains how to read a CSV file and convert its contents into a PHP array using the native fgetcsv() function. You will learn the step-by-step process of opening a file, parsing its rows sequentially through a loop, and structuring the data">
+    <link rel="canonical" href="https://salivity.github.io/php/article/read-csv-file-into-array-using-fgetcsv-in-php">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Read CSV File into Array Using fgetcsv in PHP - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/read-csv-file-into-array-using-fgetcsv-in-php" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article explains how to read a CSV file and convert its contents into a PHP array using the native fgetcsv() function. You will learn the step-by-step process of opening a file, parsing its rows sequentially through a loop, and structuring the data" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="read-csv-file-into-array-using-fgetcsv-in-php">Read CSV File
+into Array Using fgetcsv in PHP</h1>
+<p>This article explains how to read a CSV file and convert its contents
+into a PHP array using the native <code>fgetcsv()</code> function. You
+will learn the step-by-step process of opening a file, parsing its rows
+sequentially through a loop, and structuring the data into a clean,
+readable PHP array, including how to handle header rows.</p>
+<h2 id="the-basic-method-to-read-csv-into-an-array">The Basic Method to
+Read CSV into an Array</h2>
+<p>The <code>fgetcsv()</code> function in PHP reads a line from an open
+file pointer and parses it for CSV fields. To convert an entire CSV file
+into an array, you need to combine <code>fopen()</code>,
+<code>fgetcsv()</code>, and a <code>while</code> loop.</p>
+<p>Here is the standard implementation:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// Path to the CSV file</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="va">$filename</span> <span class="op">=</span> <span class="st">&#39;data.csv&#39;</span><span class="ot">;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">// Array to store the CSV data</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="va">$dataArray</span> <span class="op">=</span> []<span class="ot">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">// Open the file in read-only mode</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="va">$handle</span> <span class="op">=</span> <span class="fu">fopen</span>(<span class="va">$filename</span><span class="ot">,</span> <span class="st">&#39;r&#39;</span>)) <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Read each line of the CSV file</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span> ((<span class="va">$row</span> <span class="op">=</span> <span class="fu">fgetcsv</span>(<span class="va">$handle</span><span class="ot">,</span> <span class="dv">1000</span><span class="ot">,</span> <span class="st">&#39;,&#39;</span>)) <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="va">$dataArray</span>[] <span class="op">=</span> <span class="va">$row</span><span class="ot">;</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Close the file pointer</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fclose</span>(<span class="va">$handle</span>)<span class="ot">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">// Output the resulting array</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">print_r</span>(<span class="va">$dataArray</span>)<span class="ot">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<h3 id="how-this-code-works">How this code works:</h3>
+<ol type="1">
+<li><strong><code>fopen($filename, 'r')</code></strong>: Opens the CSV
+file for reading.</li>
+<li><strong><code>fgetcsv($handle, 1000, ',')</code></strong>: Reads a
+single line. The second argument (<code>1000</code>) limits the line
+length for performance (0 means unlimited), and the third argument
+(<code>,</code>) specifies the delimiter.</li>
+<li><strong><code>while</code> Loop</strong>: Loops through the file
+line-by-line until it reaches the end of the file
+(<code>false</code>).</li>
+<li><strong><code>fclose($handle)</code></strong>: Closes the file to
+free up system resources.</li>
+</ol>
+<hr />
+<h2 id="mapping-csv-headers-to-array-keys">Mapping CSV Headers to Array
+Keys</h2>
+<p>In many cases, the first row of your CSV file contains column headers
+(e.g., "Name", "Email", "Phone"). You can map these headers as keys for
+each associative array row using PHP's <code>array_combine()</code>
+function.</p>
+<p>Here is how to read a CSV file into an associative array:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$filename</span> <span class="op">=</span> <span class="st">&#39;users.csv&#39;</span><span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$dataArray</span> <span class="op">=</span> []<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> ((<span class="va">$handle</span> <span class="op">=</span> <span class="fu">fopen</span>(<span class="va">$filename</span><span class="ot">,</span> <span class="st">&#39;r&#39;</span>)) <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="co">// Get the first row to use as keys/headers</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>    <span class="va">$headers</span> <span class="op">=</span> <span class="fu">fgetcsv</span>(<span class="va">$handle</span><span class="ot">,</span> <span class="dv">1000</span><span class="ot">,</span> <span class="st">&#39;,&#39;</span>)<span class="ot">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="va">$headers</span> <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Loop through the remaining rows</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span> ((<span class="va">$row</span> <span class="op">=</span> <span class="fu">fgetcsv</span>(<span class="va">$handle</span><span class="ot">,</span> <span class="dv">1000</span><span class="ot">,</span> <span class="st">&#39;,&#39;</span>)) <span class="op">!==</span> <span class="kw">false</span>) {</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>            <span class="co">// Combine headers with row values</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>            <span class="va">$dataArray</span>[] <span class="op">=</span> <span class="fu">array_combine</span>(<span class="va">$headers</span><span class="ot">,</span> <span class="va">$row</span>)<span class="ot">;</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>        }</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">fclose</span>(<span class="va">$handle</span>)<span class="ot">;</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="fu">print_r</span>(<span class="va">$dataArray</span>)<span class="ot">;</span></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="kw">?&gt;</span></span></code></pre></div>
+<h3 id="why-use-associative-arrays">Why use associative arrays?</h3>
+<p>If your input CSV looks like this:</p>
+<pre class="csv"><code>Name,Email
+John Doe,john@example.com</code></pre>
+<p>The resulting PHP array will be structured cleanly with recognizable
+keys:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="dt">Array</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>(</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>] =&gt; <span class="dt">Array</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>        (</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>            [Name] =&gt; John Doe</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>            [Email] =&gt; john<span class="pp">@</span>example<span class="op">.</span>com</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>        )</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

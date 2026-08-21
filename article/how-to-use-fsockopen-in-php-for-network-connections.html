@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use fsockopen in PHP for Network Connections - php</title>
+    <meta name="description" content="This article provides a straightforward guide on how to initiate a network connection using the fsockopen() function in PHP. You will learn the basic syntax of the function, how to handle connection errors, and how to write and read data through the esta">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-to-use-fsockopen-in-php-for-network-connections">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How to Use fsockopen in PHP for Network Connections - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-to-use-fsockopen-in-php-for-network-connections" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a straightforward guide on how to initiate a network connection using the fsockopen() function in PHP. You will learn the basic syntax of the function, how to handle connection errors, and how to write and read data through the esta" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-to-use-fsockopen-in-php-for-network-connections">How to Use
+fsockopen in PHP for Network Connections</h1>
+<p>This article provides a straightforward guide on how to initiate a
+network connection using the <code>fsockopen()</code> function in PHP.
+You will learn the basic syntax of the function, how to handle
+connection errors, and how to write and read data through the
+established socket connection.</p>
+<h2 id="understanding-fsockopen-in-php">Understanding fsockopen() in
+PHP</h2>
+<p>The <code>fsockopen()</code> function is a built-in PHP tool used to
+open an Internet or Unix domain socket connection. Unlike higher-level
+tools like cURL, <code>fsockopen()</code> operates at a lower network
+level, allowing you to establish direct TCP or UDP connections to a
+remote server. This is highly useful for custom protocols, port
+checking, or sending raw HTTP requests.</p>
+<h3 id="syntax">Syntax</h3>
+<p>The basic syntax of <code>fsockopen()</code> is as follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">resource</span> <span class="fu">fsockopen</span> ( </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>    <span class="dt">string</span> <span class="va">$hostname</span><span class="ot">,</span> </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">$port</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="ot">,</span> </span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="op">&amp;</span><span class="va">$errno</span> <span class="op">=</span> <span class="kw">null</span><span class="ot">,</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">string</span> <span class="op">&amp;</span><span class="va">$errstr</span> <span class="op">=</span> <span class="kw">null</span><span class="ot">,</span> </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">float</span> <span class="va">$timeout</span> <span class="op">=</span> <span class="kw">null</span> </span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<ul>
+<li><strong><code>$hostname</code></strong>: The IP address or domain
+name of the target server.</li>
+<li><strong><code>$port</code></strong>: The port number (e.g., 80 for
+HTTP, 443 for HTTPS).</li>
+<li><strong><code>$errno</code></strong>: A variable that will hold the
+error number if the connection fails.</li>
+<li><strong><code>$errstr</code></strong>: A variable that will hold the
+error message if the connection fails.</li>
+<li><strong><code>$timeout</code></strong>: The connection timeout in
+seconds.</li>
+</ul>
+<h2 id="step-by-step-implementation">Step-by-Step Implementation</h2>
+<p>To successfully initiate a connection, write to the socket, read the
+response, and close the connection, follow these steps:</p>
+<h3 id="1-initiate-the-connection">1. Initiate the Connection</h3>
+<p>Use <code>fsockopen()</code> to establish the connection and verify
+that the socket resource was successfully created.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$hostname</span> <span class="op">=</span> <span class="st">&#39;example.com&#39;</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$port</span> <span class="op">=</span> <span class="dv">80</span><span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$timeout</span> <span class="op">=</span> <span class="dv">30</span><span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">$connection</span> <span class="op">=</span> <span class="pp">@</span><span class="fu">fsockopen</span>(<span class="va">$hostname</span><span class="ot">,</span> <span class="va">$port</span><span class="ot">,</span> <span class="va">$errno</span><span class="ot">,</span> <span class="va">$errstr</span><span class="ot">,</span> <span class="va">$timeout</span>)<span class="ot">;</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="op">!</span><span class="va">$connection</span>) {</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;Connection failed: </span><span class="va">$errstr</span><span class="st"> (</span><span class="va">$errno</span><span class="st">)&quot;</span><span class="ot">;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">exit</span><span class="ot">;</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p><em>(Note: The <code>@</code> operator suppresses default PHP PHP
+warning messages, allowing you to handle errors gracefully using
+<code>$errno</code> and <code>$errstr</code>.)</em></p>
+<h3 id="2-send-data-write-to-socket">2. Send Data (Write to Socket)</h3>
+<p>Once the connection is open, you can send data to the server using
+the <code>fwrite()</code> function. In this example, we send a standard
+HTTP GET request.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$request</span> <span class="op">=</span> <span class="st">&quot;GET / HTTP/1.1</span><span class="sc">\r\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$request</span> <span class="op">.=</span> <span class="st">&quot;Host: </span><span class="va">$hostname</span><span class="sc">\r\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$request</span> <span class="op">.=</span> <span class="st">&quot;Connection: Close</span><span class="sc">\r\n\r\n</span><span class="st">&quot;</span><span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">fwrite</span>(<span class="va">$connection</span><span class="ot">,</span> <span class="va">$request</span>)<span class="ot">;</span></span></code></pre></div>
+<h3 id="3-retrieve-data-read-from-socket">3. Retrieve Data (Read from
+Socket)</h3>
+<p>Use a <code>while</code> loop combined with <code>fgets()</code> to
+read the server's response line-by-line until the end of the file (EOF)
+is reached.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$response</span> <span class="op">=</span> <span class="st">&#39;&#39;</span><span class="ot">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="cf">while</span> (<span class="op">!</span><span class="fu">feof</span>(<span class="va">$connection</span>)) {</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>    <span class="va">$response</span> <span class="op">.=</span> <span class="fu">fgets</span>(<span class="va">$connection</span><span class="ot">,</span> <span class="dv">128</span>)<span class="ot">;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="4-close-the-connection">4. Close the Connection</h3>
+<p>Always close the network socket using <code>fclose()</code> once your
+data transfer is complete to free up system resources.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fclose</span>(<span class="va">$connection</span>)<span class="ot">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co">// Output the response</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$response</span><span class="ot">;</span></span></code></pre></div>
+<h2 id="connecting-via-ssltls-https">Connecting via SSL/TLS (HTTPS)</h2>
+<p>To establish a secure connection using <code>fsockopen()</code>,
+prepending the transport protocol <code>ssl://</code> or
+<code>tls://</code> to the hostname is required, and the port must be
+updated to <code>443</code>.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="va">$secure_connection</span> <span class="op">=</span> <span class="pp">@</span><span class="fu">fsockopen</span>(<span class="st">&#39;ssl://example.com&#39;</span><span class="ot">,</span> <span class="dv">443</span><span class="ot">,</span> <span class="va">$errno</span><span class="ot">,</span> <span class="va">$errstr</span><span class="ot">,</span> <span class="dv">30</span>)<span class="ot">;</span></span></code></pre></div></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

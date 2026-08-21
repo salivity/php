@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHPUnit Tutorial: How to Test PHP Applications - php</title>
+    <meta name="description" content="This article provides a comprehensive overview of PHPUnit, the industry-standard testing framework for PHP. You will learn what PHPUnit is, why it is vital for modern PHP development, and how to install it, write basic unit tests, and run them to ensure">
+    <link rel="canonical" href="https://salivity.github.io/php/article/phpunit-tutorial-how-to-test-php-applications">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHPUnit Tutorial: How to Test PHP Applications - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/phpunit-tutorial-how-to-test-php-applications" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article provides a comprehensive overview of PHPUnit, the industry-standard testing framework for PHP. You will learn what PHPUnit is, why it is vital for modern PHP development, and how to install it, write basic unit tests, and run them to ensure" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="phpunit-tutorial-how-to-test-php-applications">PHPUnit Tutorial:
+How to Test PHP Applications</h1>
+<p>This article provides a comprehensive overview of PHPUnit, the
+industry-standard testing framework for PHP. You will learn what PHPUnit
+is, why it is vital for modern PHP development, and how to install it,
+write basic unit tests, and run them to ensure your application's code
+remains reliable and bug-free.</p>
+<h2 id="what-is-phpunit">What is PHPUnit?</h2>
+<p>PHPUnit is a programmer-oriented testing framework for PHP. It is an
+instance of the xUnit architecture, which is a collective name for
+several unit testing frameworks that share the same structure and
+functionality.</p>
+<p>PHPUnit allows developers to write "unit tests." A unit test focuses
+on testing the smallest testable part of an application—usually a single
+method or function—in isolation from the rest of the code. By isolating
+these components, developers can verify that each part of the codebase
+behaves exactly as expected.</p>
+<h2 id="why-use-phpunit">Why Use PHPUnit?</h2>
+<p>Implementing PHPUnit in your development workflow offers several key
+benefits:</p>
+<ul>
+<li><strong>Early Bug Detection:</strong> Automated tests catch bugs
+immediately after code changes are made, preventing errors from reaching
+production.</li>
+<li><strong>Safe Refactoring:</strong> Developers can rewrite or
+optimize code with confidence, knowing that if they break existing
+functionality, the tests will fail.</li>
+<li><strong>Living Documentation:</strong> Unit tests serve as a form of
+documentation, showing other developers exactly how a class or method is
+intended to behave.</li>
+<li><strong>Continuous Integration (CI):</strong> PHPUnit integrates
+seamlessly into CI/CD pipelines, automatically running tests whenever
+new code is pushed to a repository.</li>
+</ul>
+<h2 id="setting-up-phpunit">Setting Up PHPUnit</h2>
+<p>The standard and most recommended way to install PHPUnit is through
+Composer, the dependency manager for PHP. Run the following command in
+your project root directory:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">composer</span> require <span class="at">--dev</span> phpunit/phpunit</span></code></pre></div>
+<p>The <code>--dev</code> flag ensures that PHPUnit is only installed in
+your development environment, keeping your production environment
+lightweight.</p>
+<h2 id="writing-your-first-test">Writing Your First Test</h2>
+<p>To use PHPUnit, you write test classes that extend the
+<code>PHPUnit\Framework\TestCase</code> class. By convention, test files
+are placed in a <code>tests</code> directory, and their filenames end
+with <code>Test.php</code>.</p>
+<h3 id="1-the-code-to-test">1. The Code to Test</h3>
+<p>Imagine you have a simple <code>Calculator</code> class in a file
+named <code>src/Calculator.php</code>:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="kw">namespace</span> App<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> Calculator {</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="kw">function</span> add(<span class="dt">float</span> <span class="va">$a</span><span class="ot">,</span> <span class="dt">float</span> <span class="va">$b</span>)<span class="ot">:</span> <span class="dt">float</span> {</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="va">$a</span> <span class="op">+</span> <span class="va">$b</span><span class="ot">;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="2-the-test-class">2. The Test Class</h3>
+<p>Next, create a test file named <code>tests/CalculatorTest.php</code>.
+Inside this file, you will write a method to test the <code>add</code>
+method of your <code>Calculator</code> class:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">&lt;?php</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> PHPUnit\Framework\TestCase<span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="kw">use</span> App\Calculator<span class="ot">;</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> CalculatorTest <span class="kw">extends</span> TestCase {</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>    <span class="kw">public</span> <span class="kw">function</span> testAddAddsTwoNumbersCorrectly() {</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Arrange</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>        <span class="va">$calculator</span> <span class="op">=</span> <span class="kw">new</span> Calculator()<span class="ot">;</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Act</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>        <span class="va">$result</span> <span class="op">=</span> <span class="va">$calculator</span>-&gt;add(<span class="fl">2.5</span><span class="ot">,</span> <span class="fl">3.5</span>)<span class="ot">;</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>        <span class="co">// Assert</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>        <span class="va">$this</span>-&gt;assertEquals(<span class="fl">6.0</span><span class="ot">,</span> <span class="va">$result</span>)<span class="ot">;</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="key-elements-of-a-phpunit-test">Key Elements of a PHPUnit
+Test</h3>
+<ul>
+<li><strong>Class Extension:</strong> The test class must extend
+<code>PHPUnit\Framework\TestCase</code>.</li>
+<li><strong>Method Naming:</strong> Test method names must start with
+the word <code>test</code> (e.g.,
+<code>testAddAddsTwoNumbersCorrectly</code>) or use the
+<code>@test</code> annotation in the docblock for PHPUnit to recognize
+them.</li>
+<li><strong>Assertions:</strong> PHPUnit provides various assertion
+methods, such as <code>assertEquals()</code>, <code>assertTrue()</code>,
+<code>assertFalse()</code>, and <code>assertCount()</code>. These
+methods compare the actual result of your code against the expected
+result.</li>
+</ul>
+<h2 id="running-your-tests">Running Your Tests</h2>
+<p>Once your test is written, you can execute PHPUnit using the binary
+installed in your vendor directory. Run the following command in your
+terminal:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./vendor/bin/phpunit</span> tests</span></code></pre></div>
+<p>PHPUnit will scan the <code>tests</code> directory, execute all the
+test methods it finds, and display the results in the console. A
+successful test run will display a green bar or a success message, while
+any failures will be highlighted with detailed feedback on what went
+wrong and where.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

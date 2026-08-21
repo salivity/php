@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What is PHP PCNTL Extension Used For - php</title>
+    <meta name="description" content="The PCNTL (Process Control) extension in PHP enables Unix-style process creation, execution, signal handling, and termination. This article explains how the PCNTL extension works, its primary use cases—such as multi-processing and background task handl">
+    <link rel="canonical" href="https://salivity.github.io/php/article/what-is-php-pcntl-extension-used-for">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="What is PHP PCNTL Extension Used For - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/what-is-php-pcntl-extension-used-for" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The PCNTL (Process Control) extension in PHP enables Unix-style process creation, execution, signal handling, and termination. This article explains how the PCNTL extension works, its primary use cases—such as multi-processing and background task handl" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="what-is-php-pcntl-extension-used-for">What is PHP PCNTL
+Extension Used For</h1>
+<p>The PCNTL (Process Control) extension in PHP enables Unix-style
+process creation, execution, signal handling, and termination. This
+article explains how the PCNTL extension works, its primary use
+cases—such as multi-processing and background task handling—and the key
+functions like <code>pcntl_fork</code> and <code>pcntl_signal</code>
+that developers use to manage parallel processes in CLI-based PHP
+applications.</p>
+<h2 id="understanding-the-pcntl-extension">Understanding the PCNTL
+Extension</h2>
+<p>The PCNTL extension implements the process creation, program
+execution, signal handling, and process termination facilities of
+Unix-style operating systems. Because of its nature, PCNTL is not
+supported on Windows platforms.</p>
+<p>Furthermore, <strong>PCNTL is designed strictly for Command Line
+Interface (CLI) environments.</strong> It should never be enabled or
+used in web server environments (such as Apache or PHP-FPM), as
+multitasking via process forking in a web server context can cause
+unexpected behavior, resource leaks, and severe server instability.</p>
+<hr />
+<h2 id="key-use-cases-of-pcntl">Key Use Cases of PCNTL</h2>
+<p>PHP is historically a single-threaded language. PCNTL bypasses this
+limitation by allowing scripts to spawn multiple processes to perform
+tasks concurrently.</p>
+<h3 id="1-multi-processing-forking">1. Multi-Processing (Forking)</h3>
+<p>The primary use of PCNTL is to fork a single PHP process into
+multiple concurrent processes. This is highly useful for CPU-intensive
+tasks, parallel data processing, or handling multiple operations
+simultaneously (such as processing queue jobs).</p>
+<h3 id="2-signal-handling">2. Signal Handling</h3>
+<p>PCNTL allows a PHP script to listen to operating system signals. For
+example, if a user presses <code>Ctrl+C</code> (SIGINT) or a system
+sends a termination request (SIGTERM), PCNTL can catch these signals to
+perform cleanup tasks, close database connections, and shut down
+gracefully rather than terminating abruptly.</p>
+<h3 id="3-creating-daemons">3. Creating Daemons</h3>
+<p>A daemon is a computer program that runs as a background process
+rather than under the direct control of an interactive user. With PCNTL,
+a PHP script can detach itself from the terminal controller and run
+continuously in the background to monitor queues, directories, or
+network ports.</p>
+<h3 id="4-preventing-zombie-processes">4. Preventing Zombie
+Processes</h3>
+<p>When a child process finishes executing, it remains in the system's
+process table as a "zombie" until the parent process acknowledges its
+exit status. PCNTL provides the mechanisms to monitor child processes
+and safely clear them from memory once they finish.</p>
+<hr />
+<h2 id="essential-pcntl-functions">Essential PCNTL Functions</h2>
+<p>Below are the most frequently used functions provided by the PCNTL
+extension:</p>
+<ul>
+<li><strong><code>pcntl_fork()</code></strong>: Forks the currently
+running process. It duplicates the process, creating a parent process
+and a child process running simultaneously from the exact point of the
+fork.</li>
+<li><strong><code>pcntl_signal(int $signal, callable $handler)</code></strong>:
+Installs a signal handler. It defines what PHP function should run when
+a specific OS signal (like <code>SIGTERM</code>, <code>SIGINT</code>, or
+<code>SIGHUP</code>) is received.</li>
+<li><strong><code>pcntl_wait(int &amp;$status)</code></strong>: Suspends
+the execution of the parent process until a child process has exited,
+which is crucial for preventing zombie processes.</li>
+<li><strong><code>pcntl_waitpid(int $pid, int &amp;$status)</code></strong>:
+Similar to <code>pcntl_wait</code>, but suspends execution until a
+specific child process (by its Process ID) has exited.</li>
+<li><strong><code>pcntl_alarm(int $seconds)</code></strong>: Creates a
+timer that sends a <code>SIGALRM</code> signal to the process after a
+specified number of seconds, useful for setting execution timeouts on
+specific blocks of code.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

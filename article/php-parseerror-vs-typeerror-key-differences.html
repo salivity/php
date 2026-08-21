@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP ParseError vs TypeError: Key Differences - php</title>
+    <meta name="description" content="Debugging a PHP application requires a clear understanding of the different errors the PHP engine throws during development and runtime. This article explains the fundamental differences between a ParseError and a TypeError in PHP, detailing when they oc">
+    <link rel="canonical" href="https://salivity.github.io/php/article/php-parseerror-vs-typeerror-key-differences">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="PHP ParseError vs TypeError: Key Differences - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/php-parseerror-vs-typeerror-key-differences" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="Debugging a PHP application requires a clear understanding of the different errors the PHP engine throws during development and runtime. This article explains the fundamental differences between a ParseError and a TypeError in PHP, detailing when they oc" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="php-parseerror-vs-typeerror-key-differences">PHP ParseError vs
+TypeError: Key Differences</h1>
+<p>Debugging a PHP application requires a clear understanding of the
+different errors the PHP engine throws during development and runtime.
+This article explains the fundamental differences between a
+<code>ParseError</code> and a <code>TypeError</code> in PHP, detailing
+when they occur, why they happen, and how to handle them effectively
+during debugging.</p>
+<h2 id="what-is-a-parseerror-in-php">What is a ParseError in PHP?</h2>
+<p>A <code>ParseError</code> occurs during the compilation phase of your
+PHP script, before any of your code actually executes. It is thrown when
+the PHP parser encounters syntax that violates the rules of the PHP
+language. Because the engine cannot understand the structure of the
+code, it halts execution immediately.</p>
+<p>Common causes of a <code>ParseError</code> include:</p>
+<ul>
+<li>Missing semicolons (<code>;</code>) at the end of a statement.</li>
+<li>Mismatched or unclosed parentheses, curly braces, or square
+brackets.</li>
+<li>Using reserved keywords incorrectly.</li>
+<li>Typographical errors in language constructs (e.g., writing
+<code>functon</code> instead of <code>function</code>).</li>
+</ul>
+<p>Because a <code>ParseError</code> happens before execution, you
+cannot catch it using a <code>try-catch</code> block inside the same
+file where the syntax error exists. However, if you include or require a
+corrupted file from a clean file, you can catch the
+<code>ParseError</code> in the parent script.</p>
+<h2 id="what-is-a-typeerror-in-php">What is a TypeError in PHP?</h2>
+<p>A <code>TypeError</code> occurs during the runtime phase of your
+application, meaning the code has successfully compiled, but a type
+mismatch occurs during execution. This error was introduced in PHP 7
+alongside strict typing and scalar type declarations.</p>
+<p>A <code>TypeError</code> is thrown under the following
+conditions:</p>
+<ul>
+<li>The value passed to a function argument does not match its declared
+type.</li>
+<li>The value returned from a function does not match the declared
+return type.</li>
+<li>An invalid type is assigned to a typed class property (introduced in
+PHP 7.4).</li>
+<li>Built-in PHP functions are passed arguments of the wrong type when
+strict types are enabled.</li>
+</ul>
+<p>Unlike a <code>ParseError</code>, a <code>TypeError</code> is a
+runtime exception that can be easily caught and handled using a
+<code>try-catch</code> block in the same script.</p>
+<h2 id="key-differences-summary">Key Differences Summary</h2>
+<p>Understanding the core differences between these two errors
+simplifies the debugging process:</p>
+<ul>
+<li><strong>Phase of Occurrence:</strong> A <code>ParseError</code> is a
+compile-time error that happens before the script runs. A
+<code>TypeError</code> is a runtime error that occurs during script
+execution.</li>
+<li><strong>Root Cause:</strong> A <code>ParseError</code> is caused by
+broken language syntax. A <code>TypeError</code> is caused by mismatched
+data types in arguments, return values, or properties.</li>
+<li><strong>Recoverability:</strong> A <code>ParseError</code> prevents
+the entire file from executing, making it difficult to catch locally. A
+<code>TypeError</code> allows the script to run up to the point of the
+mismatch and can be safely caught using
+<code>catch (TypeError $e)</code>.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Understanding the PHP preg_replace Function - php</title>
+    <meta name="description" content="The pregreplace() function in PHP is a powerful built-in tool used to perform a regular expression search and replace operations on strings. This article explains the core purpose of pregreplace(), breaks down its syntax and parameters, and provides prac">
+    <link rel="canonical" href="https://salivity.github.io/php/article/understanding-the-php-preg-replace-function">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Understanding the PHP preg_replace Function - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/understanding-the-php-preg-replace-function" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="The pregreplace() function in PHP is a powerful built-in tool used to perform a regular expression search and replace operations on strings. This article explains the core purpose of pregreplace(), breaks down its syntax and parameters, and provides prac" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="understanding-the-php-preg_replace-function">Understanding the
+PHP preg_replace Function</h1>
+<p>The <code>preg_replace()</code> function in PHP is a powerful
+built-in tool used to perform a regular expression search and replace
+operations on strings. This article explains the core purpose of
+<code>preg_replace()</code>, breaks down its syntax and parameters, and
+provides practical examples of how it is used in web development to
+manipulate text dynamically.</p>
+<h2 id="what-is-preg_replace">What is preg_replace()?</h2>
+<p>In PHP, <code>preg_replace()</code> searches a subject string (or
+array of strings) for matches to a specified regular expression pattern
+and replaces them with a designated replacement string.</p>
+<p>Unlike <code>str_replace()</code>, which only searches for exact,
+static string matches, <code>preg_replace()</code> utilizes
+Perl-Compatible Regular Expressions (PCRE). This allows developers to
+target complex patterns, such as verifying email formats, stripping HTML
+tags, removing whitespace, or reformatting phone numbers.</p>
+<h2 id="syntax-of-preg_replace">Syntax of preg_replace()</h2>
+<p>The basic syntax of the function is as follows:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">preg_replace</span>(pattern<span class="ot">,</span> replacement<span class="ot">,</span> subject<span class="ot">,</span> limit<span class="ot">,</span> <span class="fu">count</span>)</span></code></pre></div>
+<ul>
+<li><strong><code>pattern</code></strong> (Required): The regular
+expression search pattern as a string (or an array of strings).</li>
+<li><strong><code>replacement</code></strong> (Required): The string (or
+array of strings) to replace the matched patterns.</li>
+<li><strong><code>subject</code></strong> (Required): The input string
+(or array of strings) to search and replace.</li>
+<li><strong><code>limit</code></strong> (Optional): The maximum possible
+replacements for each pattern in each subject string. Defaults to
+<code>-1</code> (no limit).</li>
+<li><strong><code>count</code></strong> (Optional): A variable that will
+be filled with the number of replacements actually performed.</li>
+</ul>
+<h2 id="practical-examples-of-preg_replace">Practical Examples of
+preg_replace()</h2>
+<h3 id="1-removing-special-characters">1. Removing Special
+Characters</h3>
+<p>A common use case is sanitizing user input by removing everything
+except alphanumeric characters and spaces.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$text</span> <span class="op">=</span> <span class="st">&quot;Hello, World! Welcome to PHP 8.0 @ 2024.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$pattern</span> <span class="op">=</span> <span class="st">&quot;/[^a-zA-Z0-9 ]/&quot;</span><span class="ot">;</span> <span class="co">// Matches anything that is not a letter, number, or space</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="va">$clean_text</span> <span class="op">=</span> <span class="fu">preg_replace</span>(<span class="va">$pattern</span><span class="ot">,</span> <span class="st">&quot;&quot;</span><span class="ot">,</span> <span class="va">$text</span>)<span class="ot">;</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$clean_text</span><span class="ot">;</span> </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: Hello World Welcome to PHP 80  2024</span></span></code></pre></div>
+<h3 id="2-replacing-multiple-spaces-with-a-single-space">2. Replacing
+Multiple Spaces with a Single Space</h3>
+<p>If a user submits text with irregular spacing,
+<code>preg_replace()</code> can clean up the formatting.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="va">$text</span> <span class="op">=</span> <span class="st">&quot;This   is   an  unnecessarily    spaced sentence.&quot;</span><span class="ot">;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="va">$pattern</span> <span class="op">=</span> <span class="st">&quot;/\s+/&quot;</span><span class="ot">;</span> <span class="co">// Matches one or more whitespace characters</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="va">$clean_text</span> <span class="op">=</span> <span class="fu">preg_replace</span>(<span class="va">$pattern</span><span class="ot">,</span> <span class="st">&quot; &quot;</span><span class="ot">,</span> <span class="va">$text</span>)<span class="ot">;</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="va">$clean_text</span><span class="ot">;</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: This is an unnecessarily spaced sentence.</span></span></code></pre></div>
+<h3 id="3-reformatting-date-formats-using-backreferences">3.
+Reformatting Date Formats using Backreferences</h3>
+<p>You can capture parts of a pattern using parentheses and reference
+them in the replacement using <code>${1}</code>, <code>${2}</code>,
+etc.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">$date</span> <span class="op">=</span> <span class="st">&quot;2024-10-24&quot;</span><span class="ot">;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$pattern</span> <span class="op">=</span> <span class="st">&quot;/(\d{4})-(\d{2})-(\d{2})/&quot;</span><span class="ot">;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="va">$replacement</span> <span class="op">=</span> <span class="st">&quot;$2/$3/$1&quot;</span><span class="ot">;</span> <span class="co">// Rearranges to MM/DD/YYYY</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="kw">echo</span> <span class="fu">preg_replace</span>(<span class="va">$pattern</span><span class="ot">,</span> <span class="va">$replacement</span><span class="ot">,</span> <span class="va">$date</span>)<span class="ot">;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co">// Output: 10/24/2024</span></span></code></pre></div>
+<h2 id="when-to-use-preg_replace-vs-str_replace">When to Use
+preg_replace() vs str_replace()</h2>
+<p>While <code>preg_replace()</code> is highly versatile, it is
+computationally heavier than <code>str_replace()</code>.</p>
+<ul>
+<li>Use <strong><code>str_replace()</code></strong> when you need to
+replace simple, fixed strings (e.g., replacing "cat" with "dog").</li>
+<li>Use <strong><code>preg_replace()</code></strong> when you need to
+match variable patterns, wildcards, character classes, or perform
+conditional text replacements.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

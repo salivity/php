@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Does PHP Type Juggling Work? - php</title>
+    <meta name="description" content="PHP is a dynamically typed language, meaning it automatically detects and manages data types during runtime without requiring explicit definitions. This article explains the mechanics of PHP type juggling, demonstrates how implicit type conversion occurs">
+    <link rel="canonical" href="https://salivity.github.io/php/article/how-does-php-type-juggling-work">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="How Does PHP Type Juggling Work? - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/how-does-php-type-juggling-work" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="PHP is a dynamically typed language, meaning it automatically detects and manages data types during runtime without requiring explicit definitions. This article explains the mechanics of PHP type juggling, demonstrates how implicit type conversion occurs" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="how-does-php-type-juggling-work">How Does PHP Type Juggling
+Work?</h1>
+<p>PHP is a dynamically typed language, meaning it automatically detects
+and manages data types during runtime without requiring explicit
+definitions. This article explains the mechanics of PHP type juggling,
+demonstrates how implicit type conversion occurs during common
+operations, contrasts loose and strict comparisons, and highlights the
+security implications of this behavior.</p>
+<h2 id="what-is-type-juggling">What is Type Juggling?</h2>
+<p>In PHP, you do not need to declare a variable's data type when
+creating it. Type juggling—also known as implicit type casting—occurs
+when PHP automatically converts a variable from one data type to another
+based on the context in which it is used.</p>
+<p>If an operation requires a specific data type, PHP will attempt to
+convert the input variables into that expected type silently in the
+background.</p>
+<h2 id="how-type-juggling-works-in-practice">How Type Juggling Works in
+Practice</h2>
+<p>PHP determines the context of an operation and converts the operands
+accordingly. Here are the most common scenarios where type juggling
+occurs:</p>
+<h3 id="1-numeric-operations">1. Numeric Operations</h3>
+<p>When performing mathematical operations, PHP expects numbers. If you
+provide a string, PHP will attempt to convert it to an integer or a
+float.</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">$sum</span> <span class="op">=</span> <span class="st">&quot;5&quot;</span> <span class="op">+</span> <span class="dv">10</span><span class="ot">;</span> </span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">// $sum is integer 15. PHP converted the string &quot;5&quot; to the integer 5.</span></span></code></pre></div>
+<p>If a string starts with numeric characters, PHP extracts those
+numbers. In PHP 8.0 and later, if the string does not start with a
+number or is entirely non-numeric, a <code>TypeError</code> or warning
+may be thrown depending on the operation, whereas older PHP versions
+would silently convert the string to <code>0</code>.</p>
+<h3 id="2-string-concatenation">2. String Concatenation</h3>
+<p>When using the concatenation operator (<code>.</code>), PHP expects
+strings. Any non-string variable will be converted to a string.</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="va">$age</span> <span class="op">=</span> <span class="dv">25</span><span class="ot">;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="va">$message</span> <span class="op">=</span> <span class="st">&quot;I am &quot;</span> <span class="op">.</span> <span class="va">$age</span> <span class="op">.</span> <span class="st">&quot; years old.&quot;</span><span class="ot">;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co">// $message is &quot;I am 25 years old.&quot; (the integer 25 was juggled to a string).</span></span></code></pre></div>
+<h3 id="3-boolean-contexts">3. Boolean Contexts</h3>
+<p>When a variable is used inside a conditional statement like
+<code>if</code>, PHP converts the value to a boolean.</p>
+<p>The following values are juggled to <code>false</code> (often
+referred to as "falsy" values):</p>
+<ul>
+<li>The boolean <code>false</code> itself</li>
+<li>The integer <code>0</code> and float <code>0.0</code></li>
+<li>An empty string <code>""</code> and the string <code>"0"</code></li>
+<li>An empty array</li>
+<li><code>null</code></li>
+</ul>
+<p>All other values are converted to <code>true</code>.</p>
+<hr />
+<h2 id="loose-vs-strict-comparisons">Loose vs. Strict Comparisons</h2>
+<p>Type juggling heavily influences how PHP compares values. PHP
+provides two ways to compare variables:</p>
+<h3 id="loose-comparison-">Loose Comparison (<code>==</code>)</h3>
+<p>The double equal sign compares values <em>after</em> applying type
+juggling. If the types do not match, PHP converts them to a common type
+before performing the comparison.</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;5&quot;</span> <span class="op">==</span> <span class="dv">5</span>) {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;This is true&quot;</span><span class="ot">;</span> <span class="co">// Outputted because &quot;5&quot; is juggled to the integer 5.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<h3 id="strict-comparison-">Strict Comparison (<code>===</code>)</h3>
+<p>The triple equal sign compares both the value and the data type. No
+type juggling occurs. If the types are different, the comparison
+immediately returns <code>false</code>.</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="st">&quot;5&quot;</span> <span class="op">===</span> <span class="dv">5</span>) {</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>    <span class="kw">echo</span> <span class="st">&quot;This will not print&quot;</span><span class="ot">;</span> <span class="co">// False because string is not equal to integer.</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<hr />
+<h2 id="security-risks-of-type-juggling">Security Risks of Type
+Juggling</h2>
+<p>While type juggling is convenient, loose comparisons can introduce
+severe logic flaws and security vulnerabilities, particularly in
+authentication systems.</p>
+<p>A classic example involves "magic hashes" (hashes starting with
+<code>0e</code> followed only by numbers). In scientific notation,
+<code>0e...</code> represents zero raised to a power, which always
+equals zero.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode php"><code class="sourceCode php"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">$password_hash</span> <span class="op">=</span> <span class="st">&quot;0e123456789&quot;</span><span class="ot">;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="va">$user_input_hash</span> <span class="op">=</span> <span class="st">&quot;0e987654321&quot;</span><span class="ot">;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="va">$password_hash</span> <span class="op">==</span> <span class="va">$user_input_hash</span>) {</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="co">// This evaluates to true! Both are juggled to float 0.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div>
+<p>If a database password hash and a malicious user-input hash both
+start with <code>0e</code>, a loose comparison (<code>==</code>) will
+treat them as equal, allowing unauthorized access. To prevent these
+vulnerabilities, always use strict comparison (<code>===</code>) or
+built-in, type-safe functions like <code>hash_equals()</code>.</p></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>

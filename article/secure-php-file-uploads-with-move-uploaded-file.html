@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R4Y4YXFHZS"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag(){
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'G-R4Y4YXFHZS');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure PHP File Uploads with move_uploaded_file - php</title>
+    <meta name="description" content="This article examines how the PHP function moveuploadedfile() serves as a fundamental security mechanism for handling file uploads. We will explore how it validates HTTP POST uploads, prevents unauthorized file system access, and protects servers from di">
+    <link rel="canonical" href="https://salivity.github.io/php/article/secure-php-file-uploads-with-move-uploaded-file">
+    <link rel="icon" href="/php/favicon.ico">
+    <link rel="stylesheet" href="/php/css/style.css">
+    <link media="print" rel="stylesheet" href="/php/css/print.css">
+    <script src="/php/js/fuse.min.js"></script>
+    <script src="/php/js/script.js"></script>
+    <script id="MathJax-script" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/4.1.3/tex-chtml.min.js" defer></script>
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Secure PHP File Uploads with move_uploaded_file - php" />
+    <meta property="og:url" content="https://salivity.github.io/php/article/secure-php-file-uploads-with-move-uploaded-file" />
+    <meta property="og:image:url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:secure_url" content="https://salivity.github.io/php/images/open-graph/default.webp" />
+    <meta property="og:image:width" content="1120" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:description" content="This article examines how the PHP function moveuploadedfile() serves as a fundamental security mechanism for handling file uploads. We will explore how it validates HTTP POST uploads, prevents unauthorized file system access, and protects servers from di" />
+    <link rel="manifest" href="/php/pwa/manifest.json" />
+</head>
+<body>
+    <header>
+        <a href="/php/" aria-label="Go To Home Page" title="Go To Home Page" id="logo">
+            <span>salivity.github.io/</span><span>php</span>
+        </a>
+        <nav>
+            <ul class="header-links">
+                <li><a href="https://github.com/salivity" title="Github" aria-label="Go To Github Profile Page"><svg class="svg-icon" focusable="false" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1.27a11 11 0 00-3.48 21.46c.55.09.73-.28.73-.55v-1.84c-3.03.64-3.67-1.46-3.67-1.46-.55-1.29-1.28-1.65-1.28-1.65-.92-.65.1-.65.1-.65 1.1 0 1.73 1.1 1.73 1.1.92 1.65 2.57 1.2 3.21.92a2 2 0 01.64-1.47c-2.47-.27-5.04-1.19-5.04-5.5 0-1.1.46-2.1 1.2-2.84a3.76 3.76 0 010-2.93s.91-.28 3.11 1.1c1.8-.49 3.7-.49 5.5 0 2.1-1.38 3.02-1.1 3.02-1.1a3.76 3.76 0 010 2.93c.83.74 1.2 1.74 1.2 2.94 0 4.21-2.57 5.13-5.04 5.4.45.37.82.92.82 2.02v3.03c0 .27.1.64.73.55A11 11 0 0012 1.27"></path></svg></a></li>
+                <li><a href="/php/search" title="Search" aria-label="Go To Search Page"><svg class="svg-icon" aria-hidden="true" focusable="false" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14"></path></svg></a></li>
+                <li><a id="theme-toggle" title="Theme" href="javascript:void(0);" aria-label="Toggle Website Theme"></a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <article><h1 id="secure-php-file-uploads-with-move_uploaded_file">Secure PHP File
+Uploads with move_uploaded_file</h1>
+<p>This article examines how the PHP function
+<code>move_uploaded_file()</code> serves as a fundamental security
+mechanism for handling file uploads. We will explore how it validates
+HTTP POST uploads, prevents unauthorized file system access, and
+protects servers from directory traversal exploits, while also
+highlighting the additional steps developers must take to ensure
+comprehensive upload security.</p>
+<h3 id="1-verification-of-http-post-uploads">1. Verification of HTTP
+POST Uploads</h3>
+<p>The primary security feature of <code>move_uploaded_file()</code> is
+its built-in validation mechanism. Before moving any file, the function
+internally checks if the source file was actually uploaded via an HTTP
+POST request.</p>
+<p>This verification prevents attackers from manipulating the file path
+argument to point to sensitive system files (such as
+<code>/etc/passwd</code> or database configuration files). If an
+attacker attempts to pass a local server file path instead of a
+temporary uploaded file, <code>move_uploaded_file()</code> will detect
+that the file was not part of the current upload batch, refuse to move
+it, and return <code>false</code>.</p>
+<h3 id="2-mitigation-of-directory-traversal-attacks">2. Mitigation of
+Directory Traversal Attacks</h3>
+<p>Directory traversal (or path traversal) occurs when an attacker
+inputs filenames containing path sequences like <code>../</code> to
+navigate out of the intended upload directory.</p>
+<p>While <code>move_uploaded_file()</code> does not automatically
+sanitize the <em>destination</em> filename, it ensures that the
+<em>source</em> file is strictly bound to PHP's temporary upload
+directory (typically defined by the <code>upload_tmp_dir</code>
+directive in <code>php.ini</code>). Because PHP controls the creation
+and naming of these temporary files, users cannot trick the server into
+treating an arbitrary system file as a temporary upload.</p>
+<h3 id="3-safely-handling-temp-files">3. Safely Handling Temp Files</h3>
+<p>When a file is uploaded to a PHP server, it is temporarily stored in
+a secure, non-executable system folder with a randomized name. The
+<code>move_uploaded_file()</code> function is specifically designed to
+safely transition the file from this secure temporary state to its final
+destination. If the target file already exists at the destination,
+<code>move_uploaded_file()</code> will overwrite it, which prevents the
+accumulation of orphaned temporary files.</p>
+<h3 id="4-what-move_uploaded_file-does-not-do">4. What
+move_uploaded_file() Does Not Do</h3>
+<p>While <code>move_uploaded_file()</code> is secure in <em>how</em> it
+moves files, it does not inspect the <em>content</em> or <em>type</em>
+of the file being moved. To achieve complete file upload security,
+developers must implement additional checks alongside this function:</p>
+<ul>
+<li><strong>File Extension Validation:</strong> Ensure the destination
+filename does not end in executable extensions like <code>.php</code>,
+<code>.py</code>, or <code>.sh</code>. Use a strict allowlist of
+permitted extensions (e.g., <code>.jpg</code>, <code>.pdf</code>).</li>
+<li><strong>MIME Type Verification:</strong> Do not rely on the
+<code>$_FILES['file']['type']</code> sent by the browser, as this can be
+easily spoofed. Instead, use PHP's <code>finfo</code> class to inspect
+the file's actual binary content.</li>
+<li><strong>Disable Execution in the Upload Directory:</strong>
+Configure your web server (using <code>.htaccess</code> in Apache or
+Nginx configuration rules) to disable script execution in the directory
+where uploaded files are stored.</li>
+<li><strong>Rename Uploaded Files:</strong> Change the filename to a
+randomly generated hash (e.g., using <code>md5()</code> or
+<code>uniqid()</code>) to prevent attackers from guessing the file path
+or executing double-extension attacks.</li>
+</ul></article>
+        <div id=comments-container></div>
+
+        <script>
+            const utterancesScript = document.createElement('script');
+            
+            utterancesScript.setAttribute('src', 'https://utteranc.es/client.js');
+            utterancesScript.setAttribute('repo', 'salivity/php'); 
+            utterancesScript.setAttribute('issue-term', 'pathname'); 
+            utterancesScript.setAttribute('theme', localStorage.getItem('theme') === 'dark' ? 'github-dark' : 'github-light'); 
+            utterancesScript.setAttribute('crossorigin', 'anonymous');
+            utterancesScript.async = true;
+
+            document.getElementById('comments-container').appendChild(utterancesScript);
+        </script>
+    
+    </main>
+    <footer>
+        <nav>
+            <ul class="footer-links">
+                <li><a href="/php/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/php/terms-and-conditions">Terms and Conditions</a></li>
+            </ul>
+        </nav>
+        <div class="copyright">
+            Copyright &copy; <span id="current-year"></span>
+        </div>
+    </footer>
+</body>
+</html>
