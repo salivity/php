@@ -1,0 +1,1796 @@
+[
+  [
+    300,
+    "How to Prevent Headers Already Sent Error in PHP",
+    "The \"headers already sent\" error is a common issue PHP developers face, occurring when code attempts to send HTTP headers after output has already been sent to the browser. This article explains how the native headerssent() function prevents this fatal e",
+    false
+  ],
+  [
+    299,
+    "Randomize Array in PHP Using shuffle",
+    "This article explains how to randomize the order of elements within an array in place using PHP's built-in shuffle() function. You will learn how the function works, see practical code examples of its implementation, and understand how it handles both in",
+    false
+  ],
+  [
+    298,
+    "Remove Duplicate Values from PHP Array with array_unique",
+    "This article explains how to use the PHP arrayunique() function to selectively remove duplicate values from an array. You will learn the basic syntax of the function, how to use different sorting flags to control how duplicates are compared, and how to h",
+    false
+  ],
+  [
+    297,
+    "How to Use the PHP range Function to Create Arrays",
+    "This article explains how to use PHP's built-in range() function to easily generate arrays containing a sequential range of numbers or letters. You will learn the syntax of the function, how to generate ascending and descending sequences, how to create a",
+    false
+  ],
+  [
+    296,
+    "How to Use array_sum and array_product in PHP",
+    "In PHP, processing arrays of numbers is a common task, and the built-in functions arraysum() and arrayproduct() offer quick, efficient ways to perform calculations. This article explains the distinct purposes of these two mathematical functions, provides",
+    false
+  ],
+  [
+    295,
+    "Find Max and Min Values in a PHP Array",
+    "Finding the highest and lowest numerical values in a dataset is a fundamental task in web development. This article explains how to use PHP's built-in max() and min() functions to quickly find the maximum and minimum values within an array, complete with",
+    false
+  ],
+  [
+    294,
+    "PHP 8 Stringable Interface and __toString",
+    "This article explains the Stringable interface introduced in PHP 8 and its relationship with the toString() magic method. You will learn how PHP 8 automatically assigns this interface to classes defining toString(), how it simplifies type hinting for str",
+    false
+  ],
+  [
+    293,
+    "How to Restrict PHP Array Types Using PHPDoc",
+    "While PHP's native type system allows you to type-hint parameters and return values as array, it does not natively restrict what types of elements that array can contain. To solve this, developers use PHPDoc docblock annotations. This article demonstrate",
+    false
+  ],
+  [
+    292,
+    "Enforce PHP Interface Implementation with Implements",
+    "In PHP, ensuring that classes adhere to a specific structure is crucial for building robust, decoupled, and maintainable applications. This article provides a straightforward guide on how to strictly enforce interface implementation in PHP using the impl",
+    false
+  ],
+  [
+    291,
+    "PHP SplObserver and SplSubject Tutorial",
+    "This article explains how to implement the Observer design pattern in PHP using the built-in SplObserver and SplSubject interfaces. You will learn the purpose of these interfaces, how they facilitate decoupled communication between objects, and how to im",
+    false
+  ],
+  [
+    290,
+    "Deep Cloning Objects with PHP __clone Method",
+    "When cloning an object in PHP using the clone keyword, PHP performs a shallow copy by default, meaning nested objects remain referenced to their original instances. This article explains how to implement a deep clone by overriding the magic clone() metho",
+    false
+  ],
+  [
+    289,
+    "PHP var_export vs var_dump for Complex Arrays",
+    "When debugging complex arrays in PHP, developers often rely on vardump() and varexport() to inspect data structures. While both functions reveal the contents of an array, they serve different purposes: vardump() is designed for detailed debugging by show",
+    false
+  ],
+  [
+    288,
+    "Recreate PHP Objects Using __set_state and var_export",
+    "This article explains how to use PHP's setstate() magic method to restore and recreate objects that have been exported using the varexport() function. You will learn how varexport() generates an executable string representation of an object, and how impl",
+    false
+  ],
+  [
+    287,
+    "Get Number of Affected Rows in PHP PDO",
+    "When modifying database records using PHP Data Objects (PDO), it is crucial to verify how many rows were actually altered. This article explains how to retrieve the number of affected rows after executing an UPDATE or DELETE query using the built-in PDO",
+    false
+  ],
+  [
+    286,
+    "Difference Between shell_exec and system in PHP",
+    "When executing terminal commands in PHP, developers often choose between the shellexec() and system() functions. While both functions allow you to run system-level commands directly from your PHP script, they handle output, return values, and buffer flus",
+    false
+  ],
+  [
+    285,
+    "Capture Last Line of exec Output in PHP",
+    "When running external terminal commands within a PHP application, you often only need the final result or status message returned by the program. This article explains how to utilize PHP’s native exec() function to execute an external command and direc",
+    false
+  ],
+  [
+    284,
+    "Understanding PHP Middleware Request Response Lifecycle",
+    "This article explains the concept of middleware in modern PHP web frameworks and details its crucial role in managing the request and response lifecycle. Readers will learn how middleware acts as an intermediary layer, inspects and modifies HTTP messages",
+    false
+  ],
+  [
+    283,
+    "How to Structure MVC in Raw PHP",
+    "This article provides a practical guide on structuring a Model-View-Controller (MVC) architectural pattern in a raw PHP application. You will learn how to organize your directory structure, define the distinct roles of the Model, View, and Controller, an",
+    false
+  ],
+  [
+    282,
+    "Dependency Injection with Constructors in PHP",
+    "This article explains the core concept of dependency injection (DI) in software development and demonstrates how to implement it using constructor injection in PHP. You will learn the difference between tightly coupled and decoupled code, view a practica",
+    false
+  ],
+  [
+    281,
+    "Escape SQL Strings with mysqli_real_escape_string in PHP",
+    "Securing user input is a fundamental step in PHP database programming. This article provides a straightforward guide on how to use the mysqlirealescapestring() function to escape special characters in user-provided strings before inserting them into a ra",
+    false
+  ],
+  [
+    280,
+    "How to Get Last Insert ID in PHP MySQLi",
+    "When inserting data into a MySQL table with an auto-incrementing primary key, you often need to retrieve the newly created ID for use in subsequent queries. This article provides a straightforward guide on how to get the last inserted ID using both the o",
+    false
+  ],
+  [
+    279,
+    "Fetch Database Rows with mysqli_fetch_assoc",
+    "This article explains how to retrieve a single row of data from a MySQL database as an associative array using the mysqlifetchassoc() function in PHP. You will learn the basic syntax, see a practical code example for fetching a specific record, and under",
+    false
+  ],
+  [
+    278,
+    "PHP MySQLi Object-Oriented vs Procedural",
+    "This article explains the core differences between the object-oriented and procedural interfaces of PHP's MySQLi extension. It highlights why developers choose the object-oriented approach, detailing how it improves code structure, readability, and compa",
+    false
+  ],
+  [
+    277,
+    "Convert English Datetime to Unix Timestamp in PHP",
+    "This article demonstrates how to convert English textual datetime descriptions into Unix timestamps using PHP. You will learn how to use the built-in strtotime() function and the object-oriented DateTime class to parse relative and absolute English date",
+    false
+  ],
+  [
+    276,
+    "Validate PHP Dates and Leap Years Using checkdate()",
+    "In PHP, validating a calendar date to ensure it is accurate—especially when accounting for leap years—is a fundamental task for developers. This article explains how to use the built-in PHP checkdate() function to easily verify month, day, and year c",
+    false
+  ],
+  [
+    275,
+    "Format PHP DateTime in Specific Timezone",
+    "This article explains how to format a PHP DateTime object to display the date and time in a specific timezone. You will learn how to initialize a date, apply the DateTimeZone class to change its timezone, and format the final output for the user. To disp",
+    false
+  ],
+  [
+    274,
+    "PHP eval Security Risks and Dangers",
+    "The eval() function in PHP is a powerful tool that executes a string as PHP code, but it represents one of the most severe security vulnerabilities a web application can face. This article explores the critical dangers of using eval(), focusing on how it",
+    false
+  ],
+  [
+    273,
+    "How to Get System Temp Directory in PHP",
+    "This article explains how to dynamically locate your system's temporary directory in PHP using the built-in sysgettempdir() function. You will learn how the function works, see practical code examples for finding the directory, and understand how to safe",
+    false
+  ],
+  [
+    272,
+    "How to Retrieve PHP Configuration Values Using ini_get",
+    "This article explains how to use the built-in PHP function iniget() to retrieve the current value of configuration options from your environment. You will learn the syntax of the function, see practical code examples for reading common settings, and unde",
+    false
+  ],
+  [
+    271,
+    "How to Use ini_set to Change PHP Configuration",
+    "This article explains how to use the iniset() function in PHP to modify configuration settings dynamically during script execution. You will learn the basic syntax of the function, see practical examples for modifying common settings like memory limits a",
+    false
+  ],
+  [
+    270,
+    "How to Use phpinfo() to View PHP Server Details",
+    "This article explains how to use the built-in phpinfo() function in PHP to display comprehensive server, environment, and configuration details. You will learn how to create a simple PHP script to output this information, customize the output to show spe",
+    false
+  ],
+  [
+    269,
+    "PHP ob_flush vs ob_end_flush Difference",
+    "This article explains the critical differences between obflush() and obendflush() in PHP's output buffering system. It details how each function handles buffered data, their impact on the buffer lifecycle, and when to use one over the other to manage ser",
+    false
+  ],
+  [
+    268,
+    "PHP ob_get_clean: How to Get and Clear Output Buffer",
+    "This article explains how to use the built-in PHP function obgetclean() to efficiently retrieve the contents of the active output buffer and discard it in a single operation. You will learn the mechanics behind this function, see a practical code example",
+    false
+  ],
+  [
+    267,
+    "Trigger Custom Errors and Warnings in PHP",
+    "This article explains how to use the native PHP triggererror() function to generate custom user-level errors, warnings, and notices. You will learn how to configure different error levels, write practical implementation code, and understand how these tri",
+    false
+  ],
+  [
+    266,
+    "Using PHP assert for Inline Debugging and Testing",
+    "This article explains how to use the PHP assert() function to perform inline debugging and test logic assumptions during development. You will learn how to configure assertions, write effective checks to verify code behavior, and understand the differenc",
+    false
+  ],
+  [
+    265,
+    "PHP ParseError vs TypeError: Key Differences",
+    "Debugging a PHP application requires a clear understanding of the different errors the PHP engine throws during development and runtime. This article explains the fundamental differences between a ParseError and a TypeError in PHP, detailing when they oc",
+    false
+  ],
+  [
+    264,
+    "Catch PHP Errors and Exceptions Using Throwable",
+    "In modern PHP, handling runtime issues efficiently requires a solid understanding of the Throwable interface. This article explains how PHP uses Throwable to unify exception and error handling, allowing developers to catch both traditional exceptions and",
+    false
+  ],
+  [
+    263,
+    "How to Use the goto Statement in PHP",
+    "The goto statement in PHP allows you to jump execution to another section of your script. This article explains how the goto statement works, detailing its syntax, practical use cases—such as breaking out of deeply nested loops—and the strict limitat",
+    false
+  ],
+  [
+    262,
+    "How to Use password_needs_rehash in PHP",
+    "Keeping user passwords secure requires updating their hashes when your application's security standards, algorithms, or configuration options change. This article explains how to use PHP's built-in passwordneedsrehash() function to detect when a stored p",
+    false
+  ],
+  [
+    261,
+    "PHP 8.3 Typed Class Constants Explained",
+    "PHP 8.3 introduces typed class constants, a significant enhancement that brings type safety and consistency to object-oriented programming in PHP. This article explores how this feature works, why it is important for developers, and how it prevents commo",
+    false
+  ],
+  [
+    260,
+    "PHP 8.1 First-Class Callable Syntax Guide",
+    "PHP 8.1 introduced the first-class callable syntax, providing a cleaner, safer, and more efficient way to reference functions and methods as callbacks. This article explores how this new feature replaces older, error-prone string and array representation",
+    false
+  ],
+  [
+    259,
+    "PHP 8.1 Fibers: Cooperative Concurrency Explained",
+    "PHP 8.1 introduced Fibers, a powerful feature that brings low-level, lightweight cooperative concurrency to the language. This article explores how Fibers work, how they differ from traditional asynchronous programming patterns, and how they allow develo",
+    false
+  ],
+  [
+    258,
+    "Understanding WeakReference in PHP Memory Management",
+    "This article explains the role of the WeakReference class in PHP's memory management and garbage collection system. It explores how weak references prevent memory leaks by allowing objects to be destroyed even when referenced, highlighting their practica",
+    false
+  ],
+  [
+    257,
+    "Using PHP 8 WeakMap to Associate Data with Objects",
+    "PHP 8 introduced the WeakMap class, a powerful feature that allows developers to associate arbitrary data with objects without preventing those objects from being garbage collected. This article provides a practical guide on how to use WeakMap to manage",
+    false
+  ],
+  [
+    256,
+    "Why Use Abstract Methods in PHP Classes",
+    "This article explains the purpose of declaring abstract methods inside abstract PHP classes. You will learn how abstract methods act as a blueprint, enforce strict design consistency across child classes, and help developers define a reliable contract fo",
+    false
+  ],
+  [
+    255,
+    "PHP Trait Method Aliasing and Visibility",
+    "In PHP, traits are a powerful tool for code reuse, but they can sometimes lead to naming conflicts or expose methods with inappropriate visibility levels. This article explains how to use the as operator within a class to alias a trait's methods. You wil",
+    false
+  ],
+  [
+    254,
+    "Resolve Trait Method Conflicts with insteadof in PHP",
+    "PHP traits are a powerful mechanism for code reuse, but they can introduce conflicts when a class uses multiple traits that define methods with the exact same name. This article explains how to use PHP's insteadof operator to resolve these method collisi",
+    false
+  ],
+  [
+    253,
+    "How to Use fseek in PHP to Move File Pointer",
+    "In PHP, navigating through a file efficiently is crucial when you need to read or write data at specific locations. This article provides a quick, straight-to-the-point guide on how to use the fseek() function to move the file pointer to a specific byte",
+    false
+  ],
+  [
+    252,
+    "What is the Purpose of the PHP feof Function",
+    "This article explains the purpose, mechanics, and practical applications of the feof() function in PHP file handling. You will learn how feof() detects the end of a file stream, how to safely implement it within loops to read data, and how to avoid commo",
+    false
+  ],
+  [
+    251,
+    "Get Directory Path from File Path using PHP dirname",
+    "Extracting the directory name from a complete file path is a common task in PHP development. This article explains how to use PHP's built-in dirname() function to quickly and securely retrieve the parent directory path from a full file path, complete wit",
+    false
+  ],
+  [
+    250,
+    "Extract Filename from Path Using PHP basename",
+    "This article explains how to use the native PHP basename() function to extract just the filename from a complete file path. You will learn the basic syntax of the function, how to strip file extensions, and how to handle different operating system path f",
+    false
+  ],
+  [
+    249,
+    "How to Copy a File to a New Destination in PHP",
+    "In this article, you will learn how to copy an existing file to a new destination in PHP using the native copy() function. We will cover the basic syntax, walk through a practical code example, and highlight important security and error-handling consider",
+    false
+  ],
+  [
+    248,
+    "How to Rename or Move Files in PHP with rename()",
+    "In PHP, managing files on your server is a fundamental task, and the built-in rename() function is the primary tool for both renaming and moving files across directories. This article provides a concise, step-by-step guide on how to use the rename() func",
+    false
+  ],
+  [
+    247,
+    "How to Get File Last Modified Time in PHP using filemtime",
+    "This article explains how to use the built-in PHP function filemtime() to determine the exact time a file was last modified. You will learn the basic syntax of the function, how to format the returned Unix timestamp into a human-readable date, and how to",
+    false
+  ],
+  [
+    246,
+    "How to Get File Size in Bytes with PHP filesize",
+    "This article explains how to retrieve the size of a local file in bytes using PHP's built-in filesize() function. It covers the basic syntax, provides a practical code example, and explains important considerations such as error handling and clearing the",
+    false
+  ],
+  [
+    245,
+    "Check if a File Exists in PHP Using file_exists",
+    "When working with files in PHP, attempting to read a non-existent file will trigger warnings and potentially disrupt your application's flow. This article explains how to safely verify a file's existence on your server using the native PHP fileexists() f",
+    false
+  ],
+  [
+    244,
+    "Secure PHP File Uploads with move_uploaded_file",
+    "This article examines how the PHP function moveuploadedfile() serves as a fundamental security mechanism for handling file uploads. We will explore how it validates HTTP POST uploads, prevents unauthorized file system access, and protects servers from di",
+    false
+  ],
+  [
+    243,
+    "Get PHP Uploaded File Temporary Path Before Moving",
+    "When handling file uploads in PHP, files are temporarily stored in a default directory on the server before they are moved to their permanent destination. This article explains how to quickly retrieve this temporary file path using the $FILES superglobal",
+    false
+  ],
+  [
+    242,
+    "Upload Multiple Files Simultaneously in PHP",
+    "This article explains how to upload multiple files at the same time using PHP and the $FILES superglobal. You will learn how to properly configure your HTML form, understand the structure of the multi-file $FILES array, and write a secure PHP script to p",
+    false
+  ],
+  [
+    241,
+    "PHP session_set_save_handler for Custom Sessions",
+    "This article explains the purpose, functionality, and practical use cases of the sessionsetsavehandler() function in PHP. You will learn how this function enables developers to override PHP's default file-based session storage mechanism to implement cust",
+    false
+  ],
+  [
+    240,
+    "How to Make Cookies HttpOnly in PHP",
+    "Setting the HttpOnly flag on cookies is a crucial security practice that prevents client-side scripts, such as JavaScript, from accessing cookie data. By blocking this access, you significantly mitigate the risk of session hijacking through Cross-Site Sc",
+    false
+  ],
+  [
+    239,
+    "Difference between sleep and usleep in PHP",
+    "When developing in PHP, you often need to pause or delay the execution of a script for rate limiting, polling, or timing control. This article compares PHP's sleep() and usleep() functions, highlighting their primary differences in time resolution, synta",
+    false
+  ],
+  [
+    238,
+    "How to Delay PHP Script Execution with sleep()",
+    "This article explains how to pause or delay the execution of a PHP script using the built-in sleep() function. You will learn the basic syntax, see practical code examples, and understand how to delay execution by seconds or microseconds using related fu",
+    false
+  ],
+  [
+    237,
+    "PHP is_callable Function with Dynamic Functions",
+    "This article explains the purpose and utility of PHP's iscallable() function when working with dynamic function calls. You will learn how this function prevents application crashes by verifying whether a variable, method, or closure can be safely execute",
+    false
+  ],
+  [
+    236,
+    "How to Use is_numeric in PHP to Check Numbers",
+    "This article explains how to use the built-in isnumeric() function in PHP to determine whether a variable is a number or a numeric string. You will learn the basic syntax of the function, see practical code examples demonstrating various data types, and",
+    false
+  ],
+  [
+    235,
+    "PHP Explicit Type Casting to Integer or String",
+    "In PHP, while variable types are often handled automatically, you can explicitly convert a variable to an integer or a string using type casting operators or dedicated built-in functions. This article provides a direct, practical guide on how to perform",
+    false
+  ],
+  [
+    234,
+    "How to Get Variable Data Type in PHP Using gettype",
+    "This article explains how to use the built-in gettype() function in PHP to determine the exact data type of any variable. You will learn the syntax of the function, the specific string values it returns for different data types, and see practical code ex",
+    false
+  ],
+  [
+    233,
+    "PHP urlencode vs rawurlencode Difference",
+    "This article explains the differences between PHP's urlencode() and rawurlencode() functions, detailing how each handles character encoding for URLs. You will learn the historical standards behind them, how they treat spaces and special characters, and w",
+    false
+  ],
+  [
+    232,
+    "PHP base64_encode: Encode Binary Data to String",
+    "This article explains how to convert binary data into a readable ASCII string using the base64encode() function in PHP. You will learn the basic syntax of the function, see practical code examples for encoding both text and binary files (like images), an",
+    false
+  ],
+  [
+    231,
+    "Escape Special Characters in PHP Regex using preg_quote",
+    "When working with regular expressions in PHP, characters like ., +, , or ? have special meanings. If you need to treat these characters as literal text within a pattern—for example, when matching user input—they must be properly escaped. This article",
+    false
+  ],
+  [
+    230,
+    "Filter PHP Array with Regex Using preg_grep",
+    "This article explains how to use the built-in preggrep() function in PHP to filter array elements using regular expressions. You will learn the syntax of the function, explore practical code examples for matching and excluding patterns, and understand ho",
+    false
+  ],
+  [
+    229,
+    "How to Use preg_split in PHP",
+    "This article explains the purpose and usage of the pregsplit() function in PHP. You will learn how this built-in function splits strings into arrays using regular expressions, explore its syntax and key parameters, and see practical examples of how to im",
+    false
+  ],
+  [
+    228,
+    "Case-Insensitive String Replacement in PHP",
+    "This article explains how to perform case-insensitive string replacement in PHP using the built-in strireplace() function. You will learn the basic syntax of the function, how it differs from strreplace(), and see practical examples of how to replace sin",
+    false
+  ],
+  [
+    227,
+    "PHP str_split: Convert String to Character Array",
+    "This article provides a quick guide on how to use the PHP strsplit() function to convert a string into an array. It covers the function's syntax, its default behavior of splitting by individual characters, how to split strings into custom-sized chunks, a",
+    false
+  ],
+  [
+    226,
+    "How to Repeat a String in PHP Using str_repeat",
+    "In PHP, repeating a string multiple times is a common task easily achieved using the built-in strrepeat() function. This guide provides a quick and clear overview of how the strrepeat() function works, its syntax, parameter requirements, and practical co",
+    false
+  ],
+  [
+    225,
+    "PHP str_pad: How to Pad a String to a Certain Length",
+    "In PHP, formatting strings to a specific length is a common requirement for aligning text, generating serial numbers, or creating fixed-width data files. This article explains how to use the built-in strpad() function to pad a string with other character",
+    false
+  ],
+  [
+    224,
+    "How to Reverse a String in PHP Using strrev",
+    "In this article, you will learn how to reverse a string character by character in PHP using the built-in strrev() function. This guide covers the basic syntax of the function, provides a practical code example, and explains how the function processes dif",
+    false
+  ],
+  [
+    223,
+    "PHP ucfirst and ucwords Functions Explained",
+    "In PHP development, formatting text properly is essential for readability and user experience. This article explains the purpose of the ucfirst() and ucwords() string functions, demonstrating how they modify character casing, their key differences, and h",
+    false
+  ],
+  [
+    222,
+    "Convert String to Uppercase in PHP",
+    "In PHP, converting a string to uppercase is a straightforward task thanks to built-in functions designed for handling both standard ASCII and multibyte Unicode characters. This article explains how to use strtoupper() for basic English strings and mbstrt",
+    false
+  ],
+  [
+    221,
+    "PHP natsort: How to Sort Arrays Using Natural Order",
+    "This article explains how to use the natsort() function in PHP to sort arrays using a natural order algorithm. You will learn the difference between standard alphanumeric sorting and natural sorting, see practical code examples demonstrating the function",
+    false
+  ],
+  [
+    220,
+    "usort vs uasort: Sorting PHP Associative Arrays",
+    "When sorting arrays in PHP using custom comparison logic, developers often choose between the usort() and uasort() functions. While both functions allow you to define your own sorting criteria using a callback function, they behave very differently regar",
+    false
+  ],
+  [
+    219,
+    "Custom Array Sorting in PHP with usort",
+    "Sorting arrays in PHP is a common task, but standard sorting functions like sort() or asort() are often insufficient for complex data structures. This article explains how to use PHP's usort() function to perform custom array sorting using user-defined c",
+    false
+  ],
+  [
+    218,
+    "PHP array_flip Function Explained",
+    "This article explains the purpose and behavior of the arrayflip() function in PHP, specifically how it exchanges the keys and values of an associative array. You will learn how the function works, how it handles duplicate values, the data type requiremen",
+    false
+  ],
+  [
+    217,
+    "How to Split an Array in PHP Using array_chunk",
+    "In PHP, managing large datasets often requires breaking them down into smaller, more manageable pieces for processing, pagination, or grid-based layouts. This article provides a quick and clear guide on how to use the built-in arraychunk() function to sp",
+    false
+  ],
+  [
+    216,
+    "PHP array_shift: Remove the First Element of an Array",
+    "This article provides a quick guide on how to use the arrayshift() function in PHP to remove and return the first element of an array. You will learn the syntax, see a practical code example, and understand how the function modifies array keys and handle",
+    false
+  ],
+  [
+    215,
+    "How to Add Elements to a PHP Array with array_unshift",
+    "This article provides a quick guide on how to use PHP's native arrayunshift() function to add one or more elements to the beginning of an array. You will learn the function's syntax, how it handles both numerical and string keys, and how to implement it",
+    false
+  ],
+  [
+    214,
+    "How to Use PHP array_pop to Remove the Last Element",
+    "In PHP, managing array data efficiently is crucial for web development. This article provides a quick and clear guide on how to use the built-in arraypop() function to remove and retrieve the very last element of an array, complete with code examples and",
+    false
+  ],
+  [
+    213,
+    "PHP array_push: Add Elements to End of Array",
+    "In PHP, adding elements to the end of an array is a fundamental task easily accomplished using the built-in arraypush() function. This article provides a direct guide on how to use arraypush() to append one or multiple values to an existing array, explai",
+    false
+  ],
+  [
+    212,
+    "PHP isset vs array_key_exists for Array Keys",
+    "In PHP, both isset() and arraykeyexists() are used to check if a specific key exists within an array. While they may seem interchangeable, they behave differently when dealing with null values and have distinct performance characteristics. This article e",
+    false
+  ],
+  [
+    211,
+    "PHP array_key_exists: Check if Key Exists in Array",
+    "This article explains how to use the arraykeyexists() function in PHP to determine whether a specific key or index is present within an associative array. You will learn the correct syntax, see practical code examples, and understand the crucial differen",
+    false
+  ],
+  [
+    210,
+    "How to Generate Unique IDs in PHP with uniqid",
+    "This article explains how to generate unique identifier strings in PHP using the built-in uniqid() function. You will learn the basic syntax of the function, how to use prefixes, how to increase ID entropy for better collision resistance, and the securit",
+    false
+  ],
+  [
+    209,
+    "PHP microtime vs time for Performance Tracking",
+    "Measuring execution speed is crucial for optimizing PHP applications, and developers often choose between the microtime() and time() functions. While both functions retrieve the current system time, they differ significantly in precision, return formats,",
+    false
+  ],
+  [
+    208,
+    "Get PHP Current Unix Timestamp as Integer",
+    "This article explains how to retrieve the current Unix timestamp as an integer in PHP. You will learn about the most efficient built-in functions, such as time() and the DateTime class, to quickly obtain the current time in seconds since the Unix Epoch (",
+    false
+  ],
+  [
+    207,
+    "What is the PHP __debugInfo Magic Method?",
+    "The debugInfo() magic method in PHP is a specialized tool that allows developers to customize how an object behaves when it is output by debugging functions like vardump(). By default, dumping an object prints all of its public, protected, and private pr",
+    false
+  ],
+  [
+    206,
+    "Write PHP Array to CSV using fputcsv",
+    "This article provides a quick guide on how to export PHP arrays into a CSV file using the native fputcsv() function. You will learn the step-by-step process of opening a file, looping through your data array, writing the formatted CSV lines, and properly",
+    false
+  ],
+  [
+    205,
+    "Read CSV File into Array Using fgetcsv in PHP",
+    "This article explains how to read a CSV file and convert its contents into a PHP array using the native fgetcsv() function. You will learn the step-by-step process of opening a file, parsing its rows sequentially through a loop, and structuring the data",
+    false
+  ],
+  [
+    204,
+    "Difference Between die() and exit() in PHP",
+    "When writing PHP scripts, you often need to terminate execution prematurely. While both die() and exit() are widely used for this purpose, developers frequently wonder if there is a functional difference between them. This article explains the relationsh",
+    false
+  ],
+  [
+    203,
+    "How to Get File Extension in PHP using pathinfo",
+    "Extracting file extensions is a fundamental task in PHP helper scripts, file upload systems, and media management. This article explains how to use PHP's built-in pathinfo() function to quickly and securely retrieve a file's extension. You will learn the",
+    false
+  ],
+  [
+    202,
+    "How to Use the PHP strtotime Function",
+    "The strtotime() function is one of the most versatile and widely used date-handling functions in PHP. This article provides a clear overview of the purpose of strtotime(), explaining how it converts English textual datetime descriptions into Unix timesta",
+    false
+  ],
+  [
+    201,
+    "PHP number_format: Format Decimals and Thousands",
+    "This article explains how to use the PHP numberformat() function to format numbers with grouped thousands and a specific number of decimal places. You will learn the syntax of the function, see practical code examples, and understand how to customize dec",
+    false
+  ],
+  [
+    200,
+    "How to Destroy a Session and All Data in PHP",
+    "This article explains how to completely and securely destroy a PHP session and clear all associated session data. You will learn the essential three-step process required to clear the session superglobal, delete the session cookie from the client's brows",
+    false
+  ],
+  [
+    199,
+    "PHP For Loop Infinite Loop Syntax",
+    "This article explains the exact syntax required to create an infinite loop using the for loop construct in PHP. You will learn the minimalist code structure needed to run a continuous loop, how the underlying logic works, and how to safely exit the loop",
+    false
+  ],
+  [
+    198,
+    "How to Remove HTTP Headers in PHP with header_remove",
+    "This article explains how to use PHP's built-in headerremove() function to delete previously defined HTTP headers before they are sent to the client. You will learn the syntax of the function, how to remove specific headers, and how to clear all headers",
+    false
+  ],
+  [
+    197,
+    "Prevent PHP Session Locking Using session_write_close",
+    "This article explains how the PHP function sessionwriteclose() prevents session locking during concurrent HTTP requests. You will learn why PHP locks sessions by default, the performance issues this causes for concurrent AJAX requests or multiple browser",
+    false
+  ],
+  [
+    196,
+    "PHP == vs ===: Loose vs Strict Comparison",
+    "In PHP, understanding the difference between the loose comparison operator (==) and the strict comparison operator (===) is crucial for writing secure and bug-free applications. This article explains how these two operators evaluate variables, how PHP's",
+    false
+  ],
+  [
+    195,
+    "PHP Multibyte String Handling with mbstring",
+    "Standard PHP string functions often fail when processing multi-byte encodings like UTF-8, leading to corrupted data and inaccurate string lengths. This article explains how to use the PHP mbstring (Multibyte String) extension to safely perform operations",
+    false
+  ],
+  [
+    194,
+    "How get_browser Determines Browser Capabilities in PHP",
+    "The PHP getbrowser() function determines a user's browser capabilities by comparing the client's HTTP User-Agent string against a local browser capabilities database, typically the browscap.ini file. This article explains how the function works, how to c",
+    false
+  ],
+  [
+    193,
+    "How to Check If a PHP Extension Is Loaded",
+    "This article explains how to use the built-in extensionloaded() function in PHP to verify if a specific extension is active and available. You will learn the syntax of the function, see practical code examples, and discover how to handle missing extensio",
+    false
+  ],
+  [
+    192,
+    "What is register_shutdown_function in PHP?",
+    "This article explains the purpose, functionality, and practical use cases of the registershutdownfunction() in PHP. You will learn how this built-in function allows developers to execute specific code after script execution finishes or terminates unexpec",
+    false
+  ],
+  [
+    191,
+    "Catch Unhandled Exceptions Globally in PHP",
+    "This article explains how to implement global exception handling in PHP using the built-in setexceptionhandler() function. You will learn how to register a custom callback to catch any uncaught exceptions, log error details securely, and display a user-f",
+    false
+  ],
+  [
+    190,
+    "Custom PHP Error Handling with set_error_handler",
+    "PHP's built-in seterrorhandler() function allows developers to bypass standard PHP error reporting and implement custom logic for handling non-fatal errors. This article explains how the function works, outlines its syntax, demonstrates how to create a c",
+    false
+  ],
+  [
+    189,
+    "How to Use PHP __isset and __unset Magic Methods",
+    "In PHP, magic methods allow you to intercept actions performed on overloaded or inaccessible class properties. This article explains how to implement and use the isset() and unset() magic methods to dynamically check for existence and remove properties i",
+    false
+  ],
+  [
+    188,
+    "PHP __invoke Magic Method Explained",
+    "The invoke() magic method in PHP allows an object to be called directly as if it were a function. This article explains the purpose of the invoke() method, provides a practical code example of its implementation, and explores common use cases where treat",
+    false
+  ],
+  [
+    187,
+    "Serialize PHP Array to Database Without JSON",
+    "This article explains how to store a PHP array in a database without converting it to JSON. You will learn how to use PHP's native serialization functions to convert arrays into a storable string format, how to save this data securely in a database, and",
+    false
+  ],
+  [
+    186,
+    "How to Use http_build_query in PHP",
+    "The httpbuildquery() function in PHP is a built-in tool used to generate URL-encoded query strings from associative or indexed arrays, as well as objects. This article explains how the function works, explores its syntax and parameters, and demonstrates",
+    false
+  ],
+  [
+    185,
+    "Extract Query String Parameters Using PHP parse_str",
+    "This article explains how to use the built-in PHP function parsestr() to parse a query string into usable variables or arrays. You will learn the correct syntax, view practical code examples, and understand crucial security practices required for modern",
+    false
+  ],
+  [
+    184,
+    "How to Use the PHP parse_url Function",
+    "This article provides a clear overview of the parseurl() function in PHP, explaining its core purpose, syntax, and returned components. You will learn how this built-in function parses a URL string and breaks it down into its constituent parts, along wit",
+    false
+  ],
+  [
+    183,
+    "How to Use escapeshellarg in PHP for Safe CLI Execution",
+    "Running system commands from a PHP script can introduce severe security risks if user input is not properly sanitized. This article explains how to use PHP's native escapeshellarg() function to safely escape command-line arguments, preventing command inj",
+    false
+  ],
+  [
+    182,
+    "How to Set Global Timezone in PHP",
+    "Setting a consistent timezone across an entire PHP application is crucial for accurate data logging, scheduling, and time-sensitive operations. This article explains how to enforce a specific timezone globally using the datedefaulttimezoneset() function,",
+    false
+  ],
+  [
+    181,
+    "PHP CLI vs FPM: Understanding the Differences",
+    "In PHP development, Server Application Programming Interfaces (SAPIs) dictate how the PHP interpreter interacts with the outside world. This article explains the fundamental differences between the CLI (Command Line Interface) SAPI and the FPM (FastCGI P",
+    false
+  ],
+  [
+    180,
+    "What is PHP PCNTL Extension Used For",
+    "The PCNTL (Process Control) extension in PHP enables Unix-style process creation, execution, signal handling, and termination. This article explains how the PCNTL extension works, its primary use cases—such as multi-processing and background task handl",
+    false
+  ],
+  [
+    179,
+    "Send Email with PHP mail() Function",
+    "This guide provides a straightforward tutorial on how to send a basic email using PHP's native mail() function. You will learn the basic syntax, understand the required parameters, and view a practical, ready-to-use code example to implement email functi",
+    false
+  ],
+  [
+    178,
+    "How to Use PHP DOMDocument for XML and HTML",
+    "The PHP DOMDocument class is a powerful, built-in tool that allows developers to programmatically create, parse, and manipulate XML and HTML documents. This article explores how DOMDocument represents web documents as hierarchical node trees, demonstrati",
+    false
+  ],
+  [
+    177,
+    "Parse XML in PHP Using SimpleXML",
+    "Parsing XML is a fundamental task in web development, and PHP's SimpleXML extension provides an intuitive way to read and manipulate XML data. This article guides you through the process of loading XML from both files and strings, accessing elements and",
+    false
+  ],
+  [
+    176,
+    "Imagick vs GD: Why Imagick is Better for PHP",
+    "When processing images in PHP, developers generally choose between the GD library and the Imagick extension. This article compares both libraries, detailing why Imagick is the superior choice for modern web development by highlighting its extensive forma",
+    false
+  ],
+  [
+    175,
+    "Image Processing in PHP Using GD Library",
+    "This article provides a practical guide on how to process and manipulate images in PHP using the built-in GD library. You will learn how to verify the GD installation, load images from various formats, perform essential manipulations like resizing and cr",
+    false
+  ],
+  [
+    174,
+    "What is the Purpose of Reflection API in PHP?",
+    "The PHP Reflection API is a powerful built-in toolset that allows developers to inspect the structure of their code at runtime. This article explores the core purpose of the Reflection API, detailing how it enables reverse-engineering of classes, interfa",
+    false
+  ],
+  [
+    173,
+    "PHP SplFixedArray vs Standard Array Differences",
+    "This article provides a direct comparison between PHP's SplFixedArray and standard PHP arrays. It outlines their core differences in memory consumption, execution speed, and functional limitations, helping you determine when to use each data structure in",
+    false
+  ],
+  [
+    172,
+    "What is the Standard PHP Library SPL",
+    "The Standard PHP Library (SPL) is a collection of built-in classes, interfaces, and functions designed to solve common programming problems and implement standard design patterns in PHP. This article explores what SPL is, why it is beneficial for modern",
+    false
+  ],
+  [
+    171,
+    "How to Increase PHP max_execution_time for One Script",
+    "This article explains how to temporarily increase the execution time limit for a specific PHP script without altering your global server configuration. You will learn about the two primary PHP functions used to override the default maxexecutiontime setti",
+    false
+  ],
+  [
+    170,
+    "PHP display_errors vs log_errors: Key Differences",
+    "When configuring a PHP environment, managing how errors are handled is crucial for both application debugging and security. This article explains the fundamental differences between the displayerrors and logerrors directives in PHP, detailing how they fu",
+    false
+  ],
+  [
+    169,
+    "How to Use PHP putenv to Set Environment Variables",
+    "This article explains how to dynamically configure your application by setting environment variables at runtime using PHP's built-in putenv() function. You will learn the correct syntax, see practical code examples for setting and retrieving variables, a",
+    false
+  ],
+  [
+    168,
+    "Access PHP Environment Variables with getenv and $_ENV",
+    "Managing configuration settings securely is crucial in web development. This article explains how to access environment variables in PHP using the built-in getenv() function and the $ENV superglobal, highlighting their differences, use cases, and how to",
+    false
+  ],
+  [
+    167,
+    "Generate Secure Random Bytes in PHP with random_bytes",
+    "Generating cryptographically secure pseudo-random bytes is essential for creating secure tokens, passwords, and cryptographic keys in PHP. This article explains how to use the built-in randombytes() function in PHP, covering its basic syntax, how to conv",
+    false
+  ],
+  [
+    166,
+    "How to Use PHP hash_hmac for Authentication",
+    "This article explains how the hashhmac() function provides cryptographic message authentication in PHP. You will learn the mechanics behind Keyed-Hash Message Authentication Codes (HMAC), the syntax of the PHP function, why it is superior to simple hashi",
+    false
+  ],
+  [
+    165,
+    "How to Configure CORS Headers in a PHP API",
+    "This article provides a straightforward guide on how to configure Cross-Origin Resource Sharing (CORS) headers in a PHP API. You will learn how to enable cross-domain requests, handle preflight OPTIONS requests, and secure your API by restricting allowed",
+    false
+  ],
+  [
+    164,
+    "How to Prevent Session Hijacking in PHP",
+    "Securing user sessions is a critical step in protecting PHP applications from unauthorized access and data breaches. This article provides a direct, actionable guide on how to prevent session hijacking by implementing secure session cookie attributes, re",
+    false
+  ],
+  [
+    163,
+    "Prevent Session Fixation with session_regenerate_id in PHP",
+    "This article explains the security vulnerability known as session fixation, details how malicious actors exploit it to hijack user sessions, and provides a straightforward guide on how to secure your PHP applications against this threat using the built-i",
+    false
+  ],
+  [
+    162,
+    "Validate Email in PHP Using filter_var",
+    "This article demonstrates how to validate an email address in PHP using the native filtervar() function. You will learn the syntax, see practical code examples, and understand how this built-in filter simplifies email verification without the need for co",
+    false
+  ],
+  [
+    161,
+    "PHP Round Float to Nearest Integer",
+    "In PHP, rounding a float to an integer is a common task achieved using three built-in functions: round(), ceil(), and floor(). This article explains how each of these functions behaves, the key differences between them, and provides clear code examples s",
+    false
+  ],
+  [
+    160,
+    "PHP rand vs mt_rand vs random_int",
+    "PHP offers multiple functions to generate random integers: rand(), mtrand(), and randomint(). While they may seem interchangeable at first glance, they differ significantly in terms of underlying algorithms, execution speed, and cryptographic security. T",
+    false
+  ],
+  [
+    159,
+    "PHP DateTimeZone Class: Handling Timezones Explained",
+    "Working with different timezones is a crucial aspect of modern web development, and PHP provides a robust solution through its native DateTimeZone class. This article explores how PHP handles timezones using DateTimeZone, demonstrating how to instantiate",
+    false
+  ],
+  [
+    158,
+    "Generating Recurring Dates with PHP DatePeriod",
+    "Managing recurring events like weekly newsletters, monthly billing cycles, or annual anniversaries is a common task in web development. This article provides a straightforward guide on how to use PHP's built-in DatePeriod class to easily generate a serie",
+    false
+  ],
+  [
+    157,
+    "How to Calculate Date Difference in PHP Using DateInterval",
+    "Calculating the time span between two dates is a common task in web development. This article provides a straightforward guide on how to use PHP's built-in DateTime and DateInterval classes to calculate the difference between two dates. You will learn ho",
+    false
+  ],
+  [
+    156,
+    "Guide to curl_setopt Function in PHP",
+    "This article explains the purpose, syntax, and practical applications of the curlsetopt() function in PHP. It provides a clear overview of how this function configures cURL sessions, detail-oriented explanations of its parameters, and examples of commonl",
+    false
+  ],
+  [
+    155,
+    "How to Make HTTP Requests with PHP cURL",
+    "This article provides a straightforward guide on how to perform external HTTP requests in PHP using the built-in cURL extension. You will learn the core steps required to initialize a cURL session, configure essential request options for both GET and POS",
+    false
+  ],
+  [
+    154,
+    "How to Use fsockopen in PHP for Network Connections",
+    "This article provides a straightforward guide on how to initiate a network connection using the fsockopen() function in PHP. You will learn the basic syntax of the function, how to handle connection errors, and how to write and read data through the esta",
+    false
+  ],
+  [
+    153,
+    "PHP Stream Contexts Explained with File Functions",
+    "This article provides a practical overview of stream contexts in PHP and how they can be used to customize file and network stream operations. You will learn what stream contexts are, how to create them, and how to apply them to common PHP file functions",
+    false
+  ],
+  [
+    152,
+    "How to Create a Directory in PHP Using mkdir()",
+    "This article provides a quick and practical guide on how to use PHP's native mkdir() function to create new directories. You will learn the basic syntax, how to configure file permissions, how to create nested directories recursively, and how to implemen",
+    false
+  ],
+  [
+    151,
+    "How to Change File Permissions in PHP using chmod()",
+    "Managing file and directory permissions is a fundamental aspect of web application security and server management. This article provides a straightforward guide on how to use PHP's built-in chmod() function to programmatically modify file permissions, ex",
+    false
+  ],
+  [
+    150,
+    "Check if a File is Readable or Writable in PHP",
+    "Before attempting to read from or write to a file in PHP, it is crucial to verify its permissions to prevent runtime errors and application crashes. This article provides a straightforward guide on how to use PHP's built-in functions, isreadable() and is",
+    false
+  ],
+  [
+    149,
+    "How to Delete a File in PHP",
+    "This article provides a straightforward guide on how to delete a file from a server's file system using PHP. You will learn about the primary built-in function used for file deletion, how to implement best practices to avoid common errors, and how to han",
+    false
+  ],
+  [
+    148,
+    "Efficiently Write String to File with file_put_contents in PHP",
+    "This article explains how to use the PHP fileputcontents() function to write a string to a file in the most efficient and secure manner. You will learn the basic syntax, how to append data without overwriting, and how to use flags like exclusive locking",
+    false
+  ],
+  [
+    147,
+    "PHP scandir: Read Directory Contents into an Array",
+    "This article provides a straightforward guide on how to use the built-in scandir() function in PHP to read the files and directories of a specific path into an array. You will learn the basic syntax, how to handle the default directory pointers (. and ..",
+    false
+  ],
+  [
+    146,
+    "How to Use PHP glob Function to Find File Paths",
+    "This article explains the purpose, functionality, and practical use cases of the PHP glob() function, a built-in tool designed for finding file paths. You will learn how glob() simplifies directory scanning through pattern matching, how it compares to al",
+    false
+  ],
+  [
+    145,
+    "PHP DirectoryIterator: How to Iterate Over a Directory",
+    "This article provides a straightforward guide on how to use PHP's built-in DirectoryIterator class to loop through files and folders in a directory. You will learn how to initialize the class, filter out parent and current directory pointers, and retriev",
+    false
+  ],
+  [
+    144,
+    "Improving PHP File Handling with SplFileInfo",
+    "PHP’s SplFileInfo class, part of the Standard PHP Library (SPL), offers an object-oriented alternative to traditional procedural file handling functions. This article explores how SplFileInfo improves PHP file handling by providing a clean, consistent",
+    false
+  ],
+  [
+    143,
+    "What Does the Final Keyword Do in PHP?",
+    "Declaring a class or method as final in PHP is a fundamental object-oriented programming technique used to restrict inheritance and method overriding. This article explains the mechanics of the final keyword, demonstrates how it affects classes and metho",
+    false
+  ],
+  [
+    142,
+    "PHP instanceof: Check if Object Belongs to a Class",
+    "This article explains how to use the PHP instanceof operator to determine whether a specific object belongs to a given class, inherits from a parent class, or implements a specific interface. You will learn the basic syntax, see clear code examples demon",
+    false
+  ],
+  [
+    141,
+    "Difference Between self and $this in PHP OOP",
+    "Understanding the distinction between $this and self is fundamental to mastering object-oriented programming (OOP) in PHP. While both keywords are used to reference members within a class, they serve entirely different purposes based on context: $this re",
+    false
+  ],
+  [
+    140,
+    "PHP Anonymous Classes: Definition and Instantiation",
+    "This article provides a straightforward guide on how to define and instantiate anonymous classes in PHP. Introduced in PHP 7, anonymous classes are ideal for creating simple, one-off objects without the overhead of defining a standard class. You will lea",
+    false
+  ],
+  [
+    139,
+    "Advantages of PHP __serialize and __unserialize",
+    "This article examines the advantages of using the serialize() and unserialize() magic methods introduced in PHP 7.4. We will explore how these methods resolve the architectural and security flaws of the legacy Serializable interface, simplify object stat",
+    false
+  ],
+  [
+    138,
+    "PHP Object Serialization with __sleep and __wakeup",
+    "In PHP, object serialization converts an object into a storable string representation, while unserialization restores it. The sleep() and wakeup() magic methods act as hooks during these processes, allowing developers to clean up resources, commit pendin",
+    false
+  ],
+  [
+    137,
+    "How Object Cloning and __clone Work in PHP",
+    "In PHP, object cloning allows developers to create a copy of an existing object using the clone keyword. This article explains how object cloning works, the difference between shallow and deep copying, and how the clone() magic method can be used to cust",
+    false
+  ],
+  [
+    136,
+    "Understanding the PHP __destruct Magic Method",
+    "The destruct() magic method in PHP is a destructor method that is automatically triggered when an object is destroyed, goes out of scope, or when the script execution ends. This article explains the purpose of the destruct() method, how it functions with",
+    false
+  ],
+  [
+    135,
+    "PHP 8.2 DNF Types: Disjunctive Normal Form Explained",
+    "PHP 8.2 introduces Disjunctive Normal Form (DNF) types, a feature that allows developers to combine union and intersection types in a standardized, structured way. This article explains how DNF typing works in PHP 8.2, explores the syntax rules required",
+    false
+  ],
+  [
+    134,
+    "PHP 8.1 Intersection Types Explained",
+    "This article explains the concept of intersection types introduced in PHP 8.1, demonstrating how they allow developers to enforce multiple interface constraints on a single value, and provides clear, practical examples of how to declare and use them in y",
+    false
+  ],
+  [
+    133,
+    "PHP Readonly Properties and Classes Explained",
+    "Modern PHP has introduced powerful features to support immutability and prevent unintended data modification. This article explores readonly properties, introduced in PHP 8.1, and readonly classes, introduced in PHP 8.2. You will learn how these features",
+    false
+  ],
+  [
+    132,
+    "How to Define and Use Enums in PHP 8.1",
+    "In this article, you will learn how to define and use Enumerations (Enums) in PHP 8.1. We will cover the differences between Pure Enums and Backed Enums, explore how to instantiate and compare them, and demonstrate how to add methods to Enums to make you",
+    false
+  ],
+  [
+    131,
+    "PHP Typed Properties: How They Work",
+    "This article explores the implementation and behavior of typed properties introduced in PHP 7.4 and refined in subsequent versions. You will learn how to declare type hints for class properties, understand how PHP handles the uninitialized state, and dis",
+    false
+  ],
+  [
+    130,
+    "What is PHP 8 Constructor Property Promotion?",
+    "PHP 8 introduced Constructor Property Promotion, a syntax-shorcutting feature designed to significantly reduce boilerplate code when declaring and initializing class properties. This article explains how constructor property promotion works, compares it",
+    false
+  ],
+  [
+    129,
+    "PHP 8.1 Never Return Type Explained",
+    "PHP 8.1 introduced the never return type, a feature designed to indicate that a function will never return a value to the caller. This article explains how the never return type behaves, its technical requirements, and how it differs from the existing vo",
+    false
+  ],
+  [
+    128,
+    "What is the Void Return Type in PHP?",
+    "This article explores the void return type introduced in modern PHP, explaining what it is, why it was introduced, and how to use it correctly in your code. You will learn the syntax rules, see practical code examples, and understand how this type hint i",
+    false
+  ],
+  [
+    127,
+    "Understanding PHP Callbacks and Callable Type Hint",
+    "PHP uses callbacks to pass executable code as arguments to functions, enabling highly dynamic and flexible programming patterns. This article explains how callbacks work in PHP, the various ways to define them—including anonymous functions, object meth",
+    false
+  ],
+  [
+    126,
+    "Difference Between func_get_args and Variadics in PHP",
+    "This article compares the traditional funcgetargs() function with the modern variadic arguments syntax (... operator) in PHP. We will explore how both methods handle variable-length argument lists, highlight their key differences in syntax, readability,",
+    false
+  ],
+  [
+    125,
+    "How to Use the Splat Operator for Variadic Functions in PHP",
+    "In PHP, the splat operator (...), also known as the ellipsis operator, provides a clean and modern way to declare variadic functions. Variadic functions are functions that can accept a variable number of arguments. This article explains how to declare va",
+    false
+  ],
+  [
+    124,
+    "PHP array_column: Extract Column from Multidimensional Array",
+    "Extracting a single column of values from a multidimensional array is a common task in PHP development. This article provides a quick and clear guide on how to use PHP's built-in arraycolumn() function to accomplish this task efficiently, complete with p",
+    false
+  ],
+  [
+    123,
+    "PHP array_walk vs array_map: Key Differences",
+    "This article explains the key differences between the arraywalk() and arraymap() functions in PHP. While both functions are used to apply a callback function to array elements, they differ significantly in their return values, how they handle array keys,",
+    false
+  ],
+  [
+    122,
+    "PHP array_intersect Function Explained",
+    "This article provides a clear and concise overview of the arrayintersect() function in PHP. You will learn about its core purpose, how its syntax works, and how to implement it in your code through practical examples. By the end of this guide, you will u",
+    false
+  ],
+  [
+    121,
+    "How to Compare Arrays Using array_diff in PHP",
+    "This article explains how to use the PHP arraydiff() function to compare multiple arrays. You will learn the fundamental syntax of the function, how it evaluates and identifies differences based on values, and see practical code examples demonstrating it",
+    false
+  ],
+  [
+    120,
+    "Difference Between array_slice and array_splice in PHP",
+    "In PHP, manipulating arrays is a fundamental task, and two functions that often cause confusion are arrayslice() and arraysplice(). While their names are remarkably similar, they serve entirely different purposes: arrayslice() extracts a portion of an ar",
+    false
+  ],
+  [
+    119,
+    "How to Use list() for PHP Array Destructuring",
+    "This article explains how the list() language construct works in PHP to perform array destructuring. You will learn the fundamental syntax of list(), how to assign array elements to individual variables, how to handle both indexed and associative arrays,",
+    false
+  ],
+  [
+    118,
+    "How to Extract Keys from an Associative Array in PHP",
+    "Extracting keys from an associative array is a fundamental task in PHP development. This article provides a straightforward guide on how to use PHP's built-in arraykeys() function to retrieve these keys, complete with practical code examples for both bas",
+    false
+  ],
+  [
+    117,
+    "Difference Between array_search and in_array in PHP",
+    "In PHP, searching through arrays is a common task, often achieved using either inarray() or arraysearch(). While both functions are used to find values within an array, they serve different purposes and return different data types. This article explains",
+    false
+  ],
+  [
+    116,
+    "How PHP array_reduce Processes Arrays",
+    "This article explains how the arrayreduce() function works in PHP to reduce an array to a single value. You will learn about its syntax, how the callback function iteratively processes each element, and how the optional initial value affects the final ou",
+    false
+  ],
+  [
+    115,
+    "Difference Between Explode and Implode in PHP",
+    "In PHP development, string and array manipulation are fundamental tasks. This article explains the key differences between the explode() and implode() functions, detailing how they convert data between strings and arrays, their respective syntaxes, and h",
+    false
+  ],
+  [
+    114,
+    "How to Extract a Substring in PHP Using substr()",
+    "This article provides a quick guide on how to extract a specific portion of a string in PHP using the built-in substr() function. You will learn the anatomy of the function's syntax, how to handle positive and negative offsets, and see clear code example",
+    false
+  ],
+  [
+    113,
+    "How to Use str_replace with Arrays in PHP",
+    "The strreplace() function in PHP is a highly versatile tool for replacing occurrences of a search string with a replacement string. When dealing with arrays as arguments, its behavior scales to handle complex string manipulations: you can pass arrays for",
+    false
+  ],
+  [
+    112,
+    "Difference between strpos and stripos in PHP",
+    "In PHP, finding the position of a substring within a string is a common task, primarily achieved using the strpos() and stripos() functions. This article explains the key differences between these two functions, specifically focusing on case sensitivity,",
+    false
+  ],
+  [
+    111,
+    "How to Find String Length in PHP",
+    "Finding the length of a string is a fundamental task in PHP web development. This article explains how to quickly determine string length using PHP's built-in functions, specifically focusing on strlen() for standard ASCII strings and mbstrlen() for mult",
+    false
+  ],
+  [
+    110,
+    "Difference Between Heredoc and Nowdoc in PHP",
+    "PHP offers multiple ways to define strings, including Heredoc and Nowdoc syntaxes, which are ideal for outputting large blocks of text without the need for extensive escaping. While they look similar structurally, the fundamental difference lies in how t",
+    false
+  ],
+  [
+    109,
+    "How to Use the PHP Backtick Execution Operator",
+    "In PHP, the backtick execution operator ( ) provides a quick and direct way to run shell commands on the host server from within your code. This article explains how the backtick operator works, demonstrates its basic syntax with practical examples, comp",
+    false
+  ],
+  [
+    108,
+    "Understanding Static Variables in PHP Functions",
+    "In PHP, static variables inside a function allow the function to remember the value of a variable between multiple calls. While normal local variables are destroyed as soon as a function finishes executing, a static variable retains its value and state f",
+    false
+  ],
+  [
+    107,
+    "How to Use Global Variables in PHP Functions",
+    "This article explains how to access and modify global variables from within a PHP function using the global keyword. You will learn the correct syntax, view practical code examples, and discover an alternative method using the $GLOBALS superglobal array,",
+    false
+  ],
+  [
+    106,
+    "PHP Shorthand Ternary Elvis Operator Explained",
+    "This article explains the shorthand ternary operator, commonly known as the Elvis operator (?:), in PHP. You will learn its syntax, how it differs from the standard ternary operator, when to use it, and how it compares to the null coalescing operator (??",
+    false
+  ],
+  [
+    105,
+    "How to Use the Ternary Operator in PHP",
+    "The PHP ternary operator is a shorthand comparison operator that allows you to write cleaner and more concise if-else statements. This article explains the syntax of the PHP ternary operator, provides practical examples of how to implement it, and covers",
+    false
+  ],
+  [
+    104,
+    "Difference Between isset and is_null in PHP",
+    "When programming in PHP, checking the state and value of variables is a fundamental task. This article explains the distinct differences between isset() and isnull(), detailing how they handle defined, undefined, and null variables, and provides clear gu",
+    false
+  ],
+  [
+    103,
+    "Difference Between isset and empty in PHP",
+    "Understanding the difference between isset() and empty() is crucial for writing clean and bug-free PHP code. While both functions are used to check the state of variables, they behave differently when handling null, empty strings, zeros, and undefined va",
+    false
+  ],
+  [
+    102,
+    "PHP Variable Variables: Definition and Usage Guide",
+    "This article provides a clear overview of variable variables in PHP, explaining what they are, how to define them using the double dollar sign ($$) syntax, and how they function in code. You will also learn how to resolve syntax ambiguity when combining",
+    false
+  ],
+  [
+    101,
+    "PHP Spaceship Operator Explained",
+    "This article provides a clear overview of the PHP spaceship operator (<=>), which was introduced in PHP 7. You will learn how this three-way comparison operator works, what values it returns, and how to use it to write cleaner, more efficient sorting log",
+    false
+  ],
+  [
+    100,
+    "PHPUnit Tutorial: How to Test PHP Applications",
+    "This article provides a comprehensive overview of PHPUnit, the industry-standard testing framework for PHP. You will learn what PHPUnit is, why it is vital for modern PHP development, and how to install it, write basic unit tests, and run them to ensure",
+    false
+  ],
+  [
+    99,
+    "How to Create and Consume PHP REST APIs",
+    "This article provides a straightforward guide on how to build and consume RESTful APIs using PHP. You will learn how to set up a simple API endpoint that processes HTTP requests and returns JSON responses, as well as how to use PHP's cURL extension to re",
+    false
+  ],
+  [
+    98,
+    "PHP extract and compact Functions Explained",
+    "This article explains the purpose, functionality, and practical use cases of the extract() and compact() functions in PHP. While extract() imports variables from an associative array into the active symbol table, compact() does the exact opposite by crea",
+    false
+  ],
+  [
+    97,
+    "PHP Memory Management and Garbage Collection",
+    "This article provides a comprehensive guide on how PHP manages memory and handles garbage collection. It covers the core mechanics of reference counting, the challenges of circular references, how PHP’s cycle-detecting engine solves these issues, and h",
+    false
+  ],
+  [
+    96,
+    "What is OPcache and How Does It Speed Up PHP?",
+    "PHP is an interpreted scripting language, meaning it compiles code into executable machine instructions on every single request, which can significantly slow down website response times under heavy traffic. This article explains OPcache, a powerful cachi",
+    false
+  ],
+  [
+    95,
+    "How to Track PHP Script Execution Time",
+    "Tracking the execution time of a PHP script is essential for optimizing performance and identifying bottlenecks in your web applications. This article provides a straightforward guide on how to measure PHP execution time using built-in functions like mic",
+    false
+  ],
+  [
+    94,
+    "Understanding the PHP memory_limit Directive",
+    "This article explains the significance of the memorylimit directive in PHP, detailing how it prevents poorly written scripts from consuming excessive server resources. It outlines why this setting is crucial for server stability, how to identify memory e",
+    false
+  ],
+  [
+    93,
+    "How to Execute Shell Commands Securely in PHP",
+    "Executing external shell commands in PHP is a powerful feature, but it introduces severe security risks like command injection if handled improperly. This article explains how to safely run shell commands from PHP using built-in escaping functions, secur",
+    false
+  ],
+  [
+    92,
+    "How PHP Output Buffering Works with ob_start",
+    "Output buffering in PHP is a mechanism that temporarily stores a script's output in server memory instead of sending it directly to the web browser as it is generated. This article explains how output buffering works using the obstart() function, why it",
+    false
+  ],
+  [
+    91,
+    "Difference Between var_dump and print_r in PHP",
+    "In PHP development, debugging variables is a fundamental task, and vardump() and printr() are the two primary built-in functions used for this purpose. This article explains the specific purposes of these functions, how they display data, and when you sh",
+    false
+  ],
+  [
+    90,
+    "How PHP 8 Attributes and Annotations Work",
+    "PHP 8 introduced attributes as a native, structured alternative to PHPDoc annotations. This article explains the core concepts of PHP 8 attributes, compares them with legacy docblock annotations, demonstrates how to define and apply them to your code, an",
+    false
+  ],
+  [
+    89,
+    "Understanding Union Types in PHP",
+    "This article explains what union types are in PHP and demonstrates how to declare them in your code. Introduced in PHP 8.0, union types allow you to specify that a value can belong to one of several different types, moving type verification from informal",
+    false
+  ],
+  [
+    88,
+    "How Named Arguments Improve PHP Function Calls",
+    "Introduced in PHP 8.0, named arguments represent a major shift in how developers pass data to functions and methods. This article explains how named arguments improve PHP codebases by enhancing readability, allowing developers to skip default parameters,",
+    false
+  ],
+  [
+    87,
+    "What is the Nullsafe Operator in PHP 8?",
+    "PHP 8 introduced the nullsafe operator (?->), a powerful feature designed to simplify how developers handle null values when chaining method calls or property accesses. This article explains what the nullsafe operator is, how it prevents common runtime e",
+    false
+  ],
+  [
+    86,
+    "How to Use the Null Coalescing Operator in PHP",
+    "This article explains how the null coalescing operator (??) works in PHP to simplify your code. You will learn its basic syntax, how it handles undefined variables without throwing notices, how to chain multiple operators, and how it compares to the trad",
+    false
+  ],
+  [
+    85,
+    "PHP Generators and the Yield Keyword Explained",
+    "In PHP, managing memory efficiently when dealing with large datasets can be a major challenge. This article explains how PHP generators and the yield keyword solve this problem, allowing you to iterate through data on the fly without loading entire datas",
+    false
+  ],
+  [
+    84,
+    "How to Format Unix Timestamp to Date in PHP",
+    "Working with time in PHP often involves handling Unix timestamps, which represent the number of seconds that have elapsed since January 1, 1970 (UTC). This article provides a quick, practical guide on how to convert these integer timestamps into human-re",
+    false
+  ],
+  [
+    83,
+    "PHP DateTime Class: How to Manipulate Date and Time",
+    "Manipulating dates and times is a fundamental task in web development, and PHP’s native DateTime class provides a robust, object-oriented way to handle these operations. This article explains how to instantiate the DateTime class, format dates, perform",
+    false
+  ],
+  [
+    82,
+    "Understanding the PHP preg_replace Function",
+    "The pregreplace() function in PHP is a powerful built-in tool used to perform a regular expression search and replace operations on strings. This article explains the core purpose of pregreplace(), breaks down its syntax and parameters, and provides prac",
+    false
+  ],
+  [
+    81,
+    "How to Use preg_match in PHP for Regular Expressions",
+    "Regular expressions are powerful tools for pattern matching and data validation in web development. This article provides a practical guide on how to use PHP's pregmatch() function to search strings for specific patterns. You will learn the basic syntax,",
+    false
+  ],
+  [
+    80,
+    "PHP Include vs Include_once and Require vs Require_once",
+    "In PHP, managing how external files are loaded into your scripts is fundamental to building organized and reusable codebases. This article explains the critical differences between PHP’s four file inclusion statements—include, includeonce, require, a",
+    false
+  ],
+  [
+    79,
+    "Difference Between Include and Require in PHP",
+    "In PHP development, importing external files is a fundamental task, primarily achieved using the include and require statements. While both serve the purpose of inserting the content of one PHP file into another, they handle errors differently when the s",
+    false
+  ],
+  [
+    78,
+    "PHP Use Keyword: Importing and Aliasing Namespaces",
+    "This article explains how to use the use keyword in PHP to import and alias namespaces. You will learn how to simplify your code by importing classes, interfaces, functions, and constants, as well as how to resolve naming conflicts using the as keyword f",
+    false
+  ],
+  [
+    77,
+    "PHP Namespaces Explained: What They Are and Why to Use Them",
+    "PHP namespaces provide a way to group related classes, interfaces, functions, and constants under a distinct name to prevent naming collisions in your code. This article explains what PHP namespaces are, why they are essential for modern web development,",
+    false
+  ],
+  [
+    76,
+    "How PHP password_verify Function Authenticates Users",
+    "Secure user authentication is a critical component of modern web development. This article explains how PHP's native passwordverify() function securely authenticates users by comparing plain-text passwords against hashed values stored in a database, deta",
+    false
+  ],
+  [
+    75,
+    "How to Securely Hash Passwords in PHP",
+    "Securing user passwords is a critical aspect of web development, and PHP makes this process straightforward with its built-in password hashing API. This article explains how to use the modern passwordhash() and passwordverify() functions to securely stor",
+    false
+  ],
+  [
+    74,
+    "What is CSRF and How to Implement PHP CSRF Tokens",
+    "This article explains the mechanics of Cross-Site Request Forgery (CSRF), a critical web vulnerability where unauthorized commands are transmitted from a trusted user. You will learn how CSRF attacks exploit session trust, why standard authentication fai",
+    false
+  ],
+  [
+    73,
+    "How htmlspecialchars Prevents XSS in PHP",
+    "The htmlspecialchars() function is a vital security tool in PHP used to prevent Cross-Site Scripting (XSS) vulnerabilities. This article explains how the function works, why it is essential for securing user input, and how to implement it correctly to pr",
+    false
+  ],
+  [
+    72,
+    "What is XSS and How to Prevent it in PHP",
+    "Cross-Site Scripting (XSS) is a major web security vulnerability that allows attackers to inject malicious scripts into otherwise benign and trusted websites. This article provides a comprehensive overview of what XSS is, how it impacts PHP applications,",
+    false
+  ],
+  [
+    71,
+    "How to Redirect URL in PHP Using header()",
+    "Redirecting a user to a different web page is a fundamental task in web development. This article provides a quick and straightforward guide on how to perform a URL redirect in PHP using the native header() function. You will learn the correct syntax, th",
+    false
+  ],
+  [
+    70,
+    "How to Send Custom HTTP Headers in PHP",
+    "Sending custom HTTP headers in PHP is a fundamental technique for passing metadata, managing API authentication, and controlling browser behavior. This guide provides a straightforward explanation of how to send custom headers both in a server's response",
+    false
+  ],
+  [
+    69,
+    "PHP Function to Convert Array to JSON",
+    "This article explains how to convert a PHP array into a JSON string using the built-in PHP function. You will learn the exact function to use, its syntax, practical code examples, and how to format the resulting JSON output. In PHP, the jsonencode() func",
+    false
+  ],
+  [
+    68,
+    "How to Parse JSON String into PHP Array or Object",
+    "Parsing a JSON string into a PHP array or object is a fundamental task when working with modern web applications and APIs. This guide demonstrates how to use PHP's built-in jsondecode() function to safely and efficiently convert JSON data into usable PHP",
+    false
+  ],
+  [
+    67,
+    "How to Secure File Uploads in PHP",
+    "Allowing users to upload files is a common requirement for modern web applications, but it also introduces significant security risks. This article outlines the essential security checks you must perform when handling file uploads in PHP to protect your",
+    false
+  ],
+  [
+    66,
+    "How to Handle File Uploads in PHP",
+    "This article provides a straightforward guide on how PHP processes file uploads submitted through HTML forms. You will learn how to configure the HTML form correctly, understand the role of the PHP $FILES superglobal, configure crucial configuration sett",
+    false
+  ],
+  [
+    65,
+    "How to Open Read and Close Files in PHP with fopen",
+    "Working with files is a fundamental aspect of PHP development. This article provides a quick and practical guide on how to open, read, and close files in PHP using the built-in fopen(), fread(), and fclose() functions, complete with clear code examples.",
+    false
+  ],
+  [
+    64,
+    "PHP file_get_contents Function Explained",
+    "The filegetcontents() function in PHP is a built-in utility designed to read the entire contents of a file or a remote URL into a string. This article explains the primary function of filegetcontents(), details its syntax, highlights its key use cases, a",
+    false
+  ],
+  [
+    63,
+    "How to Use PDO Transactions in PHP",
+    "Database transactions are critical for maintaining data integrity by ensuring a group of SQL queries execute as a single, indivisible unit. This article explains how database transactions work in PHP using the PHP Data Objects (PDO) extension. You will l",
+    false
+  ],
+  [
+    62,
+    "Fetch Associative Array with PDO in PHP",
+    "This article explains how to retrieve database query results as an associative array using PHP Data Objects (PDO). You will learn how to use the PDO::FETCHASSOC mode to fetch both single and multiple rows, along with practical code examples to implement",
+    false
+  ],
+  [
+    61,
+    "How Prepared Statements Prevent SQL Injection in PHP",
+    "SQL injection is a severe security vulnerability that occurs when user input is incorrectly concatenated into a database query, allowing attackers to manipulate SQL commands. This article explains how PHP developers can use prepared statements (also know",
+    false
+  ],
+  [
+    60,
+    "Why Use PDO Instead of MySQLi in PHP",
+    "Selecting the right database extension in PHP is crucial for building secure, scalable, and maintainable web applications. While both PDO (PHP Data Objects) and MySQLi are excellent tools for interacting with databases, PDO offers several key advantages",
+    false
+  ],
+  [
+    59,
+    "How to Connect to a Database Using PHP PDO",
+    "PHP Data Objects (PDO) provides a secure, lightweight, and consistent interface for accessing various relational databases in PHP. This article covers how to establish a database connection using PDO, configure essential connection options, and properly",
+    false
+  ],
+  [
+    58,
+    "What is the Purpose of the php.ini File in PHP",
+    "The php.ini file is the default configuration file for PHP, responsible for controlling how the PHP interpreter behaves on a web server. This article explains the primary purpose of the php.ini file, details the critical settings it governs, and outlines",
+    false
+  ],
+  [
+    57,
+    "How to Change PHP Error Reporting Level",
+    "Controlling how PHP handles and displays errors is essential for debugging during development and securing applications in production. This article provides a direct, step-by-step guide on how to change the PHP error reporting level dynamically within yo",
+    false
+  ],
+  [
+    56,
+    "Difference Between Errors and Exceptions in PHP",
+    "In PHP development, understanding how to handle unexpected issues is crucial for building stable applications. This article provides a clear overview of the fundamental differences between errors and exceptions in PHP, exploring how they are generated, h",
+    false
+  ],
+  [
+    55,
+    "How to Create a Custom Exception Class in PHP",
+    "Creating custom exception classes in PHP allows developers to handle specific error conditions more effectively and write cleaner, more maintainable code. This article provides a straightforward guide on how to extend PHP's built-in Exception class, impl",
+    false
+  ],
+  [
+    54,
+    "How to Use Try Catch Finally in PHP",
+    "Exception handling in PHP is a critical practice for managing runtime errors and unexpected behavior gracefully. This article provides a straightforward guide on how to implement try, catch, and finally blocks in PHP to handle exceptions, prevent applica",
+    false
+  ],
+  [
+    53,
+    "What are PHP PSR Standards?",
+    "In the PHP ecosystem, PSR (PHP Standard Recommendation) standards are a set of specification documents designed to improve code interoperability, readability, and maintainability across different frameworks and libraries. This article provides a clear ov",
+    false
+  ],
+  [
+    52,
+    "PHP Composer Dependency Management Explained",
+    "This article explains what Composer is, how it functions as the standard dependency manager for PHP, and why it is essential for modern PHP development. You will learn how Composer simplifies package management, automatically resolves library conflicts,",
+    false
+  ],
+  [
+    51,
+    "How Autoloading Works in Modern PHP",
+    "Modern PHP applications rely on autoloading to automatically load class files when they are needed, eliminating the need for manual require or include statements. This article explains the mechanics of PHP autoloading, focusing on the industry-standard P",
+    false
+  ],
+  [
+    50,
+    "PHP __call and __callStatic Magic Methods Explained",
+    "This article explains the purpose, functionality, and practical use cases of PHP's dynamic method calling magic methods, call() and callStatic(). You will learn how these methods intercept calls to undefined or inaccessible methods in both object and sta",
+    false
+  ],
+  [
+    49,
+    "PHP __toString Magic Method Explained",
+    "This article explains how the toString() magic method functions in PHP. You will learn how this special method allows an object to be treated as a string, when it is automatically triggered, and how to properly implement it in your classes to simplify da",
+    false
+  ],
+  [
+    48,
+    "PHP Magic Methods Explained with Examples",
+    "In PHP, magic methods are special, predefined methods that are automatically triggered in response to specific actions performed on an object. This article provides a clear overview of what PHP magic methods are, explains how they function behind the sce",
+    false
+  ],
+  [
+    47,
+    "PHP Traits: Solving Single Inheritance",
+    "PHP is a single-inheritance language, meaning a class can only inherit from one parent class. This limitation can lead to code duplication when multiple independent classes need to share the same behavior. This article explains how PHP traits solve this",
+    false
+  ],
+  [
+    46,
+    "PHP Abstract Class vs Interface: Key Differences",
+    "In object-oriented PHP, abstract classes and interfaces are essential tools used to design flexible and reusable code. While both enforce contracts on implementing classes and cannot be instantiated on their own, they serve distinct architectural purpose",
+    false
+  ],
+  [
+    45,
+    "How to Define and Implement Interfaces in PHP",
+    "In PHP object-oriented programming, interfaces play a crucial role in designing flexible and decoupled code. This article provides a clear, step-by-step guide on how to define an interface in PHP and how to implement it within a class, complete with prac",
+    false
+  ],
+  [
+    44,
+    "What is Late Static Binding in PHP?",
+    "Late static binding is a PHP feature introduced in version 5.3 that allows you to reference the class that was initially called at runtime within a static context. This article explains the core concept of late static binding, demonstrates how it solves",
+    false
+  ],
+  [
+    43,
+    "How to Define and Use Static Methods in PHP",
+    "In PHP, static methods allow you to call functions within a class without needing to create an instance of that class first. This article provides a direct guide on how to define static methods using the static keyword, how to execute them using the scop",
+    false
+  ],
+  [
+    42,
+    "PHP Public vs Protected vs Private Visibility Modifiers",
+    "In PHP object-oriented programming, visibility modifiers (also known as access modifiers) define where class properties and methods can be accessed. This article provides a direct comparison of the three primary visibility modifiers—public, protected,",
+    false
+  ],
+  [
+    41,
+    "PHP Inheritance Using the Extends Keyword",
+    "In PHP, inheritance is a fundamental concept of object-oriented programming that allows a child class to inherit properties and methods from a parent class. This article explains how the extends keyword facilitates this relationship, how to override meth",
+    false
+  ],
+  [
+    40,
+    "Purpose of PHP Constructor Magic Method",
+    "This article explains the purpose and functionality of the constructor magic method (construct) in PHP. It covers how this special method automatically initializes object properties when a new instance of a class is created, its syntax, and how it simpli",
+    false
+  ],
+  [
+    39,
+    "How to Create Classes and Objects in PHP",
+    "Object-Oriented Programming (OOP) is a core concept in modern PHP development that allows developers to write modular, reusable code. This article provides a straightforward guide on how to define a class and instantiate an object in PHP, complete with c",
+    false
+  ],
+  [
+    38,
+    "PHP OOP Explained: Object-Oriented Programming Guide",
+    "Object-Oriented Programming (OOP) is a programming paradigm that organizes software design around data, or objects, rather than functions and logic. This article provides a clear and concise guide to understanding OOP in PHP, covering its core concepts",
+    false
+  ],
+  [
+    37,
+    "How to Return Multiple Values from a PHP Function",
+    "In PHP, a function can only return a single value using the return statement. However, you can easily bypass this limitation by returning data structures like arrays or objects, or by using pass-by-reference variables. This article provides a quick, prac",
+    false
+  ],
+  [
+    36,
+    "PHP strict_types declaration explained",
+    "This article explains the purpose and functionality of the declare(stricttypes=1); directive in PHP. You will learn how enabling strict typing changes PHP's default type-coercion behavior, how it enforces strict type matching for function arguments and r",
+    false
+  ],
+  [
+    35,
+    "How Arrow Functions Work in Modern PHP",
+    "Arrow functions, introduced in PHP 7.4 and refined in subsequent versions, provide a highly concise syntax for writing short, single-expression anonymous functions. This article explains the mechanics of arrow functions in modern PHP, detailing their syn",
+    false
+  ],
+  [
+    34,
+    "PHP Anonymous Functions and Closures Explained",
+    "This article provides a clear guide on anonymous functions and closures in PHP, explaining what they are, how they differ from standard functions, and how to use them in your code. You will learn their basic syntax, how to inherit variables from the pare",
+    false
+  ],
+  [
+    33,
+    "How to Set Default Argument Values in PHP Functions",
+    "In PHP, setting default values for function arguments allows you to make parameters optional when calling a function. This article explains how to define default argument values in PHP, covers the essential rules for ordering parameters, and demonstrates",
+    false
+  ],
+  [
+    32,
+    "PHP Pass by Value vs Pass by Reference",
+    "When writing functions in PHP, understanding how arguments are passed is crucial for managing memory and avoiding unexpected bugs. This article explains the core differences between passing arguments by value and by reference, demonstrates how each metho",
+    false
+  ],
+  [
+    31,
+    "How to Define a Custom Function in PHP",
+    "This article provides a straightforward guide on how to create and use custom functions in PHP. You will learn the basic syntax for declaring a function, how to pass arguments to it, how to return values, and how to define default parameter values to wri",
+    false
+  ],
+  [
+    30,
+    "PHP Match Expression vs Switch Statement",
+    "PHP 8 introduced the match expression as a modern, more powerful alternative to the traditional switch statement. While both structures allow you to control the flow of your program based on matching value conditions, they differ fundamentally in how the",
+    false
+  ],
+  [
+    29,
+    "Difference Between while and do-while in PHP",
+    "Understanding the distinction between loop structures is fundamental to writing efficient PHP code. This article provides a clear comparison between the while loop and the do-while loop in PHP, explaining their syntax, key structural differences, and pra",
+    false
+  ],
+  [
+    28,
+    "How to Loop Through an Associative Array in PHP",
+    "Iterating over an associative array is a fundamental task in PHP development, allowing you to access both the keys and their corresponding values. This article provides a straightforward guide on how to use the foreach loop to traverse associative arrays",
+    false
+  ],
+  [
+    27,
+    "Difference Between sort() and ksort() in PHP",
+    "In PHP, managing arrays often requires sorting their elements in a specific order. This article explains the key differences between the sort() and ksort() functions, illustrating how sort() arranges array elements by value while resetting their keys, wh",
+    false
+  ],
+  [
+    26,
+    "How to Sort an Associative Array by Value in PHP",
+    "Sorting an associative array by its values in PHP is a fundamental task that can be accomplished quickly using PHP's built-in array functions. This article demonstrates how to sort associative arrays in both ascending and descending order while preservin",
+    false
+  ],
+  [
+    25,
+    "How to Use array_filter in PHP",
+    "This article explains how the arrayfilter() function works in PHP to filter elements of an array. You will learn its syntax, how to use it with and without custom callback functions, and how to filter arrays based on keys or both keys and values. The arr",
+    false
+  ],
+  [
+    24,
+    "Understanding the PHP array_map Function",
+    "This article explains the purpose, syntax, and practical usage of the arraymap() function in PHP. You will learn how this built-in function allows you to transform array elements using custom callback functions, how it handles multiple arrays simultaneou",
+    false
+  ],
+  [
+    23,
+    "How to Merge Two Arrays in PHP",
+    "Merging arrays is a fundamental task in PHP development. This article provides a quick and clear guide on how to combine two or more arrays in PHP using three primary methods: the arraymerge() function, the spread operator (...), and the array union oper",
+    false
+  ],
+  [
+    22,
+    "How to Count Elements in a PHP Array",
+    "Counting the number of elements in an array is a fundamental task in PHP development. This article explains the primary PHP functions used for this purpose, demonstrates their basic usage with clear code examples, and explains how to count elements in mu",
+    false
+  ],
+  [
+    21,
+    "Create a Multidimensional Array in PHP",
+    "This article provides a quick guide on how to create, structure, and manipulate multidimensional arrays in PHP. You will learn the basic syntax for both indexed and associative multidimensional arrays, how to access their nested values, and how to loop t",
+    false
+  ],
+  [
+    20,
+    "Difference Between Indexed and Associative Arrays in PHP",
+    "In PHP, arrays are fundamental data structures used to store multiple values in a single variable. This article provides a clear comparison between indexed arrays, which use automatically assigned numeric keys, and associative arrays, which use developer",
+    false
+  ],
+  [
+    19,
+    "How to Set and Retrieve a Cookie in PHP",
+    "This article provides a straightforward guide on how to set and retrieve cookies in PHP. You will learn the syntax for the setcookie() function, how to access stored cookie data using the $COOKIE superglobal, and how to safely modify or delete cookies. T",
+    false
+  ],
+  [
+    18,
+    "How to Start and Use Sessions in PHP",
+    "This article explains what a PHP session is, how it works to store user data across multiple web pages, and the exact steps required to start and manage one in your web applications. You will learn the basic syntax for starting a session, how to store an",
+    false
+  ],
+  [
+    17,
+    "How to Retrieve Server Information in PHP using $_SERVER",
+    "This article explains how to use PHP's superglobal $SERVER array to retrieve essential server and execution environment information. You will learn about the most commonly used keys in this array, how to access them securely, and practical examples of di",
+    false
+  ],
+  [
+    16,
+    "Difference Between $_GET and $_POST in PHP",
+    "This article explains the primary differences between the $GET and $POST superglobal variables in PHP. It covers how they transmit data, their security implications, storage limits, and the specific scenarios where you should use one over the other. The",
+    false
+  ],
+  [
+    15,
+    "How to Use the $_GET Superglobal in PHP",
+    "This article explains how the $GET superglobal works in PHP to collect and process data sent through the URL query string. You will learn how PHP populates this predefined array, how to access its values in your scripts, and the essential security practi",
+    false
+  ],
+  [
+    14,
+    "What Are PHP Superglobals and How to Use Them",
+    "PHP superglobals are built-in, globally accessible variables that allow developers to access environment, session, user input, and server data from anywhere within a script. This article explains what PHP superglobals are, explores the most common types",
+    false
+  ],
+  [
+    12,
+    "How Does PHP Type Juggling Work?",
+    "PHP is a dynamically typed language, meaning it automatically detects and manages data types during runtime without requiring explicit definitions. This article explains the mechanics of PHP type juggling, demonstrates how implicit type conversion occurs",
+    false
+  ],
+  [
+    11,
+    "PHP Scalar Data Types Explained",
+    "In PHP, data types are used to classify the different kinds of values that variables can hold. Scalar data types are the most fundamental types, representing single values rather than complex collections of data. This article explains the four scalar dat",
+    false
+  ],
+  [
+    10,
+    "How to Write Single and Multi-Line Comments in PHP",
+    "Comments in PHP are non-executable lines of code used to document your script, explain logic, or temporarily disable code blocks during testing. This article explains how to write both single-line and multi-line comments in PHP using clear, practical exa",
+    false
+  ],
+  [
+    9,
+    "PHP const vs define: What is the Difference?",
+    "In PHP, both the const keyword and the define() function are used to define constants, which are identifiers for simple values that cannot change during script execution. While they achieve similar results, they differ significantly in their execution ti",
+    false
+  ],
+  [
+    8,
+    "How to Define a Constant in PHP with define()",
+    "In PHP, constants are identifiers for simple values that cannot change during the execution of a script. This article provides a quick and clear guide on how to define constants using the built-in define() function, explaining its syntax, rules, and prac",
+    false
+  ],
+  [
+    7,
+    "Single vs Double Quotes in PHP",
+    "In PHP, strings can be defined using either single quotes (') or double quotes (\"). While they may look similar, they behave differently regarding variable interpolation and escape sequences. This article explains the key differences between the two meth",
+    false
+  ],
+  [
+    6,
+    "How to Declare a Variable in PHP",
+    "In PHP, variables are used to store data that can be used and manipulated throughout your script. This article explains how to declare a variable in PHP, covering the basic syntax, naming rules, and how PHP handles different data types, complete with pra",
+    false
+  ],
+  [
+    5,
+    "How PHP 8 JIT Compiler Works",
+    "This article provides a clear and direct explanation of the Just-In-Time (JIT) compiler introduced in PHP 8. You will learn how the JIT compiler integrates with the Zend VM, how it translates PHP bytecode into native machine code at runtime, and how it i",
+    false
+  ],
+  [
+    4,
+    "Major Performance Improvements in PHP 7",
+    "PHP 7 marked a revolutionary milestone in the evolution of the PHP programming language, primarily celebrated for its massive leaps in execution speed and memory efficiency. This article explores the key performance enhancements introduced in PHP 7—suc",
+    false
+  ],
+  [
+    3,
+    "PHP vs JavaScript: Server-Side vs Client-Side",
+    "This article explores the core differences between PHP and client-side languages like JavaScript. While PHP operates strictly on the web server to handle database interactions and generate HTML, JavaScript primarily runs directly within the user's web br",
+    false
+  ],
+  [
+    2,
+    "Who is the Original Creator of PHP?",
+    "PHP is one of the most widely used server-side scripting languages on the web today, powering over 70% of all websites with a known server-side programming language. This article explores the origins of PHP, identifying its original creator, Rasmus Lerdo",
+    false
+  ],
+  [
+    1,
+    "What Does PHP Stand For Originally and Now?",
+    "PHP is one of the most widely used server-side scripting languages on the web today, powering millions of websites including WordPress and Wikipedia. This article explains the history behind its name, exploring what the PHP acronym originally stood for w",
+    false
+  ]
+]
